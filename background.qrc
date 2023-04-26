@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>background/bg.jpg</file>
+        <file>background/wallpaperflare.com_wallpaper.jpg</file>
+        <file>background/shirts/Chelsea.png</file>
+        <file>background/shirts/ManchesterUnited.png</file>
+        <file>background/shirts/ManchesterCity.png</file>
+        <file>background/shirts/Arsenal.png</file>
+        <file>background/shirts/Liverpool.png</file>
+        <file>background/signup.jpg</file>
+        <file>background/signup2.jpg</file>
+        <file>background/signup3.jpg</file>
+    </qresource>
+</RCC>
