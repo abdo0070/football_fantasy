@@ -159,3 +159,9 @@ void MainWindow::on_pushButton_3_clicked()
     signUpUi.show();
 }
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    MainWindow::close();
+}
+
