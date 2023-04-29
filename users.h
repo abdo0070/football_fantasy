@@ -7,7 +7,7 @@
 class users
 {
 public:
-    qint64 id,budget,points,club_id;
+    qint64 budget,points,club_id;
     bool is_admin;
     QString username,email,password;
     static int size;

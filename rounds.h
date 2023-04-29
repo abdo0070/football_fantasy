@@ -7,7 +7,6 @@
 class rounds
 {
 public:
-    qint64 id;
     QString weak;
     static int size;
 public:

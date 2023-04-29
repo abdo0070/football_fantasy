@@ -8,7 +8,6 @@ class clubs
 {
 public:
     static int size;
-    qint64 id;
     QString name;
 public:
     clubs();

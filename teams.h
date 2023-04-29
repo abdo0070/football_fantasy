@@ -7,7 +7,7 @@
 class teams
 {
 public:
-    qint64 id,user_id;
+    qint64 user_id;
     static int size;
 public:
     teams();

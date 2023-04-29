@@ -12,14 +12,16 @@
 using namespace std;
 
 map<int,clubs> d_clubs;
-map<int,matches>d_matches;
-map<int,matches_players>d_matches_players;
-map<int,players>d_players;
-map<int,rounds>d_rounds;
-map<int,teams>d_teams;
-map<int,teams_players>d_teams_players;
-map<int,users>d_users;
+map<int,matches> d_matches;
+map<int,matches_players> d_matches_players;
+map<int,players> d_players;
+map<int,rounds> d_rounds;
+map<int,teams> d_teams;
+map<int,teams_players> d_teams_players;
+map<int,users> d_users;
 
+
+QString current_user;
 QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
 int clubs::size = 0;
@@ -42,14 +44,13 @@ int main(int argc, char *argv[])
     db.open();
 
 
+
     QSqlQuery qry;
     bool d0 = qry.exec("SELECT * FROM clubs;");
-
     while(qry.next())
     {
         clubs::size = qry.size();
         int key = qry.value(0).toInt();
-        d_clubs[key].id = key;
         d_clubs[key].name = qry.value(1).toString();
     }
     bool d1 = qry.exec("SELECT * FROM matches;");
@@ -57,7 +58,6 @@ int main(int argc, char *argv[])
     {
         matches::size = qry.size();
         int key = qry.value(0).toInt();
-        d_matches[key].id = key;
         d_matches[key].club_1 = qry.value(1).toInt();
         d_matches[key].club_2 = qry.value(2).toInt();
         d_matches[key].round_id = qry.value(3).toInt();
@@ -67,7 +67,6 @@ int main(int argc, char *argv[])
     {
         matches_players::size = qry.size();
         int key = qry.value(0).toInt();
-        d_matches_players[key].id = key;
         d_matches_players[key].points = qry.value(1).toInt();
         d_matches_players[key].match_id = qry.value(2).toInt();
         d_matches_players[key].player_id = qry.value(3).toInt();
@@ -78,7 +77,6 @@ int main(int argc, char *argv[])
     {
         players::size = qry.size();
         int key = qry.value(0).toInt();
-        d_players[key].id = key;
         d_players[key].image = qry.value(1).toString(); // the path
         d_players[key].age = qry.value(2).toInt();
         d_players[key].price = qry.value(3).toInt();
@@ -91,7 +89,6 @@ int main(int argc, char *argv[])
     {
         rounds::size = qry.size();
         int key = qry.value(0).toInt();
-        d_rounds[key].id = key;
         d_rounds[key].weak = qry.value(1).toString();
     }
     bool d5 = qry.exec("SELECT * FROM teams;");
@@ -99,7 +96,6 @@ int main(int argc, char *argv[])
     {
         teams::size = qry.size();
         int key = qry.value(0).toInt();
-        d_teams[key].id = key;
         d_teams[key].user_id = qry.value(1).toInt();
     }
     bool d6 = qry.exec("SELECT * FROM teams_players;");
@@ -107,7 +103,6 @@ int main(int argc, char *argv[])
     {
         teams_players::size = qry.size();
         int key = qry.value(0).toInt();
-        d_teams_players[key].id = key;
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
     }
@@ -116,7 +111,6 @@ int main(int argc, char *argv[])
     {
         users::size = qry.size();
         int key = qry.value(0).toInt();
-        d_users[key].id = key;
         d_users[key].email = qry.value(1).toString();
         d_users[key].username = qry.value(2).toString();
         d_users[key].password = qry.value(3).toString();

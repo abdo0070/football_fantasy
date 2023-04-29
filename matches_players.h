@@ -7,7 +7,7 @@
 class matches_players
 {
 public:
-    qint64 id,points,match_id,player_id,round_id;
+    qint64 points,match_id,player_id,round_id;
     static int size;
 public:
     matches_players();

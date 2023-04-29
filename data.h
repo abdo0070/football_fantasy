@@ -19,3 +19,4 @@ extern map<int,teams>d_teams;
 extern map<int,teams_players>d_teams_players;
 extern map<int,users>d_users;
 extern QSqlDatabase db;
+extern QString current_user;

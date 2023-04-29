@@ -19,15 +19,14 @@ SignUp::~SignUp()
 
 void SignUp::on_pushButton_clicked()
 {
-    SignUp::hide();
-
+    SignUp::close();
 }
 
 
 
 void SignUp::on_pushButton_2_clicked()
 {
-    QRegularExpression email_pattern1("^\\w+\\d+@gmail\\.com");
+    QRegularExpression email_pattern1("^\\w{5}\\w*@gmail\\.com$");
     QRegularExpression email_pattern2("\\s");
 
     QRegularExpression password_pattern("\\D+");
@@ -75,27 +74,13 @@ void SignUp::on_pushButton_2_clicked()
         {
             QMessageBox::information(this,"Success","Wellcome to Fantasy premier league!");
 
-            QSqlQuery qry;
-            qry.prepare("INSERT INTO users(id,name,email,password,price,is_admin,points) VALUES(:id,:i0,:i1,:i2,:i3,:i4,:i5);");
-            qry.bindValue(":id",++users::size);
-            qry.bindValue(":i0",username);
-            qry.bindValue(":i1",email);
-            qry.bindValue(":i2",password);
-            qry.bindValue(":i3",100000);
-            qry.bindValue(":i4",0);
-            qry.bindValue(":i5",0);
-            bool registered = qry.exec();
-            if(registered)
-                qDebug() << "registered successfully\n" << '\n';
-            else
-                qDebug() << qry.lastError() << '\n';
-            d_users[users::size].id = users::size;
-            d_users[users::size].username = username;
+            d_users[++users::size].username = username;
             d_users[users::size].email = email;
             d_users[users::size].password = password;
             d_users[users::size].budget = 100000;
             d_users[users::size].is_admin = false;
             d_users[users::size].points = 0;
+            d_users[users::size].club_id = 1; // None
         }
     }
 }
