@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `clubs`
 --
+use fantasy; -- the name of the database
 
 CREATE TABLE `clubs` (
   `id` int(11) NOT NULL,

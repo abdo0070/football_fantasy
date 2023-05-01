@@ -9,6 +9,7 @@
 #include "teams.h"
 #include "teams_players.h"
 #include "users.h"
+#include "leagues.h"
 using namespace std;
 
 map<int,clubs> d_clubs;
@@ -19,7 +20,7 @@ map<int,rounds> d_rounds;
 map<int,teams> d_teams;
 map<int,teams_players> d_teams_players;
 map<int,users> d_users;
-
+map<int,leagues> d_leagues;
 
 QString current_user;
 QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -32,6 +33,7 @@ int rounds::size = 0;
 int teams::size = 0;
 int teams_players::size = 0;
 int users::size = 0;
+int leagues::size = 0;
 
 int main(int argc, char *argv[])
 {
@@ -46,14 +48,22 @@ int main(int argc, char *argv[])
 
 
     QSqlQuery qry;
-    bool d0 = qry.exec("SELECT * FROM clubs;");
+    bool d0 = qry.exec("SELECT * FROM leagues;");
+    while(qry.next())
+    {
+        leagues::size = qry.size();
+        int key = qry.value(0).toInt();
+        d_leagues[key].name = qry.value(1).toString();
+    }
+    bool d1 = qry.exec("SELECT * FROM clubs;");
     while(qry.next())
     {
         clubs::size = qry.size();
         int key = qry.value(0).toInt();
         d_clubs[key].name = qry.value(1).toString();
+        d_clubs[key].league_id = qry.value(2).toInt();
     }
-    bool d1 = qry.exec("SELECT * FROM matches;");
+    bool d2 = qry.exec("SELECT * FROM matches;");
     while(qry.next())
     {
         matches::size = qry.size();
@@ -62,7 +72,7 @@ int main(int argc, char *argv[])
         d_matches[key].club_2 = qry.value(2).toInt();
         d_matches[key].round_id = qry.value(3).toInt();
     }
-    bool d2 = qry.exec("SELECT * FROM matches_players;");
+    bool d3 = qry.exec("SELECT * FROM matches_players;");
     while(qry.next())
     {
         matches_players::size = qry.size();
@@ -72,33 +82,32 @@ int main(int argc, char *argv[])
         d_matches_players[key].player_id = qry.value(3).toInt();
         d_matches_players[key].round_id = qry.value(4).toInt();
     }
-    bool d3 = qry.exec("SELECT * FROM players;");
+    bool d4 = qry.exec("SELECT * FROM players;");
     while(qry.next())
     {
         players::size = qry.size();
         int key = qry.value(0).toInt();
-        d_players[key].image = qry.value(1).toString(); // the path
-        d_players[key].age = qry.value(2).toInt();
-        d_players[key].price = qry.value(3).toInt();
-        d_players[key].position = qry.value(4).toString();
-        d_players[key].club_id = qry.value(5).toInt();
-        d_players[key].name = qry.value(6).toString();
+        d_players[key].age = qry.value(1).toInt();
+        d_players[key].price = qry.value(2).toInt();
+        d_players[key].position = qry.value(3).toString();
+        d_players[key].club_id = qry.value(4).toInt();
+        d_players[key].name = qry.value(5).toString();
     }
-    bool d4 = qry.exec("SELECT * FROM rounds;");
+    bool d5 = qry.exec("SELECT * FROM rounds;");
     while(qry.next())
     {
         rounds::size = qry.size();
         int key = qry.value(0).toInt();
         d_rounds[key].weak = qry.value(1).toString();
     }
-    bool d5 = qry.exec("SELECT * FROM teams;");
+    bool d6 = qry.exec("SELECT * FROM teams;");
     while(qry.next())
     {
         teams::size = qry.size();
         int key = qry.value(0).toInt();
         d_teams[key].user_id = qry.value(1).toInt();
     }
-    bool d6 = qry.exec("SELECT * FROM teams_players;");
+    bool d7 = qry.exec("SELECT * FROM teams_players;");
     while(qry.next())
     {
         teams_players::size = qry.size();
@@ -106,7 +115,7 @@ int main(int argc, char *argv[])
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
     }
-    bool d7 = qry.exec("SELECT * FROM users;");
+    bool d8 = qry.exec("SELECT * FROM users;");
     while(qry.next())
     {
         users::size = qry.size();
@@ -120,7 +129,7 @@ int main(int argc, char *argv[])
         d_users[key].club_id = qry.value(7).toInt();
     }
     // data is ready
-    cout << d0 << endl << d1 << endl << d2 << endl << d3 << endl << d4 << endl << d5 << endl << d6 << endl << d7 << endl;
+    cout << d0 << endl << d1 << endl << d2 << endl << d3 << endl << d4 << endl << d5 << endl << d6 << endl << d7 << endl << d8 << endl;
     QApplication a(argc, argv);
 
     MainWindow w;

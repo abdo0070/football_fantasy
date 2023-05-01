@@ -25,6 +25,13 @@
     <height>800</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>wasy10</family>
+    <italic>true</italic>
+    <bold>true</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -33,7 +40,8 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
-	background-image: url(:/background/wallpaperflare.com_wallpaper.jpg);
+	
+	background-image: url(:/background/login2.jpg);
 }
 QGroupBox{
 	
@@ -71,8 +79,8 @@ QGroupBox{
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>10</y>
+      <x>580</x>
+      <y>80</y>
       <width>781</width>
       <height>281</height>
      </rect>
@@ -80,7 +88,7 @@ QGroupBox{
     <property name="font">
      <font>
       <family>URW Gothic</family>
-      <pointsize>50</pointsize>
+      <pointsize>70</pointsize>
       <italic>true</italic>
       <bold>true</bold>
      </font>
@@ -89,7 +97,7 @@ QGroupBox{
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>fantasy premier league</string>
+     <string>Fantasy Football</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -141,6 +149,12 @@ QGroupBox{
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>20</pointsize>
@@ -148,7 +162,7 @@ QGroupBox{
          </property>
          <property name="styleSheet">
           <string notr="true">border-radius:10px;
-background-color: rgb(255, 255, 255);
+background-color: rgb(246, 245, 244);
 color: rgb(61, 56, 70);
 opacity:2;</string>
          </property>
@@ -165,6 +179,12 @@ opacity:2;</string>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>20</pointsize>
@@ -172,8 +192,9 @@ opacity:2;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">border-radius:10px;
-background-color: rgb(255, 255, 255);
-color: rgb(61, 56, 70);</string>
+background-color: rgb(246, 245, 244);
+color: rgb(61, 56, 70);
+opacity:2;</string>
          </property>
          <property name="text">
           <string/>
@@ -204,9 +225,9 @@ color: rgb(61, 56, 70);</string>
            </property>
            <property name="styleSheet">
             <string notr="true">border-radius:10px;
-background-color: rgb(255, 255, 255);
-color: rgb(119, 118, 123);
-</string>
+background-color: rgb(246, 245, 244);
+color: rgb(61, 56, 70);
+opacity:2;</string>
            </property>
            <property name="text">
             <string>Log In</string>
@@ -223,8 +244,9 @@ color: rgb(119, 118, 123);
            </property>
            <property name="styleSheet">
             <string notr="true">border-radius:10px;
-background-color: rgb(255, 255, 255);
-color: rgb(119, 118, 123);</string>
+background-color: rgb(246, 245, 244);
+color: rgb(61, 56, 70);
+opacity:2;</string>
            </property>
            <property name="text">
             <string>Sign Up</string>
@@ -240,15 +262,15 @@ color: rgb(119, 118, 123);</string>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>1798</x>
+      <x>1808</x>
       <y>10</y>
-      <width>111</width>
-      <height>71</height>
+      <width>101</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>URW Gothic</family>
+      <family>Chandas</family>
       <pointsize>30</pointsize>
       <bold>true</bold>
      </font>
@@ -256,8 +278,7 @@ color: rgb(119, 118, 123);</string>
     <property name="styleSheet">
      <string notr="true">border-radius:10px;
 background-color: rgb(255, 255, 255);
-color: rgb(119, 118, 123);
-</string>
+color: rgb(94, 92, 100);</string>
     </property>
     <property name="text">
      <string>Exit</string>

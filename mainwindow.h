@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include"signup.h"
+#include"home.h"
 #include <QMainWindow>
 #include<QtSql>
 #include<QtSql/QSqlDatabase>
@@ -29,5 +30,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SignUp signUpUi;
+    Home homeui;
 };
 #endif // MAINWINDOW_H

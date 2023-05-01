@@ -8,6 +8,7 @@ class clubs
 {
 public:
     static int size;
+    qint64 league_id;
     QString name;
 public:
     clubs();

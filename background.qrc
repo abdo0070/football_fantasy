@@ -3,12 +3,19 @@
         <file>background/bg.jpg</file>
         <file>background/wallpaperflare.com_wallpaper.jpg</file>
         <file>background/shirts/Chelsea.png</file>
-        <file>background/shirts/ManchesterUnited.png</file>
         <file>background/shirts/ManchesterCity.png</file>
-        <file>background/shirts/Arsenal.png</file>
         <file>background/shirts/Liverpool.png</file>
         <file>background/signup.jpg</file>
         <file>background/signup2.jpg</file>
         <file>background/signup3.jpg</file>
+        <file>background/login.jpg</file>
+        <file>background/login2.jpg</file>
+        <file>background/shirts/Elzamalek.png</file>
+        <file>background/shirts/Alahly.png</file>
+        <file>background/playground.jpg</file>
+        <file>background/shirts/Barcelona.png</file>
+        <file>background/shirts/AtleticoMadrid.png</file>
+        <file>background/shirts/RealMadrid.png</file>
+        <file>background/shirts/Pyramids.png</file>
     </qresource>
 </RCC>

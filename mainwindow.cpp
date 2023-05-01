@@ -8,32 +8,61 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+//    cout << "id" << " name\n";
+//    for(auto i = d_leagues.begin() ; i != d_leagues.end() ; i++)
+//    {
+//        qDebug() << i->first << " " << i->second.name << '\n';
+//    }
+//    cout << "id" << " name " <<"leagud_id\n";
+//    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
+//    {
+//        qDebug() << i->first << " " << i->second.name << " " << i->second.league_id <<'\n';
+//    }
+//    cout << "id image age price position club_id name\n";
+//    for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+//    {
+//        qDebug() << i->first << " " << i->second.image << " " << i->second.age << i->second.price << " " << i->second.position << " " << i->second.club_id << " " << i->second.name << '\n';
+//    }
 };
 
 MainWindow::~MainWindow()
 {
     delete ui;
     QSqlQuery qry;
-    cout << "clubs deleted :"<< qry.exec("delete from clubs") << '\n';
-    cout << "matches deleted :"<< qry.exec("delete from matches") << '\n';
-    cout << "matches_players deleted :"<< qry.exec("delete from matches_players") << '\n';
-    cout << "players deleted :"<< qry.exec("delete from players") << '\n';
-    cout << "rounds deleted :"<< qry.exec("delete from rounds") << '\n';
-    cout << "teams deleted :"<< qry.exec("delete from teams") << '\n';
-    cout << "teams_players deleted :"<< qry.exec("delete from teams_players") << '\n';
-    cout << "users deleted :"<< qry.exec("delete from users") << '\n';
+    cout << "clubs deleted :" << qry.exec("delete from clubs;") << '\n';
+    cout << "leagues deleted :" << qry.exec("delete from leagues;")<< '\n';
+    cout << "matches deleted :"<< qry.exec("delete from matches;") << '\n';
+    cout << "matches_players deleted :" << qry.exec("delete from matches_players;") << '\n';
+    cout << "players deleted :" << qry.exec("delete from players;") << '\n';
+    cout << "rounds deleted :" << qry.exec("delete from rounds;") << '\n';
+    cout << "teams deleted :" << qry.exec("delete from teams;") << '\n';
+    cout << "teams_players deleted :" << qry.exec("delete from teams_players;") << '\n';
+    cout << "users deleted :" << qry.exec("delete from users;") << '\n';
+
     cout << "\n";
-    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
+    int y = 0;
+    for(auto i = d_leagues.begin() ; i != d_leagues.end() ; i++)
     {
-        qry.prepare("insert into clubs values(:id,:name);");
+        qry.prepare("insert into leagues values(:id,:name);");
         qry.bindValue(":id",i->first);
         qry.bindValue(":name",i->second.name);
         bool x = qry.exec();
         if(x)
+            cout << "leagues is in \n";
+        else
+            qDebug() << y << '\n' << qry.lastError() << '\n';
+    }
+    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++,y++)
+    {
+        qry.prepare("insert into clubs values(:id,:name,:league_id);");
+        qry.bindValue(":id",i->first);
+        qry.bindValue(":name",i->second.name);
+        qry.bindValue(":league_id",i->second.league_id);
+        bool x = qry.exec();
+        if(x)
             cout << "clubs is in \n";
         else
-            qDebug() << qry.lastError() << '\n';
+            qDebug() << "\n" << y << "\n" << qry.lastError() << '\n';
     }
     for(auto i = d_rounds.begin() ; i != d_rounds.end() ; i++)
     {
@@ -61,9 +90,8 @@ MainWindow::~MainWindow()
     }
     for(auto i = d_players.begin() ; i != d_players.end() ; i++)
     {
-        qry.prepare("insert into players values(:id,:image,:age,:price,:position,:club_id,:name);");
+        qry.prepare("insert into players values(:id,:age,:price,:position,:club_id,:name);");
         qry.bindValue(":id",i->first);
-        qry.bindValue(":image",i->second.image);
         qry.bindValue(":age",i->second.age);
         qry.bindValue(":price",i->second.price);
         qry.bindValue(":position",i->second.position);
@@ -130,14 +158,10 @@ MainWindow::~MainWindow()
             qDebug() << qry.lastError() << '\n';
     }
 }
-
-
-
 void MainWindow::on_pushButton_clicked()
 {
     QString user = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
-
     for(auto i = d_users.begin() ; i != d_users.end() ; i++)
     {
         if(user == i->second.username && password == i->second.password)
@@ -146,19 +170,18 @@ void MainWindow::on_pushButton_clicked()
     if(current_user != "")
     {
         QMessageBox::information(this,"log in","loged in successfully");
-        // opening main window
+        homeui.setWindowState(Qt::WindowFullScreen);
+        homeui.show();
     }
     else
         QMessageBox::warning(this,"log in","invaled username or password");
 }
-
 
 void MainWindow::on_pushButton_3_clicked()
 {
     signUpUi.setWindowState(Qt::WindowFullScreen);
     signUpUi.show();
 }
-
 
 void MainWindow::on_pushButton_2_clicked()
 {

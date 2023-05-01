@@ -11,6 +11,8 @@ CONFIG += c++17
 
 SOURCES += \
     clubs.cpp \
+    home.cpp \
+    leagues.cpp \
     main.cpp \
     mainwindow.cpp \
     matches.cpp \
@@ -25,6 +27,8 @@ SOURCES += \
 HEADERS += \
     clubs.h \
     data.h \
+    home.h \
+    leagues.h \
     mainwindow.h \
     matches.h \
     matches_players.h \
@@ -36,6 +40,7 @@ HEADERS += \
     users.h
 
 FORMS += \
+    home.ui \
     mainwindow.ui \
     signup.ui
 

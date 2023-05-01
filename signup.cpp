@@ -80,7 +80,7 @@ void SignUp::on_pushButton_2_clicked()
             d_users[users::size].budget = 100000;
             d_users[users::size].is_admin = false;
             d_users[users::size].points = 0;
-            d_users[users::size].club_id = 1; // None
+            d_users[users::size].club_id = 10; // None
         }
     }
 }
