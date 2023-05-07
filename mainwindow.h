@@ -30,6 +30,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SignUp signUpUi;
-    Home homeui;
+    Home *homeui;
 };
 #endif // MAINWINDOW_H

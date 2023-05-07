@@ -26,7 +26,7 @@ void SignUp::on_pushButton_clicked()
 
 void SignUp::on_pushButton_2_clicked()
 {
-    QRegularExpression email_pattern1("^\\w{5}\\w*@gmail\\.com$");
+    QRegularExpression email_pattern1("^[\\w._%+-]{1,20}@[\\w.-]{2,20}\\.[A-Za-z]{2,3}");
     QRegularExpression email_pattern2("\\s");
 
     QRegularExpression password_pattern("\\D+");
@@ -80,7 +80,11 @@ void SignUp::on_pushButton_2_clicked()
             d_users[users::size].budget = 100000;
             d_users[users::size].is_admin = false;
             d_users[users::size].points = 0;
-            d_users[users::size].club_id = 10; // None
+            ch_club.setWindowState(Qt::WindowFullScreen);
+            ch_club.show();
+            d_users[users::size].club_id = ch_club.checked;
+            d_users[users::size].number_of_players = 0;
+            SignUp::close();
         }
     }
 }

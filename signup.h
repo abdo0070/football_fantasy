@@ -2,7 +2,7 @@
 #define SIGNUP_H
 
 #include <QDialog>
-
+#include "dialog.h"
 namespace Ui {
 class SignUp;
 }
@@ -21,6 +21,7 @@ private slots:
 
 private:
     Ui::SignUp *ui;
+    Dialog ch_club;
 };
 
 #endif // SIGNUP_H

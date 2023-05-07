@@ -1,0 +1,10 @@
+ALTER TABLE `fantasy`.`players` 
+ADD COLUMN `points` INT NULL AFTER `name`;
+
+ALTER TABLE `fantasy`.`players` 
+CHANGE COLUMN `points` `points` INT NULL DEFAULT 0 ;
+
+ALTER TABLE `fantasy`.`users` 
+ADD COLUMN `number_of_players` INT NULL AFTER `club_id`;
+
+

@@ -24,4 +24,5 @@ extern map<int,users> d_users;
 extern map<int,leagues> d_leagues;
 extern QSqlDatabase db;
 extern QString current_user;
+extern qint64 current_user_id;
 

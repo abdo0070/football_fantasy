@@ -7,7 +7,7 @@
 class players
 {
 public:
-    qint64 age,price,club_id;
+    qint64 age,price,club_id,points;
     QString image;
     QString position,name;
     static int size;
