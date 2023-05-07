@@ -77,3 +77,23 @@ void Home::on_pushButton_clicked()
     Home::close();
 }
 
+
+void Home::on_pb_read_clicked()
+{
+    ui->tableWidget->setRowCount(users::size);
+
+    int rowNum = 0;
+    for(auto user = d_users.begin() ; user != d_users.end() ; user++ , rowNum++)
+    {
+    ui->tableWidget->setItem(rowNum,0,new QTableWidgetItem(QString::number(user->first)));
+    ui->tableWidget->setItem(rowNum,1,new QTableWidgetItem(QString(user->second.username)));
+    ui->tableWidget->setItem(rowNum,2,new QTableWidgetItem(QString::number(user->second.points)));
+    ui->tableWidget->setItem(rowNum,3,new QTableWidgetItem(QString::number(user->second.budget)));
+    ui->tableWidget->setItem(rowNum,4,new QTableWidgetItem(QString::number(user->second.is_admin)));
+    ui->tableWidget->setItem(rowNum,5,new QTableWidgetItem(QString::number(user->second.club_id)));
+    ui->tableWidget->setItem(rowNum,6,new QTableWidgetItem(QString(user->second.email)));
+
+    }
+
+}
+

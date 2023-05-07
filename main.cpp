@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     db.setDatabaseName("fantasy");
     db.setHostName("127.0.0.1");
-    db.setPassword("@#191#36@aC");
+    db.setPassword("");
     db.setUserName("root");
 
     db.open();

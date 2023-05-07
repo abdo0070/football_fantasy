@@ -18,6 +18,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pb_read_clicked();
+
 private:
     Ui::Home *ui;
 };
