@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include<iostream>
 #include "data.h"
+#include<QKeyEvent>
 using namespace std;
 SignUp::SignUp(QWidget *parent):
     QDialog(parent),

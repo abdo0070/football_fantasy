@@ -61,6 +61,10 @@ Home::Home(QWidget *parent) :
         break;
     }
     ui->label_4->setPixmap(profile);
+
+
+    ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin);
+    ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
 }
 
 Home::~Home()
