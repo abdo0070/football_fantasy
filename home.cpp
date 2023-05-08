@@ -103,6 +103,20 @@ Home::Home(QWidget *parent) :
         ui->cb_update_club->hide();
         ui->cb_update_admin->hide();
 
+        // hide update for players
+        ui->gb_update_players->hide();
+        // hide delete for players
+        ui->gb_delete_players->hide();
+        // hide delete for players
+        ui->gb_insert_players->hide();
+        // set max range for points & age and price spin box for player (admin)
+        ui->sp_update_points_players->setMaximum(1000);
+        ui->sp_update_age_players->setMaximum(50);
+        ui->sp_update_price_players->setMaximum(10000000);
+        ui->sp_insert_age_players->setMaximum(50);
+        ui->sp_insert_points_players->setMaximum(1000);
+        ui->sp_insert_price_players->setMaximum(10000000);
+
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 }
@@ -294,3 +308,163 @@ void Home::on_pb_update_clicked()
         ui->cb_update_admin->hide();
     }
 }
+
+void Home::on_pb_read_players_clicked()
+{
+    ui->tw_players->setRowCount(players::size);
+    // id , name , age , price , pos , points , club_id
+    int rowNum = 0;
+    for(auto player = d_players.begin() ; player != d_players.end() ; player++ , rowNum++)
+    {
+        ui->tw_players->setItem(rowNum,0,new QTableWidgetItem(QString::number(player->first)));
+        ui->tw_players->setItem(rowNum,1,new QTableWidgetItem(QString(player->second.name)));
+        ui->tw_players->setItem(rowNum,2,new QTableWidgetItem(QString::number(player->second.age)));
+        ui->tw_players->setItem(rowNum,3,new QTableWidgetItem(QString::number(player->second.price)));
+        ui->tw_players->setItem(rowNum,4,new QTableWidgetItem(QString(player->second.position)));
+        ui->tw_players->setItem(rowNum,5,new QTableWidgetItem(QString::number(player->second.points)));
+        ui->tw_players->setItem(rowNum,6,new QTableWidgetItem(QString::number(player->second.club_id)));
+    }
+}
+
+
+
+void Home::on_pb_update_players_clicked()
+{
+    if(!ui->gb_update_players->isVisible())
+    {
+        ui->gb_update_players->show();
+    }
+    else
+    {
+        ui->gb_update_players->hide();
+    }
+}
+
+
+void Home::on_pb_update_confirm_players_clicked()
+{
+    qint64 id = ui->le_target_id_players->text().toInt();
+    if(!found_player(id))
+    {
+        QMessageBox::critical(this,"Error","there is no user with this id..!");
+    }
+
+    d_players[id].name = ui->le_name_update_players->text();
+    d_players[id].age = ui->sp_update_age_players->value();
+    d_players[id].points = ui->sp_update_points_players->value();
+    d_players[id].position = ui->le_position_update_players->text();
+    d_players[id].price = ui->sp_update_price_players->value();
+    d_players[id].club_id = ui->cb_club_update_players->currentIndex()+1;
+    QMessageBox::information(this,"success","done!");
+    on_pb_read_players_clicked();
+
+    if(!found_player(id))
+    {
+        QMessageBox::critical(this,"Error","there is no user with this id..!");
+        return;
+    }
+
+}
+
+void Home::on_pb_update_target_players_clicked()
+{
+    qint64 id = ui->le_target_id_players->text().toInt();
+    if(!found_player(id))
+    {
+        QMessageBox::critical(this,"Error","there is no player with this id..!");
+        return;
+    }
+
+    ui->le_name_update_players->setText(d_players[id].name);
+    ui->sp_update_age_players->setValue(d_players[id].age);
+    ui->sp_update_points_players->setValue(d_players[id].points);
+    ui->le_position_update_players->setText(d_players[id].position);
+    ui->sp_update_price_players->setValue(d_players[id].price);
+    ui->cb_club_update_players->setCurrentIndex(d_players[id].club_id-1);
+}
+
+
+void Home::on_pb_delete_players_clicked()
+{
+    if(!ui->gb_delete_players->isVisible())
+    {
+        ui->gb_delete_players->show();
+    }
+    else
+    {
+        ui->gb_delete_players->hide();
+    }
+}
+
+bool Home::found_player(qint64 id)
+{
+    for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+        if(i->first == id)
+        {
+            return true;
+        }
+    return false;
+}
+
+void Home::on_pb_delete_confirm_players_clicked()
+{
+    qint64 id = ui->le_delete_id_players->text().toInt();
+    if(ui->le_delete_id_players->text().isEmpty())
+        return;
+    // check if the player id is exist
+    if(found_player(id))
+    {
+        QMessageBox::warning(this,"deleted",d_players[id].name + " has been deleted successfully!");
+        d_players.erase(id);
+        players::size--;
+        on_pb_read_players_clicked();
+    }
+    else
+        QMessageBox::critical(this,"Error","there is no player with this id..!");
+}
+
+
+
+
+
+void Home::on_pb_insert_players_clicked()
+{
+    if(!ui->gb_insert_players->isVisible())
+    {
+        ui->gb_insert_players->show();
+    }
+    else
+    {
+        ui->gb_insert_players->hide();
+    }
+}
+
+
+void Home::on_pb_insert_confirm_players_clicked()
+{
+    bool checkThatAllInputNotNull = false;
+    if(
+        !ui->le_name_insert_players->text().isEmpty()
+        && !ui->le_position_insert_players->text().isEmpty()
+        && !ui->sp_insert_points_players->text().isEmpty()
+        && !ui->sp_insert_price_players->text().isEmpty()
+        && !ui->sp_insert_age_players->text().isEmpty()
+       )
+        checkThatAllInputNotNull = true;
+
+    if(checkThatAllInputNotNull)
+    {
+        players::size++;
+        d_players[++max_players_id].name = ui->le_name_insert_players->text();
+        d_players[max_players_id].age = ui->sp_insert_age_players->value();
+        d_players[max_players_id].position = ui->le_position_insert_players->text();
+        d_players[max_players_id].price = ui->sp_insert_price_players->value();
+        d_players[max_players_id].points= ui->sp_insert_age_players->value();
+        d_players[max_players_id].club_id = (ui->cb_club_insert_players->currentIndex())+1;
+        QMessageBox::information(this,"success","done!");
+        on_pb_read_players_clicked();
+    }
+    else
+        QMessageBox::critical(this,"Error","invaled data!");
+}
+
