@@ -4,9 +4,10 @@
 #include"data.h"
 #include<iostream>
 #include<QMessageBox>
+#include <queue>
 
 using namespace std;
-
+QPushButton* label;
 bool Home::find_user(qint64 id)
 {
     for(auto i = d_users.begin() ; i != d_users.end() ; i++)
@@ -270,9 +271,6 @@ void Home::on_pb_conform_update_clicked()
 }
 
 
-/************** PLAYERS ****************/
-
-
 void Home::on_pb_read_players_clicked()
 {
     ui->tw_players->setRowCount(players::size);
@@ -407,6 +405,177 @@ void Home::on_pb_insert_confirm_players_clicked()
       }
     else
         QMessageBox::critical(this,"Error","invaled data!");
+}
 
+
+/************** PLAYERS ****************/
+
+void Home::on_search_button_clicked()
+{
+      QGridLayout *lay =new QGridLayout(this);
+      QString s = ui->search_bar->text().toLower();
+      vector<pair<double,int>> matches;
+
+      for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+      {
+        QString name = i->second.name.toLower();
+        int match = 0;
+        int bestmatch = 0;
+        queue<int> indices;
+        for(int k=0;k<name.length();k++)
+        {
+            if(name[k] == s[0] && k+s.size()<name.length())
+            {
+                indices.push(k);
+            }
+        }
+        while(!indices.empty())
+        {
+            for (int j=indices.front();j<indices.front()+s.size();j++)
+            {
+                if(name[j] == s[j-indices.front()])
+                {
+                    match++;
+                }
+            }
+            if(match>bestmatch) bestmatch = match;
+            indices.pop();
+        }
+        if(bestmatch >= s.length()*0.6)
+        {
+            matches.push_back(make_pair(bestmatch/s.length(),i->first));
+            qDebug() << matches.back().first << " " << matches.back().second;
+        }
+      }
+      sort(matches.rbegin(),matches.rend());
+      for(int i=0;i<int(matches.size());i++)
+      {
+        players player= d_players[matches[i].second];
+        if(ui->scrollContents->layout() != NULL)
+        {
+            QLayoutItem* item;
+            while ((item = ui->scrollContents->layout()->takeAt(0))!= NULL)
+            {
+                delete item->widget();
+                delete item;
+            }
+            delete ui->scrollContents->layout();
+        }
+        label = new QPushButton(player.name);
+        label->setObjectName(player.name);
+        QLabel* lab =new QLabel(
+            "Age: "+ QString::number( player.age) +
+            "   position: " + player.position +
+            "   club:" + d_clubs[player.club_id].name +
+            "   price:" + QString::number( player.price));
+        lay->addWidget(label);
+        lay->addWidget(lab);
+
+
+        connect(label, SIGNAL(clicked()), this, SLOT(on_player_clicked()));
+      }
+
+      ui->scrollContents->setLayout(lay);
+      ui->scrollContents->setVisible(true);
+      ui->scrollContents->show();
+
+      ui->player_profile->hide();
+}
+QString buttonText;
+QPushButton *player_name_button;
+qint64 player_id;
+bool inMyTeam = false;
+void Home::on_player_clicked()
+{
+      ui->scrollArea->setGeometry(75,150,1000,750);
+      ui->player_profile->show();
+      //initializing the previously created button...
+      player_name_button = new QPushButton;
+
+      //recieving the button (name) clicked and assigning it to the pButton[x]...
+      player_name_button = qobject_cast<QPushButton*>(sender());
+
+      //assigning the text of the button to the string "buttonText"..
+      buttonText = player_name_button->text();
+
+      // recognize buttonText here
+      ui->player_name->setText(buttonText);
+      ui->player_name->setStyleSheet("font-family:century gothic;background:transparent;font-size:25px;color:yellow;Text-align:center");
+      QString name;
+
+      for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+      {
+        name = i->second.name;
+        if (buttonText == name)
+        {
+            player_id = i->first;
+            auto club = d_clubs[i->second.club_id];
+            ui->player_club->setText(club.name);
+            ui->player_position->setText(i->second.position);
+            QPixmap pix(i->second.image);
+            ui->image->setPixmap(pix);
+            break;
+        }
+      }
+      for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+      {
+        if (i->second.player_id == player_id)
+        {
+            inMyTeam = true;
+            break;
+        }
+      }
+      if (inMyTeam)
+      {
+        ui->buyButton->setEnabled(false);
+        ui->sellButton->setEnabled(true);
+      }
+      else
+      {
+        ui->sellButton->setEnabled(false);
+        ui->buyButton->setEnabled(true);
+      }
+      qDebug() << "on_player_clicked is good";
+}
+
+void Home::on_sellButton_clicked()
+{
+      users user = d_users[current_user_id];
+      players player = d_players[player_id];
+      QMessageBox::information(this,"Success","You sold this player successfully");
+      d_teams_players.erase(player_id);
+      ui->sellButton->setEnabled(false);
+      ui->buyButton->setEnabled(true);
+      user.budget += player.price;
+      qDebug() << "on_sellButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+}
+
+void Home::on_buyButton_clicked()
+{
+
+      qint64 team_id;
+      players player = d_players[player_id];
+      users user = d_users[current_user_id];
+//      qDebug() << "current_user_id: " << current_user_id;
+      for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
+      {
+        if (i->second.user_id == current_user_id)
+        {
+//            qDebug() << team_id << "   " << player_id;
+            team_id = i->first;
+            break;
+        }
+      }
+      if (user.budget >= player.price)
+      {
+        QMessageBox::information(this,"Success","You bought this player successfully");
+
+        d_teams_players[teams_players::size].player_id = player_id;
+        d_teams_players[teams_players::size].team_id = team_id;
+        ui->buyButton->setEnabled(false);
+        ui->sellButton->setEnabled(true);
+        user.budget -= player.price;
+      }
+      qDebug() << "on_buyButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
 }
 

@@ -52,6 +52,14 @@ private slots:
 
     void on_pb_insert_confirm_players_clicked();
 
+    void on_search_button_clicked();
+
+    void on_player_clicked();
+
+    void on_sellButton_clicked();
+
+    void on_buyButton_clicked();
+
 private:
     Ui::Home *ui;
 };

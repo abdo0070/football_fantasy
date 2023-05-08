@@ -178,7 +178,7 @@ MainWindow::~MainWindow()
     for(auto i = d_players.begin() ; i != d_players.end() ; i++)
     {
         qry.prepare("insert into players values(:id,:age,:price,:position,:club_id,:name,:points);");
-        qry.bindValue(":id",i->first);
+        qry.bindValue(":id",NULL);
         qry.bindValue(":age",i->second.age);
         qry.bindValue(":price",i->second.price);
         qry.bindValue(":position",i->second.position);
