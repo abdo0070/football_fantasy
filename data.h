@@ -26,3 +26,13 @@ extern QSqlDatabase db;
 extern QString current_user;
 extern qint64 current_user_id;
 
+extern int max_clubs_id;
+extern int max_matches_id;
+extern int max_matches_players_id;
+extern int max_players_id;
+extern int max_rounds_id;
+extern int max_teams_id;
+extern int max_teams_players_id;
+extern int max_users_id;
+extern int max_leagues_id;
+

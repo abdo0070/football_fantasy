@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         leagues::size = qry.size();
         int key = qry.value(0).toInt();
+        max_leagues_id = max(max_leagues_id,key);
         d_leagues[key].name = qry.value(1).toString();
     }
     bool d1 = qry.exec("SELECT * FROM clubs;");
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         clubs::size = qry.size();
         int key = qry.value(0).toInt();
+        max_clubs_id = max(max_clubs_id,key);
         d_clubs[key].name = qry.value(1).toString();
         d_clubs[key].league_id = qry.value(2).toInt();
     }
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         matches::size = qry.size();
         int key = qry.value(0).toInt();
+        max_matches_id = max(max_matches_id,key);
         d_matches[key].club_1 = qry.value(1).toInt();
         d_matches[key].club_2 = qry.value(2).toInt();
         d_matches[key].round_id = qry.value(3).toInt();
@@ -37,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         matches_players::size = qry.size();
         int key = qry.value(0).toInt();
+        max_matches_players_id= max(max_matches_players_id,key);
         d_matches_players[key].points = qry.value(1).toInt();
         d_matches_players[key].match_id = qry.value(2).toInt();
         d_matches_players[key].player_id = qry.value(3).toInt();
@@ -47,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         players::size = qry.size();
         int key = qry.value(0).toInt();
+        max_players_id= max(max_players_id,key);
         d_players[key].age = qry.value(1).toInt();
         d_players[key].price = qry.value(2).toInt();
         d_players[key].position = qry.value(3).toString();
@@ -59,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         rounds::size = qry.size();
         int key = qry.value(0).toInt();
+        max_rounds_id= max(max_rounds_id,key);
         d_rounds[key].weak = qry.value(1).toString();
     }
     bool d6 = qry.exec("SELECT * FROM teams;");
@@ -66,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         teams::size = qry.size();
         int key = qry.value(0).toInt();
+        max_teams_id= max(max_teams_id,key);
         d_teams[key].user_id = qry.value(1).toInt();
     }
     bool d7 = qry.exec("SELECT * FROM teams_players;");
@@ -73,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         teams_players::size = qry.size();
         int key = qry.value(0).toInt();
+        max_teams_players_id= max(max_teams_players_id,key);
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
     }
@@ -81,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         users::size = qry.size();
         int key = qry.value(0).toInt();
+        max_users_id= max(max_users_id,key);
         d_users[key].email = qry.value(1).toString();
         d_users[key].username = qry.value(2).toString();
         d_users[key].password = qry.value(3).toString();
@@ -246,7 +255,7 @@ void MainWindow::on_pushButton_clicked()
     {
         if(user == i->second.username && password == i->second.password)
         {
-            current_user = user,current_user_id=i->first;
+            current_user = user,current_user_id = i->first;
             // if there is any data to be calculated before we begin
             break;
         }

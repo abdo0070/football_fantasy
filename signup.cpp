@@ -74,17 +74,17 @@ void SignUp::on_pushButton_2_clicked()
         else
         {
             QMessageBox::information(this,"Success","Wellcome to Fantasy premier league!");
-
-            d_users[++users::size].username = username;
-            d_users[users::size].email = email;
-            d_users[users::size].password = password;
-            d_users[users::size].budget = 100000;
-            d_users[users::size].is_admin = false;
-            d_users[users::size].points = 0;
+            users::size++;
+            d_users[++max_users_id].username = username;
+            d_users[max_users_id].email = email;
+            d_users[max_users_id].password = password;
+            d_users[max_users_id].budget = 100000;
+            d_users[max_users_id].is_admin = false;
+            d_users[max_users_id].points = 0;
             ch_club.setWindowState(Qt::WindowFullScreen);
             ch_club.show();
-            d_users[users::size].club_id = ch_club.checked;
-            d_users[users::size].number_of_players = 0;
+            d_users[max_users_id].club_id = ch_club.checked;
+            d_users[max_users_id].number_of_players = 0;
             SignUp::close();
         }
     }

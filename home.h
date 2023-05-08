@@ -20,6 +20,16 @@ private slots:
 
     void on_pb_read_clicked();
 
+    void on_pb_delete_clicked();
+
+    void on_pb_conform_clicked();
+
+    void on_pb_insert_clicked();
+
+    void on_pb_conform_insert_clicked();
+
+    void on_pb_update_clicked();
+
 private:
     Ui::Home *ui;
 };

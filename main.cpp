@@ -39,12 +39,22 @@ int teams_players::size = 0;
 int users::size = 0;
 int leagues::size = 0;
 
+int max_clubs_id = 0;
+int max_matches_id = 0;
+int max_matches_players_id = 0;
+int max_players_id = 0;
+int max_rounds_id = 0;
+int max_teams_id = 0;
+int max_teams_players_id = 0;
+int max_users_id = 0;
+int max_leagues_id = 0;
+
 int main(int argc, char *argv[])
 {
 
     db.setDatabaseName("fantasy");
     db.setHostName("127.0.0.1");
-    db.setPassword("");
+    db.setPassword("@#191#36@aC");
     db.setUserName("root");
 
     db.open();

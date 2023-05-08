@@ -35,9 +35,8 @@ void Dialog::on_pushButton_clicked()
         checked = 4;
     else
         checked = 6;
-    d_users[users::size].club_id = checked;
+    d_users[max_users_id].club_id = checked;
     QMessageBox config;
-    //config.setStyleSheet(QString::fromUtf8("background-color: rgb(241, 241, 241);"));
     config.information(this,"good one!","new member of "+ d_clubs[checked].name);
 
     Dialog::close();
