@@ -38,7 +38,6 @@ void Dialog::on_pushButton_clicked()
     d_users[max_users_id].club_id = checked;
     QMessageBox config;
     config.information(this,"good one!","new member of "+ d_clubs[checked].name);
-
     Dialog::close();
 }
 

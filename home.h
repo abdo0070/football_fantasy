@@ -12,6 +12,7 @@ class Home : public QDialog
     Q_OBJECT
 
 public:
+    bool find_user(qint64 id);
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 
@@ -29,6 +30,10 @@ private slots:
     void on_pb_conform_insert_clicked();
 
     void on_pb_update_clicked();
+
+    void on_pb_conform_update_clicked();
+
+    void on_pb_user_update_clicked();
 
 private:
     Ui::Home *ui;
