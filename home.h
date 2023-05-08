@@ -17,6 +17,11 @@ public:
     ~Home();
     bool found_player(qint64 id);
 private slots:
+
+    void on_pb_user_update_clicked();
+
+    void on_pb_conform_update_clicked();
+
     void on_pushButton_clicked();
 
     void on_pb_read_clicked();
