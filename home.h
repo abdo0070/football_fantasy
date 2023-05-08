@@ -36,6 +36,22 @@ private slots:
 
     void on_pb_update_clicked();
 
+    void on_pb_update_players_clicked();
+
+    void on_pb_update_target_players_clicked();
+
+    void on_pb_update_confirm_players_clicked();
+
+    void on_pb_read_players_clicked();
+
+    void on_pb_delete_players_clicked();
+
+    void on_pb_delete_confirm_players_clicked();
+
+    void on_pb_insert_players_clicked();
+
+    void on_pb_insert_confirm_players_clicked();
+
 private:
     Ui::Home *ui;
 };
