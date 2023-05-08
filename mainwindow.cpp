@@ -251,16 +251,18 @@ void MainWindow::on_pushButton_clicked()
 {
     QString user = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
+    bool found = false;
     for(auto i = d_users.begin() ; i != d_users.end() ; i++)
     {
         if(user == i->second.username && password == i->second.password)
         {
             current_user = user,current_user_id = i->first;
             // if there is any data to be calculated before we begin
+            found = true;
             break;
         }
     }
-    if(current_user != "")
+    if(current_user != "" && found)
     {
         homeui = new Home;
 
