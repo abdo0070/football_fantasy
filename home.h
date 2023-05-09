@@ -17,8 +17,13 @@ public:
     void leader_board();
     explicit Home(QWidget *parent = nullptr);
     ~Home();
-
+    bool found_player(qint64 id);
 private slots:
+
+    void on_pb_user_update_clicked();
+
+    void on_pb_conform_update_clicked();
+
     void on_pushButton_clicked();
 
     void on_pb_read_clicked();
@@ -33,9 +38,21 @@ private slots:
 
     void on_pb_update_clicked();
 
-    void on_pb_conform_update_clicked();
+    void on_pb_update_players_clicked();
 
-    void on_pb_user_update_clicked();
+    void on_pb_update_target_players_clicked();
+
+    void on_pb_update_confirm_players_clicked();
+
+    void on_pb_read_players_clicked();
+
+    void on_pb_delete_players_clicked();
+
+    void on_pb_delete_confirm_players_clicked();
+
+    void on_pb_insert_players_clicked();
+
+    void on_pb_insert_confirm_players_clicked();
 
     //************players******************//
 
