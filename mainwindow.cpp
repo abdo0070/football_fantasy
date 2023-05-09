@@ -137,7 +137,7 @@ MainWindow::~MainWindow()
         if(x)
             cout << "leagues is in \n";
         else
-            qDebug() << y << '\n' << qry.lastError() << '\n';
+            qDebug() << "in  ...... " <<  y << '\n' << qry.lastError() << '\n';
     }
     for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++,y++)
     {

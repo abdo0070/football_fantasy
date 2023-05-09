@@ -570,11 +570,12 @@ void Home::on_buyButton_clicked()
       {
         QMessageBox::information(this,"Success","You bought this player successfully");
 
-        d_teams_players[teams_players::size].player_id = player_id;
-        d_teams_players[teams_players::size].team_id = team_id;
+        d_teams_players[++max_teams_players_id].player_id = player_id;
+        d_teams_players[max_teams_players_id].team_id = team_id;
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
         user.budget -= player.price;
+        d_users[current_user_id].budget -= player.price;
       }
       qDebug() << "on_buyButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
 }
