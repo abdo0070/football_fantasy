@@ -10,7 +10,7 @@ bool valed_user(T THIS,QString username,QString email,QString password)
     QRegularExpressionMatch match1_email = email_pattern1.match(email);
     QRegularExpressionMatch match2_email = email_pattern2.match(email);
     QRegularExpressionMatch match_password = password_pattern.match(password);
-    if(username.size() > 10 || username.size() < 4 )
+    if(username.size() > 10 || username.size() < 4)
     {
         QMessageBox::warning(THIS,"Faild","username size must be greater than 3 chracters and less than 11");
         return false;
@@ -32,6 +32,7 @@ bool valed_user(T THIS,QString username,QString email,QString password)
     }
     return true;
 }
+
 template<class T>
 bool is_found(int id,map<int,T> d_table)
 {

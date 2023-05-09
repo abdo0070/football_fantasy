@@ -27,9 +27,9 @@ void Home::leader_board()
         switch (rowNum) {
         case 0:
         {
-             QTableWidgetItem *item = new QTableWidgetItem();
-             item->setData(Qt::DecorationRole,QPixmap(":/Icons/1.png").scaled(60,60,Qt::IgnoreAspectRatio));
-             ui->tw_leader_board->setItem(0,0,item);
+            QTableWidgetItem *item = new QTableWidgetItem();
+            item->setData(Qt::DecorationRole,QPixmap(":/Icons/1.png").scaled(50,50,Qt::IgnoreAspectRatio));
+            ui->tw_leader_board->setItem(0,0,item);
             break;
         }
         case 1:

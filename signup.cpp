@@ -33,7 +33,7 @@ void SignUp::on_pushButton_2_clicked()
     QString email = ui->lineEdit_2->text();
     QString password = ui->lineEdit_3->text();
 
-    if(valed_user(this,username,email,password));
+    if(!valed_user(this,username,email,password));
     else
     {
         bool repeated_username = false;
