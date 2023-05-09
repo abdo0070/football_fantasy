@@ -5,6 +5,7 @@
 #include<iostream>
 #include "data.h"
 #include<QKeyEvent>
+#include"SUPPORT.cpp"
 using namespace std;
 SignUp::SignUp(QWidget *parent):
     QDialog(parent),
@@ -27,29 +28,12 @@ void SignUp::on_pushButton_clicked()
 
 void SignUp::on_pushButton_2_clicked()
 {
-    QRegularExpression email_pattern1("^[\\w._%+-]{1,20}@[\\w.-]{2,20}\\.[A-Za-z]{2,3}");
-    QRegularExpression email_pattern2("\\s");
-
-    QRegularExpression password_pattern("\\D+");
-
 
     QString username = ui->lineEdit->text();
     QString email = ui->lineEdit_2->text();
     QString password = ui->lineEdit_3->text();
 
-    QRegularExpressionMatch match1_email = email_pattern1.match(email);
-    QRegularExpressionMatch match2_email = email_pattern2.match(email);
-
-    QRegularExpressionMatch match_password = password_pattern.match(password);
-
-    if(username.size() > 10 || username.size() < 4 )//password.size() > 8 && password.size() < 16 && match_email.hasMatch() && match_password1.hasMatch() && match_password2.hasMatch())
-        QMessageBox::warning(this,"Faild","username size must be greater than 3 chracters and less than 11");
-    else if(!match1_email.hasMatch() || match2_email.hasMatch())
-        QMessageBox::warning(this,"Faild","email doesn't match \n note that only gmail domain is valed");
-    else if(!match_password.hasMatch())
-        QMessageBox::warning(this,"Faild","password doesn't match \n note that you have to use at least one chracter!\n the size of your password must be greater than 8 and less than 16!");
-    else if(password.size() < 8 || password.size() > 16 || !match_password.hasMatch())
-        QMessageBox::warning(this,"Faild","password size must be greater than 7 chracters and less than 17 \n note that password must have at least one special character");
+    if(valed_user(this,username,email,password));
     else
     {
         bool repeated_username = false;

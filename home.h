@@ -12,7 +12,9 @@ class Home : public QDialog
     Q_OBJECT
 
 public:
-    bool find_user(qint64 id);
+
+
+    void leader_board();
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 
@@ -34,6 +36,24 @@ private slots:
     void on_pb_conform_update_clicked();
 
     void on_pb_user_update_clicked();
+
+    //************players******************//
+
+    void on_pb_update_players_clicked();
+
+    void on_pb_update_target_players_clicked();
+
+    void on_pb_update_confirm_players_clicked();
+
+    void on_pb_read_players_clicked();
+
+    void on_pb_delete_players_clicked();
+
+    void on_pb_delete_confirm_players_clicked();
+
+    void on_pb_insert_players_clicked();
+
+    void on_pb_insert_confirm_players_clicked();
 
 private:
     Ui::Home *ui;

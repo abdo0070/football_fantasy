@@ -35,5 +35,8 @@
         <file>background/Leagues/Dialog4.jpg</file>
         <file>background/Leagues/premier.png</file>
         <file>background/IMG-20230415-WA0008.jpg</file>
+        <file>Icons/1.png</file>
+        <file>Icons/2.png</file>
+        <file>Icons/3.png</file>
     </qresource>
 </RCC>
