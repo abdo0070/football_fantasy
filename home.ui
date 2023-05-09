@@ -70,7 +70,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/playground.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/playground.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -89,7 +89,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -133,7 +133,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -157,7 +157,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -196,7 +196,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/IMG-20230415-WA0008.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/IMG-20230415-WA0008.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -215,7 +215,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1656,8 +1656,6 @@ background-color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="background.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
