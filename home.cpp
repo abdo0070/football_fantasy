@@ -58,17 +58,7 @@ void Home::leader_board()
 
 }
 
-<<<<<<< HEAD
 
-=======
-bool Home::found_player(qint64 id)
-{
-    for(auto i = d_players.begin() ; i != d_players.end() ; i++)
-        if(i->first == id)
-             return true;
-    return false;
-}
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
 Home::Home(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Home)
@@ -142,7 +132,6 @@ Home::Home(QWidget *parent) :
     // hide update users
         ui->gb_user_update->hide();
 
-<<<<<<< HEAD
 
     // hide update for players
         ui->gb_update_players->hide();
@@ -151,15 +140,6 @@ Home::Home(QWidget *parent) :
     // hide delete for players
         ui->gb_insert_players->hide();
     // set max range for points & age and price spin box for player (admin)
-=======
-        // hide update for players
-        ui->gb_update_players->hide();
-        // hide delete for players
-        ui->gb_delete_players->hide();
-        // hide delete for players
-        ui->gb_insert_players->hide();
-        // set max range for points & age and price spin box for player (admin)
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
         ui->sp_update_points_players->setMaximum(1000);
         ui->sp_update_age_players->setMaximum(50);
         ui->sp_update_price_players->setMaximum(10000000);
@@ -408,79 +388,8 @@ void Home::on_pb_update_confirm_players_clicked()
 }
 
 
-/************** PLAYERS ****************/
 
 
-<<<<<<< HEAD
-=======
-void Home::on_pb_read_players_clicked()
-{
-    ui->tw_players->setRowCount(players::size);
-
-    int rowNum = 0;
-    // id , name , age , price , position , points
-    for(auto player = d_players.begin() ; player != d_players.end() ; player++ , rowNum++)
-    {
-        ui->tw_players->setItem(rowNum,0,new QTableWidgetItem(QString::number(player->first)));
-        ui->tw_players->setItem(rowNum,1,new QTableWidgetItem(QString(player->second.name)));
-        ui->tw_players->setItem(rowNum,2,new QTableWidgetItem(QString::number(player->second.age)));
-        ui->tw_players->setItem(rowNum,3,new QTableWidgetItem(QString::number(player->second.price)));
-        ui->tw_players->setItem(rowNum,4,new QTableWidgetItem(QString(player->second.position)));
-        ui->tw_players->setItem(rowNum,5,new QTableWidgetItem(QString::number(player->second.points)));
-        ui->tw_players->setItem(rowNum,6,new QTableWidgetItem(QString::number(player->second.club_id)));
-    }
-}
-
-void Home::on_pb_update_players_clicked()
-{
-    if( !ui->gb_update_players->isVisible())
-    {
-        ui->gb_update_players->show();
-    }
-    else
-        ui->gb_update_players->hide();
-}
-
-
-
-void Home::on_pb_update_target_players_clicked()
-{
-    qint64 id = ui->le_target_id_players->text().toInt();
-    if(!found_player(id))
-    {
-        QMessageBox::critical(this,"Error","there is no player with this id..!");
-        return;
-    }
-    ui->le_name_update_players->setText(d_players[id].name);
-    ui->le_position_update_players->setText(d_players[id].position);
-    ui->sp_update_price_players->setValue(d_players[id].price);
-    ui->sp_update_age_players->setValue(d_players[id].age);
-    ui->sp_update_points_players->setValue(d_players[id].points);
-    ui->cb_club_update_players->setCurrentIndex(d_players[id].club_id-1);
-    ui->is_admin_update->setChecked(d_users[id].is_admin);
-}
-
-void Home::on_pb_update_confirm_players_clicked()
-{
-    qint64 id = ui->le_target_id_players->text().toInt();
-    if(!found_player(id))
-    {
-        QMessageBox::critical(this,"Error","there is no user with this id..!");
-    }
-    d_players[id].name = ui->le_name_update_players->text();
-    d_players[id].position = ui->le_position_update_players->text();
-    d_players[id].age = ui->sp_update_age_players->value();
-    d_players[id].price = ui->sp_update_price_players->value();
-    d_players[id].points = ui->sp_update_points_players->value();
-    d_players[id].club_id = ui->cb_club_update_players->currentIndex()+1;
-    QMessageBox::information(this,"success","done!");
-    on_pb_read_players_clicked();
-}
-
-
-
-
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
 void Home::on_pb_delete_players_clicked()
 {
     if(!ui->gb_delete_players->isVisible())
@@ -499,11 +408,7 @@ void Home::on_pb_delete_confirm_players_clicked()
         return;
     }
 
-<<<<<<< HEAD
     if(is_found(id,d_players))
-=======
-    if(found_player(id))
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
     {
         QMessageBox::warning(this,"deleted",d_players[id].name+" has been deleted successfully!");
         d_players.erase(id);
@@ -520,11 +425,7 @@ void Home::on_pb_delete_confirm_players_clicked()
 void Home::on_pb_insert_players_clicked()
 {
     if(!ui->gb_insert_players->isVisible())
-<<<<<<< HEAD
         ui->gb_insert_players->show();
-=======
-    ui->gb_insert_players->show();
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
     else
         ui->gb_insert_players->hide();
 }
@@ -553,18 +454,11 @@ void Home::on_pb_insert_confirm_players_clicked()
         d_players[max_players_id].club_id = (ui->cb_club_insert_players->currentIndex())+1;
         QMessageBox::information(this,"success","done!");
         on_pb_read_players_clicked();
-<<<<<<< HEAD
     }
-=======
-      }
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
     else
         QMessageBox::critical(this,"Error","invaled data!");
 
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7

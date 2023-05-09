@@ -70,7 +70,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/playground.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/playground.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -89,7 +89,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -133,7 +133,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -160,7 +160,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -323,7 +323,7 @@ border-radius:20px 20px 20px 20px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/IMG-20230415-WA0008.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/IMG-20230415-WA0008.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -342,7 +342,7 @@ border-radius:20px 20px 20px 20px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../football_fantasy2/football_fantasy/background.qrc">:/background/bg.jpg</pixmap>
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1065,13 +1065,8 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QTableWidget" name="tw_players">
        <property name="geometry">
         <rect>
-<<<<<<< HEAD
          <x>530</x>
          <y>270</y>
-=======
-         <x>540</x>
-         <y>280</y>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
          <width>1011</width>
          <height>521</height>
         </rect>
@@ -1118,57 +1113,11 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </column>
       </widget>
-<<<<<<< HEAD
       <widget class="QGroupBox" name="gb_delete_players">
        <property name="geometry">
         <rect>
          <x>1110</x>
          <y>150</y>
-=======
-      <widget class="QPushButton" name="pb_update_players">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>180</y>
-         <width>191</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>UPDATE</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pb_delete_players">
-       <property name="geometry">
-        <rect>
-         <x>760</x>
-         <y>180</y>
-         <width>211</width>
-         <height>89</height>
-        </rect>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>DELETE</string>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="gb_delete_players">
-       <property name="geometry">
-        <rect>
-         <x>1120</x>
-         <y>160</y>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
          <width>301</width>
          <height>111</height>
         </rect>
@@ -1213,7 +1162,6 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </widget>
-<<<<<<< HEAD
       <widget class="QPushButton" name="pb_insert_players">
        <property name="geometry">
         <rect>
@@ -1238,13 +1186,6 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>30</x>
          <y>260</y>
-=======
-      <widget class="QGroupBox" name="gb_update_players">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>270</y>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
          <width>501</width>
          <height>601</height>
         </rect>
@@ -1526,38 +1467,11 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </widget>
-<<<<<<< HEAD
       <widget class="QGroupBox" name="gb_insert_players">
        <property name="geometry">
         <rect>
          <x>1550</x>
          <y>270</y>
-=======
-      <widget class="QPushButton" name="pb_read_players">
-       <property name="geometry">
-        <rect>
-         <x>540</x>
-         <y>180</y>
-         <width>211</width>
-         <height>89</height>
-        </rect>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>READ</string>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="gb_insert_players">
-       <property name="geometry">
-        <rect>
-         <x>1560</x>
-         <y>280</y>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
          <width>341</width>
          <height>571</height>
         </rect>
@@ -1802,19 +1716,11 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </widget>
-<<<<<<< HEAD
       <widget class="QPushButton" name="pb_read_players">
        <property name="geometry">
         <rect>
          <x>530</x>
          <y>170</y>
-=======
-      <widget class="QPushButton" name="pb_insert_players">
-       <property name="geometry">
-        <rect>
-         <x>1620</x>
-         <y>180</y>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
          <width>211</width>
          <height>89</height>
         </rect>
@@ -1826,7 +1732,6 @@ background-color: rgb(255, 255, 255);</string>
         </sizepolicy>
        </property>
        <property name="text">
-<<<<<<< HEAD
         <string>READ</string>
        </property>
       </widget>
@@ -1866,9 +1771,6 @@ background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>UPDATE</string>
-=======
-        <string>INSERT</string>
->>>>>>> 8ae5d3efad7ce8207dc9ffc97cbfa73b2f1381c7
        </property>
       </widget>
      </widget>
@@ -1881,6 +1783,8 @@ background-color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="background.qrc"/>
+ </resources>
  <connections/>
 </ui>
