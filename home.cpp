@@ -578,4 +578,3 @@ void Home::on_buyButton_clicked()
       }
       qDebug() << "on_buyButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
 }
-
