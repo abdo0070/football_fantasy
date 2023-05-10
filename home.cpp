@@ -444,7 +444,7 @@ void Home::on_search_button_clicked()
         if(bestmatch >= s.length()*0.6)
         {
             matches.push_back(make_pair(bestmatch/s.length(),i->first));
-            qDebug() << matches.back().first << " " << matches.back().second;
+//            qDebug() << matches.back().first << " " << matches.back().second;
         }
       }
       sort(matches.rbegin(),matches.rend());
@@ -472,7 +472,7 @@ void Home::on_search_button_clicked()
         lay->addWidget(lab);
 
 
-        connect(label, SIGNAL(clicked()), this, SLOT(on_player_clicked()));
+        connect(label, SIGNAL(clicked()), this, SLOT(on_player_profile_clicked()));
       }
 
       ui->scrollContents->setLayout(lay);
@@ -485,7 +485,7 @@ QString buttonText;
 QPushButton *player_name_button;
 qint64 player_id;
 bool inMyTeam = false;
-void Home::on_player_clicked()
+void Home::on_player_profile_clicked()
 {
       ui->scrollArea->setGeometry(75,150,1000,750);
       ui->player_profile->show();
@@ -535,47 +535,77 @@ void Home::on_player_clicked()
         ui->sellButton->setEnabled(false);
         ui->buyButton->setEnabled(true);
       }
-      qDebug() << "on_player_clicked is good";
+//      qDebug() << "on_player_clicked is good";
 }
 
 void Home::on_sellButton_clicked()
 {
-      users user = d_users[current_user_id];
+      qint64 playerid_in_teamsplayers;
+      auto user = d_users.begin() ;
+      for(; user != d_users.end() ; user++)
+      {
+        if (user->first == current_user_id)
+        {
+            qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
+            break;
+        }
+      }
+
+
+//      users user = d_users[current_user_id];
+
+      for(auto player = d_teams_players.begin() ; player != d_teams_players.end() ; player++)
+      {
+        if (player->second.player_id == player_id)
+        {
+            playerid_in_teamsplayers = player->first;
+            break;
+        }
+      }
+
       players player = d_players[player_id];
       QMessageBox::information(this,"Success","You sold this player successfully");
-      d_teams_players.erase(player_id);
+      d_teams_players.erase(playerid_in_teamsplayers);
       ui->sellButton->setEnabled(false);
       ui->buyButton->setEnabled(true);
-      user.budget += player.price;
-      qDebug() << "on_sellButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+      user->second.budget += player.price;
+      qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
 }
 
 void Home::on_buyButton_clicked()
 {
+    auto user = d_users.begin() ;
+    for(; user != d_users.end() ; user++)
+    {
+        if (user->first == current_user_id)
+        {
+            qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
+            break;
+        }
+    }
 
-      qint64 team_id;
-      players player = d_players[player_id];
-      users user = d_users[current_user_id];
-//      qDebug() << "current_user_id: " << current_user_id;
-      for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
-      {
+    qint64 team_id;
+    players player = d_players[player_id];
+    for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
+    {
         if (i->second.user_id == current_user_id)
         {
-//            qDebug() << team_id << "   " << player_id;
             team_id = i->first;
             break;
         }
-      }
-      if (user.budget >= player.price)
-      {
+    }
+    if (user->second.budget >= player.price)
+    {
         QMessageBox::information(this,"Success","You bought this player successfully");
 
         d_teams_players[++max_teams_players_id].player_id = player_id;
         d_teams_players[max_teams_players_id].team_id = team_id;
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
-        user.budget -= player.price;
+        user->second.budget -= player.price;
         d_users[current_user_id].budget -= player.price;
-      }
-      qDebug() << "on_buyButton_clicked is good and the budget is: " << user.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+    }
+    qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+    qDebug() << "*********Mission is completed*********";
 }
+

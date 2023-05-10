@@ -54,7 +54,7 @@ private slots:
 
     void on_search_button_clicked();
 
-    void on_player_clicked();
+    void on_player_profile_clicked();
 
     void on_sellButton_clicked();
 
