@@ -106,12 +106,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
 
-    cout << "id "<<"user_id\n";
-    for(auto i = d_teams.begin() ; i != d_teams.end(); i++)
-        cout << i->first << " " << i->second.user_id << '\n';
-    cout << "id "<<" player_id "<< "team_id\n";
-    for(auto i = d_teams_players.begin() ; i != d_teams_players.end(); i++)
-        cout << i->first << " " << i->second.player_id << " " << i->second.team_id <<'\n';
+//    cout << "id "<<"user_id\n";
+//    for(auto i = d_teams.begin() ; i != d_teams.end(); i++)
+//        cout << i->first << " " << i->second.user_id << '\n';
+//    cout << "id "<<" player_id "<< "team_id\n";
+//    for(auto i = d_teams_players.begin() ; i != d_teams_players.end(); i++)
+//        cout << i->first << " " << i->second.player_id << " " << i->second.team_id <<'\n';
 
     delete ui;
     QSqlQuery qry;
@@ -237,7 +237,7 @@ MainWindow::~MainWindow()
     for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
     {
         qry.prepare("insert into teams_players values(NULL,:player_id,:team_id);");
-        //        qry.bindValue(":id",NULL);
+        // qry.bindValue(":id",NULL);
         qry.bindValue(":player_id",i->second.player_id);
         qry.bindValue(":team_id",i->second.team_id);
         bool x = qry.exec();

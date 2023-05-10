@@ -33,7 +33,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/FC_Barcelona_(crest).svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Barcelona.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -78,7 +78,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Real_Madrid_CF.svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/RealMadrid.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -110,7 +110,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Atletico_Madrid_2017_logo.svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/AtleticoMadrid.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -161,7 +161,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Chelsea_FC.svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Chelsea.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -225,7 +225,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Liverpool_FC.svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Liverpool.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -244,7 +244,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Manchester_City_FC_badge.svg.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/ManchesterCity.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -276,7 +276,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Pyramids_FC_(2020).png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Pyramids.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -340,7 +340,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/Al_Ahly_SC_logo.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Alahly.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -359,7 +359,7 @@ QMessageBox QPushButton {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="background.qrc">:/background/Clubs/ZamalekSC.png</pixmap>
+    <pixmap resource="background.qrc">:/background/Clubs/Zamalek.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

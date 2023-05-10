@@ -24,7 +24,8 @@ SOURCES += \
     signup.cpp \
     teams.cpp \
     teams_players.cpp \
-    users.cpp
+    users.cpp \
+    utils.cpp
 
 HEADERS += \
     clubs.h \
@@ -40,7 +41,8 @@ HEADERS += \
     signup.h \
     teams.h \
     teams_players.h \
-    users.h
+    users.h \
+    utils.h
 
 FORMS += \
     dialog.ui \

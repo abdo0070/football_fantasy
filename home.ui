@@ -29,7 +29,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="profile">
     <property name="maximumSize">
@@ -95,7 +95,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="profile_picture">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -114,7 +114,7 @@
     <zorder>label_2</zorder>
     <zorder>pushButton</zorder>
     <zorder>label</zorder>
-    <zorder>label_4</zorder>
+    <zorder>profile_picture</zorder>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">
@@ -130,7 +130,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
      </property>
      <property name="text">
       <string extracomment="nbjk."/>
@@ -149,10 +150,11 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Search</string>
      </property>
     </widget>
     <widget class="QFrame" name="player_profile">
@@ -308,8 +310,14 @@ background-color: rgb(255, 85, 0);
        <height>750</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
@@ -325,6 +333,23 @@ background-color: rgb(255, 85, 0);
       </property>
      </widget>
     </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1920</width>
+       <height>1080</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+     </property>
+    </widget>
+    <zorder>label_3</zorder>
     <zorder>player_profile</zorder>
     <zorder>scrollArea</zorder>
     <zorder>search_bar</zorder>

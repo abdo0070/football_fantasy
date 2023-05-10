@@ -6,12 +6,14 @@
 #include<QMessageBox>
 #include <queue>
 #include"SUPPORT.cpp"
+#include"utils.h"
 using namespace std;
+
+
 
 void Home::leader_board()
 
 {
-
     vector<pair<qint64, QString>> v;
     int admins = 0;
     for(auto it = d_users.begin(); it != d_users.end(); it++){
@@ -65,59 +67,9 @@ Home::Home(QWidget *parent) :
     ui(new Ui::Home)
 {
     ui->setupUi(this);
-    QPixmap profile;
-    switch (d_users[current_user_id].club_id)
-    {
-    case 1:
-    {
-        profile = QPixmap(":/background/Clubs/Liverpool_FC.svg.png");
-        break;
-    }
-    case 2:
-    {
-        profile = QPixmap(":/background/Clubs/Chelsea_FC.svg.png");
-        break;
-    }
-    case 3:
-    {
-        profile = QPixmap(":/background/Clubs/Manchester_City_FC_badge.svg.png");
-        break;
-    }
-    case 4:
-    {
-        profile = QPixmap(":/background/Clubs/Pyramids_FC_(2020).png");
-        break;
-    }
-    case 5:
-    {
-        profile = QPixmap(":/background/Clubs/Al_Ahly_SC_logo.png");
-        break;
-    }
-    case 6:
-    {
-        profile = QPixmap(":/background/Clubs/ZamalekSC.png");
-        break;
-    }
-    case 7:
-    {
-        profile = QPixmap(":/background/Clubs/FC_Barcelona_(crest).svg.png");
-        break;
-    }
-    case 8:
-    {
-        profile = QPixmap(":/background/Clubs/Real_Madrid_CF.svg.png");
-        break;
-    }
-    case 9:
-    {
-        profile = QPixmap(":/background/Clubs/Atletico_Madrid_2017_logo.svg.png");
-        break;
-    }
-    default:
-        break;
-    }
+    QPixmap profile(utils::get_club_path(d_users[current_user_id].club_id));
 
-    ui->label_4->setPixmap(profile);
+    ui->profile_picture->setPixmap(profile);
 
 
     leader_board();
@@ -466,12 +418,15 @@ QPushButton* label;
 
 void Home::on_search_button_clicked()
 {
-      QGridLayout *lay =new QGridLayout(this);
-      QString s = ui->search_bar->text().toLower();
-      vector<pair<double,int>> matches;
+    if(ui->search_bar->text().isEmpty())
+        return;
 
-      for(auto i = d_players.begin() ; i != d_players.end() ; i++)
-      {
+    QGridLayout *lay =new QGridLayout(this);
+    QString s = ui->search_bar->text().toLower();
+    vector<pair<double,int>> matches;
+
+    for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+    {
         QString name = i->second.name.toLower();
         int match = 0;
         int bestmatch = 0;
@@ -500,7 +455,7 @@ void Home::on_search_button_clicked()
             matches.push_back(make_pair(bestmatch/s.length(),i->first));
 //            qDebug() << matches.back().first << " " << matches.back().second;
         }
-      }
+    }
       sort(matches.rbegin(),matches.rend());
       for(int i=0;i<int(matches.size());i++)
       {
@@ -541,54 +496,56 @@ qint64 player_id;
 bool inMyTeam = false;
 void Home::on_player_profile_clicked()
 {
-      ui->scrollArea->setGeometry(75,150,1000,750);
-      ui->player_profile->show();
-      //initializing the previously created button...
-      player_name_button = new QPushButton;
+  ui->scrollArea->setGeometry(75,150,1000,750);
+  ui->player_profile->show();
+  ui->image->setStyleSheet(""); // to filter white background
+  //initializing the previously created button...
+  player_name_button = new QPushButton;
 
-      //recieving the button (name) clicked and assigning it to the pButton[x]...
-      player_name_button = qobject_cast<QPushButton*>(sender());
+  //recieving the button (name) clicked and assigning it to the pButton[x]...
+  player_name_button = qobject_cast<QPushButton*>(sender());
 
-      //assigning the text of the button to the string "buttonText"..
-      buttonText = player_name_button->text();
+  //assigning the text of the button to the string "buttonText"..
+  buttonText = player_name_button->text();
 
-      // recognize buttonText here
-      ui->player_name->setText(buttonText);
-      ui->player_name->setStyleSheet("font-family:century gothic;background:transparent;font-size:25px;color:yellow;Text-align:center");
-      QString name;
+  // recognize buttonText here
+  ui->player_name->setText(buttonText);
+  ui->player_name->setStyleSheet("font-family:century gothic;background:transparent;font-size:25px;color:yellow;Text-align:center");
+  QString name;
 
-      for(auto i = d_players.begin() ; i != d_players.end() ; i++)
-      {
-        name = i->second.name;
-        if (buttonText == name)
-        {
-            player_id = i->first;
-            auto club = d_clubs[i->second.club_id];
-            ui->player_club->setText(club.name);
-            ui->player_position->setText(i->second.position);
-            QPixmap pix(i->second.image);
-            ui->image->setPixmap(pix);
-            break;
-        }
-      }
-      for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
-      {
-        if (i->second.player_id == player_id)
-        {
-            inMyTeam = true;
-            break;
-        }
-      }
-      if (inMyTeam)
-      {
-        ui->buyButton->setEnabled(false);
-        ui->sellButton->setEnabled(true);
-      }
-      else
-      {
-        ui->sellButton->setEnabled(false);
-        ui->buyButton->setEnabled(true);
-      }
+  for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+  {
+    name = i->second.name;
+    if (buttonText == name)
+    {
+        player_id = i->first;
+        auto club = d_clubs[i->second.club_id];
+        ui->player_club->setText(club.name);
+        ui->player_position->setText(i->second.position);
+        QPixmap pix(utils::get_shirt_path(i->second.club_id));
+        ui->image->setScaledContents(1);
+        ui->image->setPixmap(pix);
+        break;
+    }
+  }
+  for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+  {
+    if (i->second.player_id == player_id)
+    {
+        inMyTeam = true;
+        break;
+    }
+  }
+  if (inMyTeam)
+  {
+    ui->buyButton->setEnabled(false);
+    ui->sellButton->setEnabled(true);
+  }
+  else
+  {
+    ui->sellButton->setEnabled(false);
+    ui->buyButton->setEnabled(true);
+  }
 //      qDebug() << "on_player_clicked is good";
 }
 
