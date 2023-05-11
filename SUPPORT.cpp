@@ -30,7 +30,26 @@ bool valed_user(T THIS,QString username,QString email,QString password)
         QMessageBox::warning(THIS,"Faild","password size must be greater than 7 chracters and less than 17 \n note that password must have at least one special character");
         return false;
     }
+
     return true;
+}
+
+template<class T>
+bool is_repeated(T THIS,QString username,QString email)
+{
+    for(auto i = d_users.begin(); i != d_users.end(); i++)
+        if(i->second.username == username)
+        {
+            QMessageBox::warning(THIS,"Faild","this username has already been used!");
+            return true;
+        }
+    for(auto i = d_users.begin(); i != d_users.end(); i++)
+        if(i->second.email == email)
+        {
+            QMessageBox::warning(THIS,"Faild","this email has already been used!");
+            return true;
+        }
+    return false;
 }
 
 template<class T>

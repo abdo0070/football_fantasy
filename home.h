@@ -15,6 +15,9 @@ public:
 
 
     void leader_board();
+    void delete_user(qint64 id);
+    void delete_player(qint64 id);
+    void refresh_players();
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 

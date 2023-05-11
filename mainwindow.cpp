@@ -9,34 +9,34 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     QSqlQuery qry;
     bool d0 = qry.exec("SELECT * FROM leagues;");
+    leagues::size = qry.size();
     while(qry.next())
     {
-        leagues::size = qry.size();
         int key = qry.value(0).toInt();
         max_leagues_id = max(max_leagues_id,key);
         d_leagues[key].name = qry.value(1).toString();
     }
     bool d1 = qry.exec("SELECT * FROM clubs;");
+    clubs::size = qry.size();
     while(qry.next())
     {
-        clubs::size = qry.size();
         int key = qry.value(0).toInt();
         max_clubs_id = max(max_clubs_id,key);
         d_clubs[key].name = qry.value(1).toString();
         d_clubs[key].league_id = qry.value(2).toInt();
     }
     bool d2 = qry.exec("SELECT * FROM rounds;");
+    rounds::size = qry.size();
     while(qry.next())
     {
-        rounds::size = qry.size();
         int key = qry.value(0).toInt();
         max_rounds_id= max(max_rounds_id,key);
         d_rounds[key].weak = qry.value(1).toString();
     }
     bool d3 = qry.exec("SELECT * FROM matches;");
+    matches::size = qry.size();
     while(qry.next())
     {
-        matches::size = qry.size();
         int key = qry.value(0).toInt();
         max_matches_id = max(max_matches_id,key);
         d_matches[key].club_1 = qry.value(1).toInt();
@@ -44,9 +44,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_matches[key].round_id = qry.value(3).toInt();
     }
     bool d4 = qry.exec("SELECT * FROM players;");
+    players::size = qry.size();
     while(qry.next())
     {
-        players::size = qry.size();
         int key = qry.value(0).toInt();
         max_players_id= max(max_players_id,key);
         d_players[key].age = qry.value(1).toInt();
@@ -57,9 +57,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_players[key].points = qry.value(6).toInt();
     }
     bool d5 = qry.exec("SELECT * FROM matches_players;");
+    matches_players::size = qry.size();
     while(qry.next())
     {
-        matches_players::size = qry.size();
         int key = qry.value(0).toInt();
         max_matches_players_id= max(max_matches_players_id,key);
         d_matches_players[key].points = qry.value(1).toInt();
@@ -68,9 +68,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_matches_players[key].round_id = qry.value(4).toInt();
     }
     bool d6 = qry.exec("SELECT * FROM users;");
+    users::size = qry.size();
     while(qry.next())
     {
-        users::size = qry.size();
         int key = qry.value(0).toInt();
         max_users_id= max(max_users_id,key);
         d_users[key].email = qry.value(1).toString();
@@ -83,24 +83,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_users[key].number_of_players = qry.value(8).toInt();
     }
     bool d7 = qry.exec("SELECT * FROM teams;");
+    teams::size = qry.size();
     while(qry.next())
     {
-        teams::size = qry.size();
         int key = qry.value(0).toInt();
         max_teams_id= max(max_teams_id,key);
         d_teams[key].user_id = qry.value(1).toInt();
     }
     bool d8 = qry.exec("SELECT * FROM teams_players;");
+    teams_players::size = qry.size();
     while(qry.next())
     {
-        teams_players::size = qry.size();
         int key = qry.value(0).toInt();
         max_teams_players_id= max(max_teams_players_id,key);
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
     }
-
-    qDebug() << "*********" << max_teams_players_id;
 };
 
 MainWindow::~MainWindow()
@@ -249,6 +247,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_pushButton_clicked()
 {
+
     QString user = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
     bool found = false;

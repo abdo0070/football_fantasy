@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <iostream>
+
 #include "clubs.h"
 #include "matches.h"
 #include "matches_players.h"
@@ -57,8 +58,6 @@ int main(int argc, char *argv[])
     db.setUserName("root");
 
     db.open();
-
-
 
     QApplication a(argc, argv);
     MainWindow w;

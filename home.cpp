@@ -9,10 +9,59 @@
 #include"utils.h"
 using namespace std;
 
+void Home::delete_user(qint64 id)
+{
+    d_users.erase(id);
+    users::size--;
+
+    qint64 deleted_team;
+    teams::size--;
+    for(auto i = d_teams.begin(); i != d_teams.end(); i++)
+    {
+        if(i->second.user_id == id)
+        {
+            deleted_team = i->first;
+            d_teams.erase(i->first);
+            break;
+        }
+    }
+
+    for(auto i = d_teams_players.begin() ; i != d_teams_players.end();)
+    {
+        i++;
+        if(prev(i)->second.team_id == deleted_team)
+            d_teams_players.erase(prev(i)->first),teams_players::size--;
+    }
+}
+
+void Home::delete_player(qint64 id)
+{
+    d_players.erase(id);
+    players::size--;
+    matches_players::size--;
+    for(auto i = d_matches_players.begin(); i != d_matches_players.end();)
+    {
+        i++;
+        if(prev(i)->second.player_id == id)
+        {
+            d_matches_players.erase(prev(i)->first);
+            break;
+        }
+    }
+    for(auto i = d_teams_players.begin() ; i != d_teams_players.end();) // different users have the same player
+    {
+        i++;
+        if(prev(i)->second.player_id == id)
+        {
+            d_teams_players.erase(prev(i)->first);
+            d_users[d_teams[prev(i)->second.team_id].user_id].number_of_players--;
+            teams_players::size--;
+        }
+    }
+}
 
 
 void Home::leader_board()
-
 {
     vector<pair<qint64, QString>> v;
     int admins = 0;
@@ -61,6 +110,166 @@ void Home::leader_board()
 
 }
 
+void Home::refresh_players()
+{
+    queue<pair<QString,QPixmap>> my_players;
+    for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+    {
+        if(d_teams[i->second.team_id].user_id == current_user_id)
+            my_players.push(make_pair(d_players[i->second.player_id].name,QPixmap(utils::get_shirt_path(d_players[i->second.player_id].club_id))));
+    }
+
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME->setText(my_players.front().first);
+        ui->PLAYER_IMAGE->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME->clear();
+        ui->PLAYER_IMAGE->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_2->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_2->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_2->clear();
+        ui->PLAYER_IMAGE_2->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_3->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_3->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_3->clear();
+        ui->PLAYER_IMAGE_3->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_4->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_4->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_4->clear();
+        ui->PLAYER_IMAGE_4->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_5->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_5->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_5->clear();
+        ui->PLAYER_IMAGE_5->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_6->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_6->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_6->clear();
+        ui->PLAYER_IMAGE_6->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_7->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_7->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_7->clear();
+        ui->PLAYER_IMAGE_7->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_8->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_8->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_8->clear();
+        ui->PLAYER_IMAGE_8->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_9->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_9->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_9->clear();
+        ui->PLAYER_IMAGE_9->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_10->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_10->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_10->clear();
+        ui->PLAYER_IMAGE_10->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_11->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_11->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_11->clear();
+        ui->PLAYER_IMAGE_11->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_12->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_12->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_12->clear();
+        ui->PLAYER_IMAGE_12->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_13->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_13->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_13->clear();
+        ui->PLAYER_IMAGE_13->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_14->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_14->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_14->clear();
+        ui->PLAYER_IMAGE_14->clear();
+    }
+    if(!my_players.empty())
+    {
+        ui->PLAYER_NAME_15->setText(my_players.front().first);
+        ui->PLAYER_IMAGE_15->setPixmap(my_players.front().second);
+        my_players.pop();
+    }
+    else {
+        ui->PLAYER_NAME_15->clear();
+        ui->PLAYER_IMAGE_15->clear();
+    }
+}
 
 Home::Home(QWidget *parent) :
     QDialog(parent),
@@ -73,8 +282,9 @@ Home::Home(QWidget *parent) :
 
 
     leader_board();
+    refresh_players();
 
-    ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin);
+    ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin); // first parameter is the index of the tab
     ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
 
     ui->gb_user_update->hide();
@@ -117,14 +327,11 @@ void Home::on_pushButton_clicked()
     Home::close();
 }
 
+/************** Admin USERS ****************/
 
 void Home::on_pb_read_clicked()
 {
     ui->tableWidget->setRowCount(users::size);
-//    if(ui->pb_read->text() == "READ DATA")
-//        ui->pb_read->setText("HIDE DATA");
-//    else
-//        ui->pb_read->setText("READ DATA");
     int rowNum = 0;
     for(auto user = d_users.begin() ; user != d_users.end() ; user++ , rowNum++)
     {
@@ -147,8 +354,6 @@ void Home::on_pb_delete_clicked()
     else
         ui->gb_user_delete->hide();
 }
-
-
 void Home::on_pb_conform_clicked()
 {
     qint64 id = ui->le_enter_id->text().toInt();
@@ -162,14 +367,15 @@ void Home::on_pb_conform_clicked()
     if(is_found(id,d_users))
     {
         QMessageBox::warning(this,"deleted",d_users[id].username+" has been deleted successfully!");
-        d_users.erase(id);
-        users::size--;
+        delete_user(id);
+        // refresh
         on_pb_read_clicked();
         leader_board();
     }
     else
         QMessageBox::critical(this,"Error","there is no user with this id..!");
 }
+
 
 
 void Home::on_pb_insert_clicked()
@@ -179,46 +385,33 @@ void Home::on_pb_insert_clicked()
     else
         ui->gb_user_insert->hide();
 }
-
-
 void Home::on_pb_conform_insert_clicked()
 {
-    bool valed1 = false,valed2 = true;
-    if(!ui->le_username_insert->text().isEmpty()
-        && !ui->le_email_insert->text().isEmpty()
-        && !ui->le_password_insert->text().isEmpty()
-        && !ui->sb_budget_insert->text().isEmpty()
-        && !ui->sb_points_insert->text().isEmpty()
-        )
-        valed1 = true;
-    for(auto i = d_users.begin() ; i != d_users.end() ; i ++)
-    {
-        if(i->second.username == ui->le_username_insert->text() || i->second.email == ui->le_email_insert->text() )
-        {
-            valed2 = false;
-            break;
-        }
-    }
-    if(valed1 && valed2)
+    QString username = ui->le_username_insert->text();
+    QString email = ui->le_email_insert->text();
+    QString password = ui->le_password_insert->text();
+
+    if(valed_user(this,username,email,password) && !is_repeated(this,username,email))
     {
         users::size++;
-        d_users[++max_users_id].username = ui->le_username_insert->text();
-        d_users[max_users_id].email = ui->le_email_insert->text();
-        d_users[max_users_id].password = ui->le_password_insert->text();
+        d_teams[++max_teams_id].user_id = ++max_users_id;
+        d_users[max_users_id].username = username;
+        d_users[max_users_id].email = email;
+        d_users[max_users_id].password = password;
         d_users[max_users_id].budget = ui->sb_budget_insert->text().toInt();
         d_users[max_users_id].points = ui->sb_points_insert->text().toInt();
         d_users[max_users_id].is_admin = ui->is_admin_insert->isChecked();
         d_users[max_users_id].number_of_players = 0;
         d_users[max_users_id].club_id = (ui->cb_club_insert->currentIndex())+1;
         QMessageBox::information(this,"success","done!");
+
+        // refresh
         on_pb_read_clicked();
         leader_board();
     }
-    else if(!valed1)
-        QMessageBox::critical(this,"Error","invaled data!");
-    else
-        QMessageBox::critical(this,"Error","repeated username or email!");
 }
+
+
 
 void Home::on_pb_update_clicked()
 {
@@ -227,7 +420,6 @@ void Home::on_pb_update_clicked()
     else
         ui->gb_user_update->hide();
 }
-
 void Home::on_pb_user_update_clicked()
 {
     qint64 id = ui->le_target_id->text().toInt();
@@ -244,11 +436,12 @@ void Home::on_pb_user_update_clicked()
     ui->cb_club_update->setCurrentIndex(d_users[id].club_id-1);
     ui->is_admin_update->setChecked(d_users[id].is_admin);
 }
-
 void Home::on_pb_conform_update_clicked()
 {
     qint64 id = ui->le_target_id->text().toInt();
-    QString username = ui->le_username_update->text(),email = ui->le_email_update->text(), password = ui->le_password_update->text();
+    QString username = ui->le_username_update->text();
+    QString email = ui->le_email_update->text();
+    QString password = ui->le_password_update->text();
     if(!is_found(id,d_users))
     {
         QMessageBox::critical(this,"Error","there is no user with this id..!");
@@ -264,6 +457,8 @@ void Home::on_pb_conform_update_clicked()
     d_users[id].club_id = ui->cb_club_update->currentIndex()+1;
     d_users[id].is_admin = ui->is_admin_update->isChecked();
     QMessageBox::information(this,"success","done!");
+
+    // refresh
     on_pb_read_clicked();
     leader_board();
     if(d_users[current_user_id].is_admin == false)
@@ -271,7 +466,7 @@ void Home::on_pb_conform_update_clicked()
 }
 
 
-/************** PLAYERS ****************/
+/************** Admin PLAYERS ****************/
 
 
 void Home::on_pb_read_players_clicked()
@@ -301,9 +496,6 @@ void Home::on_pb_update_players_clicked()
     else
         ui->gb_update_players->hide();
 }
-
-
-
 void Home::on_pb_update_target_players_clicked()
 {
     qint64 id = ui->le_target_id_players->text().toInt();
@@ -320,7 +512,6 @@ void Home::on_pb_update_target_players_clicked()
     ui->cb_club_update_players->setCurrentIndex(d_players[id].club_id-1);
     ui->is_admin_update->setChecked(d_users[id].is_admin);
 }
-
 void Home::on_pb_update_confirm_players_clicked()
 {
     qint64 id = ui->le_target_id_players->text().toInt();
@@ -336,6 +527,7 @@ void Home::on_pb_update_confirm_players_clicked()
     d_players[id].points = ui->sp_update_points_players->value();
     d_players[id].club_id = ui->cb_club_update_players->currentIndex()+1;
     QMessageBox::information(this,"success","done!");
+    // refresh
     on_pb_read_players_clicked();
 }
 
@@ -349,8 +541,6 @@ void Home::on_pb_delete_players_clicked()
     else
         ui->gb_delete_players->hide();
 }
-
-
 void Home::on_pb_delete_confirm_players_clicked()
 {
     qint64 id = ui->le_delete_id_players->text().toInt();
@@ -359,12 +549,11 @@ void Home::on_pb_delete_confirm_players_clicked()
         QMessageBox::critical(this,"Faild","Empty ID OR NOT VALID ID");
         return;
     }
-
     if(is_found(id,d_players))
     {
         QMessageBox::warning(this,"deleted",d_players[id].name+" has been deleted successfully!");
-        d_players.erase(id);
-        players::size--;
+        delete_player(id);
+        // refresh
         on_pb_read_players_clicked();
     }
     else
@@ -381,8 +570,6 @@ void Home::on_pb_insert_players_clicked()
     else
         ui->gb_insert_players->hide();
 }
-
-
 void Home::on_pb_insert_confirm_players_clicked()
 {
     bool checkAllInputNotEmpty = false;
@@ -394,7 +581,6 @@ void Home::on_pb_insert_confirm_players_clicked()
         )
         checkAllInputNotEmpty = true;
 
-
     if(checkAllInputNotEmpty)
     {
         players::size++;
@@ -405,6 +591,7 @@ void Home::on_pb_insert_confirm_players_clicked()
         d_players[max_players_id].price = ui->sp_insert_price_players->value();
         d_players[max_players_id].club_id = (ui->cb_club_insert_players->currentIndex())+1;
         QMessageBox::information(this,"success","done!");
+        // refresh
         on_pb_read_players_clicked();
     }
     else
@@ -431,39 +618,36 @@ void Home::on_search_button_clicked()
         int match = 0;
         int bestmatch = 0;
         queue<int> indices;
-        for(int k=0;k<name.length();k++)
+        for(int k = 0; k < name.length(); k++)
         {
-            if(name[k] == s[0] && k+s.size()<name.length())
-            {
+            if(name[k] == s[0] && k + s.size() < name.length())
                 indices.push(k);
-            }
         }
         while(!indices.empty())
         {
             for (int j=indices.front();j<indices.front()+s.size();j++)
             {
                 if(name[j] == s[j-indices.front()])
-                {
                     match++;
-                }
             }
-            if(match>bestmatch) bestmatch = match;
+            if(match > bestmatch)
+                bestmatch = match;
             indices.pop();
         }
         if(bestmatch >= s.length()*0.6)
         {
             matches.push_back(make_pair(bestmatch/s.length(),i->first));
-//            qDebug() << matches.back().first << " " << matches.back().second;
+            //qDebug() << matches.back().first << " " << matches.back().second;
         }
     }
-      sort(matches.rbegin(),matches.rend());
-      for(int i=0;i<int(matches.size());i++)
-      {
-        players player= d_players[matches[i].second];
+    sort(matches.rbegin(), matches.rend());
+    for(int i = 0; i < int(matches.size()); i++)
+    {
+        players player = d_players[matches[i].second];
         if(ui->scrollContents->layout() != NULL)
         {
             QLayoutItem* item;
-            while ((item = ui->scrollContents->layout()->takeAt(0))!= NULL)
+            while ((item = ui->scrollContents->layout()->takeAt(0)) != NULL)
             {
                 delete item->widget();
                 delete item;
@@ -472,125 +656,141 @@ void Home::on_search_button_clicked()
         }
         label = new QPushButton(player.name);
         label->setObjectName(player.name);
-        QLabel* lab =new QLabel(
-            "Age: "+ QString::number( player.age) +
-            "   position: " + player.position +
-            "   club:" + d_clubs[player.club_id].name +
-            "   price:" + QString::number( player.price));
+//        QLabel* lab =new QLabel(
+//            "Age: "+ QString::number( player.age) +
+//            "   position: " + player.position +
+//            "   club:" + d_clubs[player.club_id].name +
+//            "   price:" + QString::number( player.price));
         lay->addWidget(label);
-        lay->addWidget(lab);
+       // lay->addWidget(lab);
 
 
         connect(label, SIGNAL(clicked()), this, SLOT(on_player_profile_clicked()));
-      }
+    }
 
-      ui->scrollContents->setLayout(lay);
-      ui->scrollContents->setVisible(true);
-      ui->scrollContents->show();
+    ui->scrollContents->setLayout(lay);
+    ui->scrollContents->setVisible(true);
+    ui->scrollContents->show();
 
-      ui->player_profile->hide();
+    ui->player_profile->hide();
 }
+
 QString buttonText;
 QPushButton *player_name_button;
 qint64 player_id;
 bool inMyTeam = false;
 void Home::on_player_profile_clicked()
 {
-  ui->scrollArea->setGeometry(75,150,1000,750);
-  ui->player_profile->show();
-  ui->image->setStyleSheet(""); // to filter white background
-  //initializing the previously created button...
-  player_name_button = new QPushButton;
 
-  //recieving the button (name) clicked and assigning it to the pButton[x]...
-  player_name_button = qobject_cast<QPushButton*>(sender());
 
-  //assigning the text of the button to the string "buttonText"..
-  buttonText = player_name_button->text();
+   ui->scrollArea->setGeometry(75,150,1000,750);
+   ui->player_profile->show();
+   ui->image->setStyleSheet(""); // to filter white background
+   //initializing the previously created button...
+   player_name_button = new QPushButton;
 
-  // recognize buttonText here
-  ui->player_name->setText(buttonText);
-  ui->player_name->setStyleSheet("font-family:century gothic;background:transparent;font-size:25px;color:yellow;Text-align:center");
-  QString name;
+   //recieving the button (name) clicked and assigning it to the pButton[x]...
+   player_name_button = qobject_cast<QPushButton*>(sender());
 
-  for(auto i = d_players.begin() ; i != d_players.end() ; i++)
-  {
-    name = i->second.name;
-    if (buttonText == name)
-    {
-        player_id = i->first;
-        auto club = d_clubs[i->second.club_id];
-        ui->player_club->setText(club.name);
-        ui->player_position->setText(i->second.position);
-        QPixmap pix(utils::get_shirt_path(i->second.club_id));
-        ui->image->setScaledContents(1);
-        ui->image->setPixmap(pix);
-        break;
-    }
-  }
-  for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
-  {
-    if (i->second.player_id == player_id)
-    {
-        inMyTeam = true;
-        break;
-    }
-  }
-  if (inMyTeam)
-  {
-    ui->buyButton->setEnabled(false);
-    ui->sellButton->setEnabled(true);
-  }
-  else
-  {
-    ui->sellButton->setEnabled(false);
-    ui->buyButton->setEnabled(true);
-  }
-//      qDebug() << "on_player_clicked is good";
+   //assigning the text of the button to the string "buttonText"..
+   buttonText = player_name_button->text();
+
+   // recognize buttonText here
+   ui->player_name->setText(buttonText);
+   ui->player_name->setStyleSheet("font-family:century gothic;background:transparent;font-size:25px;color:yellow;Text-align:center");
+   QString name;
+
+   for(auto i = d_players.begin() ; i != d_players.end() ; i++)
+   {
+        name = i->second.name;
+        if (buttonText == name)
+        {
+            player_id = i->first;
+            auto club = d_clubs[i->second.club_id];
+            ui->player_club->setText(club.name);
+            ui->player_position->setText(i->second.position);
+            QPixmap pix(utils::get_shirt_path(i->second.club_id));
+            ui->image->setScaledContents(1);
+            ui->image->setPixmap(pix);
+            break;
+        }
+   }
+   ui->player_points->setText(QString::number(d_players[player_id].points));
+   ui->player_price->setText(QString::number(d_players[player_id].price)+'$');
+
+   inMyTeam = false;
+   for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+   {
+        if (i->second.player_id == player_id && d_teams[i->second.team_id].user_id == current_user_id)
+        {
+            inMyTeam = true;
+            break;
+        }
+   }
+   if (inMyTeam)
+   {
+        ui->buyButton->setEnabled(false);
+        ui->sellButton->setEnabled(true);
+   }
+   else
+   {
+        ui->sellButton->setEnabled(false);
+        ui->buyButton->setEnabled(true);
+   }
+   //qDebug() << "on_player_clicked is good";
 }
 
 void Home::on_sellButton_clicked()
 {
-      qint64 playerid_in_teamsplayers;
-      auto user = d_users.begin() ;
-      for(; user != d_users.end() ; user++)
-      {
-        if (user->first == current_user_id)
-        {
-            qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
-            break;
-        }
-      }
-
-
-//      users user = d_users[current_user_id];
-
-      for(auto player = d_teams_players.begin() ; player != d_teams_players.end() ; player++)
-      {
-        if (player->second.player_id == player_id)
-        {
-            playerid_in_teamsplayers = player->first;
-            break;
-        }
-      }
-
-      players player = d_players[player_id];
-      QMessageBox::information(this,"Success","You sold this player successfully");
-      d_teams_players.erase(playerid_in_teamsplayers);
-      ui->sellButton->setEnabled(false);
-      ui->buyButton->setEnabled(true);
-      user->second.budget += player.price;
-      qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
-}
-
-void Home::on_buyButton_clicked()
-{
+    qint64 playerid_in_teamsplayers;
     auto user = d_users.begin() ;
     for(; user != d_users.end() ; user++)
     {
         if (user->first == current_user_id)
         {
-            qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
+            //qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
+            break;
+        }
+    }
+
+
+    // users user = d_users[current_user_id];
+
+    for(auto player = d_teams_players.begin(); player != d_teams_players.end(); player++)
+    {
+        if (player->second.player_id == player_id && d_teams[player->second.team_id].user_id == current_user_id)
+        {
+            playerid_in_teamsplayers = player->first;
+            break;
+        }
+    }
+
+   players player = d_players[player_id];
+   QMessageBox::information(this,"Success","You sold this player successfully");
+   d_users[current_user_id].number_of_players--;
+   d_teams_players.erase(playerid_in_teamsplayers);
+
+   ui->sellButton->setEnabled(false);
+   ui->buyButton->setEnabled(true);
+
+   user->second.budget += player.price;
+   refresh_players();
+   //qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+}
+
+void Home::on_buyButton_clicked()
+{
+    if(d_users[current_user_id].number_of_players == 15)
+    {
+        QMessageBox::critical(this,"Faild","your team is already full!");
+        return;
+    }
+    auto user = d_users.begin() ;
+    for(; user != d_users.end() ; user++)
+    {
+        if (user->first == current_user_id)
+        {
+            //qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
             break;
         }
     }
@@ -611,14 +811,14 @@ void Home::on_buyButton_clicked()
 
         d_teams_players[++max_teams_players_id].player_id = player_id;
         d_teams_players[max_teams_players_id].team_id = team_id;
+        d_users[current_user_id].number_of_players++;
+
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
-        user->second.budget -= player.price;
+
         d_users[current_user_id].budget -= player.price;
+        refresh_players();
     }
-    qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
-    qDebug() << "*********Mission is completed*********";
+    // qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+    // qDebug() << "*********Mission is completed*********";
 }
-
-
-

@@ -19,7 +19,7 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>-10</x>
      <y>0</y>
      <width>1920</width>
      <height>1080</height>
@@ -29,7 +29,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="profile">
     <property name="maximumSize">
@@ -161,7 +161,7 @@ background-color: rgb(47, 47, 47);</string>
      <property name="geometry">
       <rect>
        <x>1135</x>
-       <y>150</y>
+       <y>120</y>
        <width>500</width>
        <height>751</height>
       </rect>
@@ -229,6 +229,11 @@ font: 75 26pt &quot;Century Gothic&quot;;</string>
         <height>61</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -259,7 +264,7 @@ font-size:18px;</string>
      <widget class="QPushButton" name="buyButton">
       <property name="geometry">
        <rect>
-        <x>150</x>
+        <x>100</x>
         <y>600</y>
         <width>100</width>
         <height>50</height>
@@ -294,18 +299,59 @@ background-color: rgb(255, 85, 0);
        <string>Sell</string>
       </property>
      </widget>
+     <widget class="QLabel" name="player_price">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>530</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player_points">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>110</y>
+        <width>121</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>30</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <zorder>player_club</zorder>
      <zorder>player_position</zorder>
      <zorder>image</zorder>
      <zorder>player_name</zorder>
      <zorder>buyButton</zorder>
      <zorder>sellButton</zorder>
+     <zorder>player_price</zorder>
+     <zorder>player_points</zorder>
     </widget>
     <widget class="QScrollArea" name="scrollArea">
      <property name="geometry">
       <rect>
        <x>75</x>
-       <y>150</y>
+       <y>120</y>
        <width>1561</width>
        <height>750</height>
       </rect>
@@ -333,12 +379,28 @@ background-color: rgb(47, 47, 47);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="PLAYER_IMAGE">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Player_background">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1920</width>
+       <width>1951</width>
        <height>1080</height>
       </rect>
      </property>
@@ -348,12 +410,510 @@ background-color: rgb(47, 47, 47);</string>
      <property name="pixmap">
       <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
      </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
     </widget>
-    <zorder>label_3</zorder>
-    <zorder>player_profile</zorder>
-    <zorder>scrollArea</zorder>
+    <widget class="QLabel" name="PLAYER_IMAGE_2">
+     <property name="geometry">
+      <rect>
+       <x>128</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_3">
+     <property name="geometry">
+      <rect>
+       <x>256</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_4">
+     <property name="geometry">
+      <rect>
+       <x>384</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_5">
+     <property name="geometry">
+      <rect>
+       <x>512</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_6">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_7">
+     <property name="geometry">
+      <rect>
+       <x>768</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_8">
+     <property name="geometry">
+      <rect>
+       <x>896</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_9">
+     <property name="geometry">
+      <rect>
+       <x>1024</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_10">
+     <property name="geometry">
+      <rect>
+       <x>1152</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_11">
+     <property name="geometry">
+      <rect>
+       <x>1280</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_12">
+     <property name="geometry">
+      <rect>
+       <x>1408</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_13">
+     <property name="geometry">
+      <rect>
+       <x>1536</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_14">
+     <property name="geometry">
+      <rect>
+       <x>1664</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_IMAGE_15">
+     <property name="geometry">
+      <rect>
+       <x>1792</x>
+       <y>870</y>
+       <width>128</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_2">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_3">
+     <property name="geometry">
+      <rect>
+       <x>266</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_4">
+     <property name="geometry">
+      <rect>
+       <x>394</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_5">
+     <property name="geometry">
+      <rect>
+       <x>522</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_6">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_7">
+     <property name="geometry">
+      <rect>
+       <x>778</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_8">
+     <property name="geometry">
+      <rect>
+       <x>906</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_9">
+     <property name="geometry">
+      <rect>
+       <x>1034</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_10">
+     <property name="geometry">
+      <rect>
+       <x>1162</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_11">
+     <property name="geometry">
+      <rect>
+       <x>1290</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_12">
+     <property name="geometry">
+      <rect>
+       <x>1418</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_13">
+     <property name="geometry">
+      <rect>
+       <x>1546</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_14">
+     <property name="geometry">
+      <rect>
+       <x>1674</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLAYER_NAME_15">
+     <property name="geometry">
+      <rect>
+       <x>1802</x>
+       <y>970</y>
+       <width>128</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <zorder>Player_background</zorder>
     <zorder>search_bar</zorder>
     <zorder>search_button</zorder>
+    <zorder></zorder>
+    <zorder>PLAYER_NAME</zorder>
+    <zorder>PLAYER_NAME_2</zorder>
+    <zorder>PLAYER_NAME_3</zorder>
+    <zorder>PLAYER_NAME_4</zorder>
+    <zorder>PLAYER_NAME_5</zorder>
+    <zorder>PLAYER_NAME_6</zorder>
+    <zorder>PLAYER_NAME_7</zorder>
+    <zorder>PLAYER_NAME_8</zorder>
+    <zorder>PLAYER_NAME_9</zorder>
+    <zorder>PLAYER_NAME_10</zorder>
+    <zorder>PLAYER_NAME_11</zorder>
+    <zorder>PLAYER_NAME_12</zorder>
+    <zorder>PLAYER_NAME_13</zorder>
+    <zorder>PLAYER_NAME_14</zorder>
+    <zorder>PLAYER_NAME_15</zorder>
+    <zorder>player_profile</zorder>
+    <zorder>scrollArea</zorder>
+    <zorder>PLAYER_IMAGE</zorder>
+    <zorder>PLAYER_IMAGE_2</zorder>
+    <zorder>PLAYER_IMAGE_3</zorder>
+    <zorder>PLAYER_IMAGE_4</zorder>
+    <zorder>PLAYER_IMAGE_5</zorder>
+    <zorder>PLAYER_IMAGE_6</zorder>
+    <zorder>PLAYER_IMAGE_7</zorder>
+    <zorder>PLAYER_IMAGE_8</zorder>
+    <zorder>PLAYER_IMAGE_9</zorder>
+    <zorder>PLAYER_IMAGE_10</zorder>
+    <zorder>PLAYER_IMAGE_11</zorder>
+    <zorder>PLAYER_IMAGE_12</zorder>
+    <zorder>PLAYER_IMAGE_13</zorder>
+    <zorder>PLAYER_IMAGE_14</zorder>
+    <zorder>PLAYER_IMAGE_15</zorder>
    </widget>
    <widget class="QWidget" name="tab_4">
     <property name="styleSheet">
@@ -492,7 +1052,7 @@ background: #222222
       <rect>
        <x>360</x>
        <y>160</y>
-       <width>21</width>
+       <width>23</width>
        <height>671</height>
       </rect>
      </property>
@@ -587,7 +1147,7 @@ border-radius:20px 20px 20px 20px;
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="ctl_users">
       <attribute name="title">
