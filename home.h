@@ -14,6 +14,7 @@ class Home : public QDialog
 public:
 
 
+    void profile();
     void leader_board();
     void refresh_players();
     explicit Home(QWidget *parent = nullptr);
@@ -68,6 +69,8 @@ private slots:
     void on_buyButton_clicked();
 
     //**************** Admin matches ******************//
+
+
 
 private:
     Ui::Home *ui;

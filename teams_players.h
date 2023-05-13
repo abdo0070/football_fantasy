@@ -7,7 +7,7 @@
 class teams_players
 {
 public:
-    qint64 player_id,team_id;
+    qint64 player_id,team_id, position;
     static int size;
 public:
     teams_players();

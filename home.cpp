@@ -221,11 +221,7 @@ Home::Home(QWidget *parent) :
     ui(new Ui::Home)
 {
     ui->setupUi(this);
-    QPixmap profile(d_clubs[d_users[current_user_id].club_id].club_image);
-
-    ui->profile_picture->setPixmap(profile);
-
-
+    profile();
     //matches();
     leader_board();
     refresh_players();
@@ -765,11 +761,118 @@ void Home::on_buyButton_clicked()
         d_users[current_user_id].budget -= player.price;
         refresh_players();
     }
-    // qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
-    // qDebug() << "*********Mission is completed*********";
 }
+
+
+
 
 /********************** Admin matches **********************/
 
 int club1 = 0;
 int club2 = 0;
+
+
+
+/********************** Profile **********************/
+
+void Home::profile()
+{
+    QPixmap club_icon(d_clubs[d_users[current_user_id].club_id].club_image);
+    ui->profile_picture->setPixmap(club_icon);
+    qint64 user_team_id = 0;
+    map<int,int> players_ids_insquad; //<position, player_id>
+    map<QString,int> players_ids_notinsquad; //<position, player_id>
+    players player;
+    ui->username->setText(d_users[current_user_id].username + "'s team");
+    ui->user_budget->setText(QString::number(d_users[current_user_id].budget) + "$");
+    for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
+    {
+        if (i->second.user_id == current_user_id)
+        {
+            user_team_id = i->first;
+            break;
+        }
+    }
+    for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+    {
+        if (i->second.team_id == user_team_id)
+        {
+            player = d_players[i->second.player_id];
+            QPixmap shirt(d_clubs[player.club_id].shirt_image);
+            switch (i->second.position)
+            {
+            case 0:
+                players_ids_notinsquad[player.position] =  i->second.player_id;
+
+                break;
+            case 1: // GK1
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->GK1->setPixmap(shirt);
+                break;
+            case 2: // GK2
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->GK2->setPixmap(shirt);
+                break;
+            case 3: // LB
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->LB->setPixmap(shirt);
+                break;
+            case 4: // CB1
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CB1->setPixmap(shirt);
+
+                break;
+            case 5: // CB2
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CB2->setPixmap(shirt);
+
+                break;
+            case 6: // CB3
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CB3->setPixmap(shirt);
+
+                break;
+            case 7: // RB
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->RB->setPixmap(shirt);
+
+                break;
+            case 8: // LM
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->LM->setPixmap(shirt);
+
+                break;
+            case 9: // CM1
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CM1->setPixmap(shirt);
+
+                break;
+            case 10: // CM2
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CM2->setPixmap(shirt);
+                break;
+            case 11: // CM3
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->CM3->setPixmap(shirt);
+                break;
+            case 12: // RM
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->RM->setPixmap(shirt);
+                break;
+            case 13: // LW
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->LW->setPixmap(shirt);
+                break;
+            case 14: // ST
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->ST->setPixmap(shirt);
+                break;
+            case 15: // RW
+                players_ids_insquad[i->second.position] =  i->second.player_id;
+                ui->RW->setPixmap(shirt);
+                break;
+            }
+        }
+    }
+}
+

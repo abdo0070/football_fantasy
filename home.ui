@@ -29,7 +29,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="profile">
     <property name="maximumSize">
@@ -58,9 +58,9 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>70</y>
+       <y>0</y>
        <width>1281</width>
-       <height>851</height>
+       <height>1051</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -98,8 +98,8 @@
     <widget class="QLabel" name="profile_picture">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
+       <x>12</x>
+       <y>5</y>
        <width>231</width>
        <height>181</height>
       </rect>
@@ -111,10 +111,670 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="username">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>270</y>
+       <width>251</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>username's team</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="budget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Budget:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="user_budget">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>390</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>user_bugdet</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK1">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>350</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>GK1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK2">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>530</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>GK2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LB">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>60</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>LB</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB1">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>260</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CB1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB2">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CB2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB3">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>610</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CB3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RB">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>800</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>RB</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LM">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>60</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>LM</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM1">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>260</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CM1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM2">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CM2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM3">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>610</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>CM3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RM">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>800</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>RM</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LW">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>120</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>LW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ST">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>ST</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RW">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>700</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>RW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK1_name">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>455</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB1_name">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>365</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB2_name">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>545</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB3_name">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>725</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RB_name">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>905</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LM_name">
+     <property name="geometry">
+      <rect>
+       <x>885</x>
+       <y>170</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM1_name">
+     <property name="geometry">
+      <rect>
+       <x>885</x>
+       <y>365</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM2_name">
+     <property name="geometry">
+      <rect>
+       <x>885</x>
+       <y>545</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM3_name">
+     <property name="geometry">
+      <rect>
+       <x>885</x>
+       <y>725</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK2_name">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>645</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LB_name">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>170</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RW_name">
+     <property name="geometry">
+      <rect>
+       <x>1231</x>
+       <y>810</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ST_name">
+     <property name="geometry">
+      <rect>
+       <x>1231</x>
+       <y>545</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LW_name">
+     <property name="geometry">
+      <rect>
+       <x>1231</x>
+       <y>225</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RM_name">
+     <property name="geometry">
+      <rect>
+       <x>885</x>
+       <y>905</y>
+       <width>150</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
     <zorder>label_2</zorder>
     <zorder>pushButton</zorder>
     <zorder>label</zorder>
     <zorder>profile_picture</zorder>
+    <zorder>username</zorder>
+    <zorder>budget</zorder>
+    <zorder>user_budget</zorder>
+    <zorder>GK1</zorder>
+    <zorder>GK2</zorder>
+    <zorder>LB</zorder>
+    <zorder>CB1</zorder>
+    <zorder>CB2</zorder>
+    <zorder>CB3</zorder>
+    <zorder>RB</zorder>
+    <zorder>LM</zorder>
+    <zorder>CM1</zorder>
+    <zorder>CM2</zorder>
+    <zorder>CM3</zorder>
+    <zorder>RM</zorder>
+    <zorder>LW</zorder>
+    <zorder>ST</zorder>
+    <zorder>RW</zorder>
+    <zorder>GK1_name</zorder>
+    <zorder>CB1_name</zorder>
+    <zorder>CB2_name</zorder>
+    <zorder>CB3_name</zorder>
+    <zorder>RB_name</zorder>
+    <zorder>LM_name</zorder>
+    <zorder>CM1_name</zorder>
+    <zorder>CM2_name</zorder>
+    <zorder>CM3_name</zorder>
+    <zorder>GK2_name</zorder>
+    <zorder>LB_name</zorder>
+    <zorder>RW_name</zorder>
+    <zorder>ST_name</zorder>
+    <zorder>LW_name</zorder>
+    <zorder>RM_name</zorder>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">
