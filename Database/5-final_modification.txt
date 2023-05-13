@@ -1,6 +1,6 @@
 ALTER TABLE `fantasy`.`clubs` 
-ADD COLUMN `shirt_image` VARCHAR(45) NULL AFTER `league_id`,
-ADD COLUMN `club_image` VARCHAR(45) NULL AFTER `shirt_image`;
+ADD COLUMN `shirt_image` VARCHAR(255) NULL AFTER `league_id`,
+ADD COLUMN `club_image` VARCHAR(255) NULL AFTER `shirt_image`;
 
 ALTER TABLE `fantasy`.`teams_players` 
-ADD COLUMN `position` INT NULL AFTER `team_id`;
+ADD COLUMN `position` INT NULL AFTER `team_id`
