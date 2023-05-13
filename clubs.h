@@ -9,8 +9,9 @@ class clubs
 public:
     static int size;
     qint64 league_id;
-    QString name;
+    QString name,shirt_image,club_image;
 public:
+    static void refresh();
     clubs();
 };
 

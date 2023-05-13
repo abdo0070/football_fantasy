@@ -47,6 +47,7 @@ void SignUp::on_pushButton_2_clicked()
         d_users[max_users_id].points = 0;
         d_users[max_users_id].number_of_players = 0;
         ch_club.setWindowState(Qt::WindowFullScreen);
+        ch_club.refresh();
         ch_club.show();
         SignUp::close();
     }

@@ -13,7 +13,9 @@ public:
     static int size;
 
 public:
+    static void remove(qint64 id);
     users();
 };
 
 #endif // USERS_H
+

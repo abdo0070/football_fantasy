@@ -3,9 +3,13 @@
 #include<iostream>
 #include<QMessageBox>
 #include"data.h"
+#include<QFileDialog>
+
 using namespace std;
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    // QFileDialog p;
     ui->setupUi(this);
     QSqlQuery qry;
     bool d0 = qry.exec("SELECT * FROM leagues;");
@@ -24,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         max_clubs_id = max(max_clubs_id,key);
         d_clubs[key].name = qry.value(1).toString();
         d_clubs[key].league_id = qry.value(2).toInt();
+        d_clubs[key].shirt_image = qry.value(3).toString();
+        d_clubs[key].club_image = qry.value(4).toString();
     }
     bool d2 = qry.exec("SELECT * FROM rounds;");
     rounds::size = qry.size();
@@ -98,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         max_teams_players_id= max(max_teams_players_id,key);
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
-    }
+    }  
 };
 
 MainWindow::~MainWindow()
@@ -139,10 +145,12 @@ MainWindow::~MainWindow()
     }
     for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++,y++)
     {
-        qry.prepare("insert into clubs values(:id,:name,:league_id);");
+        qry.prepare("insert into clubs values(:id,:name,:league_id,:shirt_image,:club_image);");
         qry.bindValue(":id",i->first);
         qry.bindValue(":name",i->second.name);
         qry.bindValue(":league_id",i->second.league_id);
+        qry.bindValue(":shirt_image",i->second.shirt_image);
+        qry.bindValue(":club_image",i->second.club_image);
         bool x = qry.exec();
         if(x)
             cout << "clubs is in \n";

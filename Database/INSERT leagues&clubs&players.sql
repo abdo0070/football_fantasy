@@ -4,21 +4,21 @@ select * from users;
 delete from players
 where id > 0;
 
--- select * from leagues;
--- select * from players;
--- select * from clubs;
+select * from leagues;
+select * from players;
+select * from clubs;
 
--- delete from users
--- where id > 0;
+delete from users
+where id > 0;
 
--- delete from players
--- where id > 0;
+delete from players
+where id > 0;
 
--- delete from leagues
--- where id > 0;
+delete from leagues
+where id > 0;
 
--- delete from clubs
--- where id > 0;
+delete from clubs
+where id > 0;
 
 
 
@@ -26,16 +26,16 @@ where id > 0;
 insert into leagues values(1,'Premier League');
 insert into leagues values (2,'Egyption League');
 insert into leagues values(3,'Laliga');
-
-insert into clubs values(1,'Liverpool',1);
-insert into clubs values(2,'Chelsea',1);
-insert into clubs values(3,'ManchesterCity',1);
-insert into clubs values (4,'Pyramids',2);
-insert into clubs values (5,'Alahly',2);
-insert into clubs values (6,'Zamalek',2);
-insert into clubs values(7, 'Barcelona', 3);
-insert into clubs values(8, 'RealMadrid', 3);
-insert into clubs values(9, 'AtleticoMadrid', 3);
+ -- ,':/background/shirts/Chelsea.png',':/background/Clubs/Chelsea.png'
+insert into clubs values(1,'Liverpool',1,':/background/shirts/Liverpool.png',':/background/Clubs/Liverpool.png');
+insert into clubs values(2,'Chelsea',1,':/background/shirts/Chelsea.png',':/background/Clubs/Chelsea.png');
+insert into clubs values(3,'ManchesterCity',1,':/background/shirts/ManchesterCity.png',':/background/Clubs/ManchesterCity.png');
+insert into clubs values (4,'Pyramids',2,':/background/shirts/Pyramids.png',':/background/Clubs/Pyramids.png');
+insert into clubs values (5,'Alahly',2,':/background/shirts/Alahly.png',':/background/Clubs/Alahly.png');
+insert into clubs values (6,'Zamalek',2,':/background/shirts/Zamalek.png',':/background/Clubs/Zamalek.png');
+insert into clubs values(7, 'Barcelona', 3,':/background/shirts/Barcelona.png',':/background/Clubs/Barcelona.png');
+insert into clubs values(8, 'RealMadrid', 3,':/background/shirts/RealMadrid.png',':/background/Clubs/RealMadrid.png');
+insert into clubs values(9, 'AtleticoMadrid', 3,':/background/shirts/AtleticoMadrid.png',':/background/Clubs/AtleticoMadrid.png');
 
 -- players of clubs Liverpool
 

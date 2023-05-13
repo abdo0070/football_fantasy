@@ -8,11 +8,11 @@ class players
 {
 public:
     qint64 age,price,club_id,points;
-    QString image;
     QString position,name;
     static int size;
 public:
     players();
+    static void remove(qint64 id);
 };
 
 #endif // PLAYERS_H

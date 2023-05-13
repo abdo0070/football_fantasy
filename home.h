@@ -15,13 +15,13 @@ public:
 
 
     void leader_board();
-    void delete_user(qint64 id);
-    void delete_player(qint64 id);
     void refresh_players();
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 
 private slots:
+    //************ Admin users ******************//
+
     void on_pushButton_clicked();
 
     void on_pb_read_clicked();
@@ -40,7 +40,7 @@ private slots:
 
     void on_pb_user_update_clicked();
 
-    //************players******************//
+    //************ Admin players ******************//
 
     void on_pb_update_players_clicked();
 
@@ -58,6 +58,7 @@ private slots:
 
     void on_pb_insert_confirm_players_clicked();
 
+    //**************** market ***************//
     void on_search_button_clicked();
 
     void on_player_profile_clicked();
@@ -65,6 +66,8 @@ private slots:
     void on_sellButton_clicked();
 
     void on_buyButton_clicked();
+
+    //**************** Admin matches ******************//
 
 private:
     Ui::Home *ui;

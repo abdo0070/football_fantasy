@@ -881,7 +881,6 @@ background-color: rgb(47, 47, 47);</string>
     <zorder>Player_background</zorder>
     <zorder>search_bar</zorder>
     <zorder>search_button</zorder>
-    <zorder></zorder>
     <zorder>PLAYER_NAME</zorder>
     <zorder>PLAYER_NAME_2</zorder>
     <zorder>PLAYER_NAME_3</zorder>
@@ -1130,7 +1129,7 @@ border-radius:20px 20px 20px 20px;
     <attribute name="title">
      <string>Admin</string>
     </attribute>
-    <widget class="QTabWidget" name="tabWidget_2">
+    <widget class="QTabWidget" name="CTL_clubs">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1147,7 +1146,7 @@ border-radius:20px 20px 20px 20px;
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="ctl_users">
       <attribute name="title">
@@ -2553,6 +2552,91 @@ background-color: rgb(255, 255, 255);</string>
       <attribute name="title">
        <string>CONTROL MATCHES</string>
       </attribute>
+      <widget class="QLabel" name="chosen_club1">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>40</y>
+         <width>151</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="chosen_club2">
+       <property name="geometry">
+        <rect>
+         <x>880</x>
+         <y>40</y>
+         <width>151</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="club_1_result">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>230</y>
+         <width>101</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="club_2_result">
+       <property name="geometry">
+        <rect>
+         <x>740</x>
+         <y>230</y>
+         <width>91</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pb_declare_result">
+       <property name="geometry">
+        <rect>
+         <x>610</x>
+         <y>100</y>
+         <width>151</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Declare Result</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cb_choose_club1">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>240</y>
+         <width>201</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cb_choose_club2">
+       <property name="geometry">
+        <rect>
+         <x>860</x>
+         <y>240</y>
+         <width>201</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

@@ -6,60 +6,7 @@
 #include<QMessageBox>
 #include <queue>
 #include"SUPPORT.cpp"
-#include"utils.h"
 using namespace std;
-
-void Home::delete_user(qint64 id)
-{
-    d_users.erase(id);
-    users::size--;
-
-    qint64 deleted_team;
-    teams::size--;
-    for(auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if(i->second.user_id == id)
-        {
-            deleted_team = i->first;
-            d_teams.erase(i->first);
-            break;
-        }
-    }
-
-    for(auto i = d_teams_players.begin() ; i != d_teams_players.end();)
-    {
-        i++;
-        if(prev(i)->second.team_id == deleted_team)
-            d_teams_players.erase(prev(i)->first),teams_players::size--;
-    }
-}
-
-void Home::delete_player(qint64 id)
-{
-    d_players.erase(id);
-    players::size--;
-    matches_players::size--;
-    for(auto i = d_matches_players.begin(); i != d_matches_players.end();)
-    {
-        i++;
-        if(prev(i)->second.player_id == id)
-        {
-            d_matches_players.erase(prev(i)->first);
-            break;
-        }
-    }
-    for(auto i = d_teams_players.begin() ; i != d_teams_players.end();) // different users have the same player
-    {
-        i++;
-        if(prev(i)->second.player_id == id)
-        {
-            d_teams_players.erase(prev(i)->first);
-            d_users[d_teams[prev(i)->second.team_id].user_id].number_of_players--;
-            teams_players::size--;
-        }
-    }
-}
-
 
 void Home::leader_board()
 {
@@ -106,8 +53,6 @@ void Home::leader_board()
         ui->tw_leader_board->setItem(rowNum,1,new QTableWidgetItem(QString(i->second)));
         ui->tw_leader_board->setItem(rowNum,2,new QTableWidgetItem(QString::number(i->first)));
     }
-
-
 }
 
 void Home::refresh_players()
@@ -116,7 +61,7 @@ void Home::refresh_players()
     for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
     {
         if(d_teams[i->second.team_id].user_id == current_user_id)
-            my_players.push(make_pair(d_players[i->second.player_id].name,QPixmap(utils::get_shirt_path(d_players[i->second.player_id].club_id))));
+            my_players.push(make_pair(d_players[i->second.player_id].name,QPixmap(d_clubs[d_players[i->second.player_id].club_id].shirt_image)));
     }
 
     if(!my_players.empty())
@@ -276,11 +221,12 @@ Home::Home(QWidget *parent) :
     ui(new Ui::Home)
 {
     ui->setupUi(this);
-    QPixmap profile(utils::get_club_path(d_users[current_user_id].club_id));
+    QPixmap profile(d_clubs[d_users[current_user_id].club_id].club_image);
 
     ui->profile_picture->setPixmap(profile);
 
 
+    //matches();
     leader_board();
     refresh_players();
 
@@ -367,7 +313,7 @@ void Home::on_pb_conform_clicked()
     if(is_found(id,d_users))
     {
         QMessageBox::warning(this,"deleted",d_users[id].username+" has been deleted successfully!");
-        delete_user(id);
+        users::remove(id);
         // refresh
         on_pb_read_clicked();
         leader_board();
@@ -552,7 +498,7 @@ void Home::on_pb_delete_confirm_players_clicked()
     if(is_found(id,d_players))
     {
         QMessageBox::warning(this,"deleted",d_players[id].name+" has been deleted successfully!");
-        delete_player(id);
+        players::remove(id);
         // refresh
         on_pb_read_players_clicked();
     }
@@ -709,7 +655,7 @@ void Home::on_player_profile_clicked()
             auto club = d_clubs[i->second.club_id];
             ui->player_club->setText(club.name);
             ui->player_position->setText(i->second.position);
-            QPixmap pix(utils::get_shirt_path(i->second.club_id));
+            QPixmap pix(d_clubs[i->second.club_id].shirt_image);
             ui->image->setScaledContents(1);
             ui->image->setPixmap(pix);
             break;
@@ -822,3 +768,8 @@ void Home::on_buyButton_clicked()
     // qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
     // qDebug() << "*********Mission is completed*********";
 }
+
+/********************** Admin matches **********************/
+
+int club1 = 0;
+int club2 = 0;
