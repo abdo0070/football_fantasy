@@ -6,6 +6,8 @@
 #include<QMessageBox>
 #include <queue>
 #include"SUPPORT.cpp"
+#include <QFileDialog>
+#include <qdebug.h>
 using namespace std;
 
 void Home::leader_board()
@@ -773,3 +775,65 @@ void Home::on_buyButton_clicked()
 
 int club1 = 0;
 int club2 = 0;
+/************************* ADMIN CLUB *****************************/
+QString Home::on_pb_insert_logo_clubs_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,"Select Logo","C://","Image files (*.jpg *.gif *.png)");
+    return fileName;
+}
+
+
+QString Home::on_pb_shirt_insert_clubs_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,"Select T-shirt","C://","Image files (*.jpg *.gif *.png)");
+    return fileName;
+}
+
+
+void Home::on_pb_insert_confirm_clubs_clicked()
+{
+    QString shirt = on_pb_shirt_insert_clubs_clicked();
+    QString logo = on_pb_insert_logo_clubs_clicked();
+    QString name = ui->le_name_insert_clubs->text();
+    if(logo.isEmpty() || shirt.isEmpty() || name.isEmpty()){
+        QMessageBox::information(this,"Error","select t-shirt and logo");
+        return;
+    }
+    d_clubs[++max_clubs_id].shirt_image = shirt;
+    d_clubs[max_clubs_id].name = name;
+    d_clubs[max_clubs_id].club_image = logo;
+    d_clubs[max_clubs_id].league_id = (ui->cb_league_insert_clubs->currentIndex())+1;
+    QMessageBox::information(this,"success","inserted succesfuly");
+    on_pb_read_clubs_clicked();
+}
+void Home::on_pb_read_clubs_clicked()
+{
+    ui->tw_clubs->setRowCount(clubs::size);
+    int rowNum = 0;
+    for(auto club = d_clubs.begin() ; club != d_clubs.end() ; club++ , rowNum++)
+    {
+        ui->tw_clubs->setItem(rowNum,0,new QTableWidgetItem(QString::number(club->first)));
+        ui->tw_clubs->setItem(rowNum,1,new QTableWidgetItem(QString(club->second.name)));
+        ui->tw_clubs->setItem(rowNum,2,new QTableWidgetItem(QString::number(club->second.league_id)));
+    }
+}
+void Home::on_pb_delete_confirm_clubs_clicked()
+{
+    qint64 id = ui->le_delete_id_clubs->text().toInt();
+    if(ui->le_delete_id_clubs->text().isEmpty())
+    {
+        QMessageBox::critical(this,"Faild","Empty ID OR NOT VALID ID");
+        return;
+    }
+    if(is_found(id,d_clubs))
+    {
+        QMessageBox::warning(this,"deleted",d_clubs[id].name+" has been deleted successfully!");
+        // delete club
+        clubs::remove(id);
+        on_pb_read_clubs_clicked();
+        return;
+    }
+    QMessageBox::critical(this,"Error","there is no user with this id..!");
+}
+
+

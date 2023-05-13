@@ -69,6 +69,16 @@ private slots:
 
     //**************** Admin matches ******************//
 
+    QString on_pb_insert_logo_clubs_clicked();
+
+    QString on_pb_shirt_insert_clubs_clicked();
+
+    void on_pb_insert_confirm_clubs_clicked();
+
+    void on_pb_read_clubs_clicked();
+
+    void on_pb_delete_confirm_clubs_clicked();
+
 private:
     Ui::Home *ui;
 };

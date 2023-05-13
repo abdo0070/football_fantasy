@@ -10,8 +10,8 @@ public:
     static int size;
     qint64 league_id;
     QString name,shirt_image,club_image;
-public:
     static void refresh();
+    static void remove(qint64 id);
     clubs();
 };
 
