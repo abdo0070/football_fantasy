@@ -3,11 +3,14 @@
 #include <QPixmap>
 #include"data.h"
 #include<iostream>
+#include<QPushButton>
 #include<QMessageBox>
 #include <queue>
 #include"SUPPORT.cpp"
 #include <QFileDialog>
 #include <qdebug.h>
+#include<QTableWidgetItem>
+
 using namespace std;
 
 void Home::leader_board()
@@ -228,9 +231,11 @@ Home::Home(QWidget *parent) :
     ui->profile_picture->setPixmap(profile);
 
 
-    //matches();
+    //refresh
     leader_board();
     refresh_players();
+    refresh_clubs_comboboxs();
+
 
     ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin); // first parameter is the index of the tab
     ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
@@ -238,18 +243,25 @@ Home::Home(QWidget *parent) :
     ui->gb_user_update->hide();
     // hide delete users
         ui->gb_user_delete->hide();
-    // hide insert users
-        ui->gb_user_insert->hide();
     // hide update users
         ui->gb_user_update->hide();
-
+    // hide insert users
+    ui->gb_user_insert->hide();
 
     // hide update for players
         ui->gb_update_players->hide();
     // hide delete for players
         ui->gb_delete_players->hide();
-    // hide delete for players
+    // hide insert for players
         ui->gb_insert_players->hide();
+
+    // hide update for clubs
+    ui->gb_update_clubs->hide();
+    // hide delete for clubs
+    ui->gb_delete_clubs->hide();
+    // hide insert for clubs
+    ui->gb_insert_clubs->hide();
+
     // set max range for points & age and price spin box for player (admin)
         ui->sp_update_points_players->setMaximum(1000);
         ui->sp_update_age_players->setMaximum(50);
@@ -416,6 +428,38 @@ void Home::on_pb_conform_update_clicked()
 
 /************** Admin PLAYERS ****************/
 
+bool hold_currentIndexChanged = false;
+void Home::refresh_clubs_comboboxs()
+{
+    hold_currentIndexChanged = true;
+
+    ui->cb_club_update_players->clear();
+    ui->cb_club_insert_players->clear();
+    ui->cb_club_update->clear();
+    ui->cb_club_insert->clear();
+    ui->cb_choose_club1->clear();
+    ui->cb_choose_club2->clear();
+
+
+    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
+    {
+        ui->cb_club_update_players->addItem(i->second.name);
+        ui->cb_club_insert_players->addItem(i->second.name);
+        ui->cb_club_update->addItem(i->second.name);
+        ui->cb_club_insert->addItem(i->second.name);
+        ui->cb_choose_club1->addItem(i->second.name);
+        ui->cb_choose_club2->addItem(i->second.name);
+    }
+
+    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
+    {
+        if(i->second.name == ui->cb_choose_club1->currentText())
+            ui->chosen_club1->setPixmap(QPixmap(i->second.club_image));
+        if(i->second.name == ui->cb_choose_club2->currentText())
+            ui->chosen_club2->setPixmap(QPixmap(i->second.club_image));
+    }
+    hold_currentIndexChanged = false;
+}
 
 void Home::on_pb_read_players_clicked()
 {
@@ -453,7 +497,7 @@ void Home::on_pb_update_target_players_clicked()
         return;
     }
     ui->le_name_update_players->setText(d_players[id].name);
-    ui->le_position_update_players->setText(d_players[id].position);
+    ui->cb_position_update_players->setCurrentIndex(ui->cb_position_update_players->findText(d_players[id].position));
     ui->sp_update_price_players->setValue(d_players[id].price);
     ui->sp_update_age_players->setValue(d_players[id].age);
     ui->sp_update_points_players->setValue(d_players[id].points);
@@ -469,7 +513,7 @@ void Home::on_pb_update_confirm_players_clicked()
         return;
     }
     d_players[id].name = ui->le_name_update_players->text();
-    d_players[id].position = ui->le_position_update_players->text();
+    d_players[id].position = ui->cb_position_update_players->currentText();
     d_players[id].age = ui->sp_update_age_players->value();
     d_players[id].price = ui->sp_update_price_players->value();
     d_players[id].points = ui->sp_update_points_players->value();
@@ -516,14 +560,13 @@ void Home::on_pb_insert_players_clicked()
     if(!ui->gb_insert_players->isVisible())
         ui->gb_insert_players->show();
     else
-        ui->gb_insert_players->hide();
+     ui->gb_insert_players->hide();
 }
 void Home::on_pb_insert_confirm_players_clicked()
 {
     bool checkAllInputNotEmpty = false;
     if(!ui->le_name_insert_players->text().isEmpty()
         && !ui->sp_insert_age_players->text().isEmpty()
-        && !ui->le_position_insert_players->text().isEmpty()
         && !ui->sp_insert_points_players->text().isEmpty()
         && !ui->sp_insert_price_players->text().isEmpty()
         )
@@ -533,11 +576,17 @@ void Home::on_pb_insert_confirm_players_clicked()
     {
         players::size++;
         d_players[++max_players_id].name = ui->le_name_insert_players->text();
-        d_players[max_players_id].position = ui->le_position_insert_players->text();
+        d_players[max_players_id].position = ui->cb_position_insert_players->currentText();
         d_players[max_players_id].age = ui->sp_insert_age_players->value();
         d_players[max_players_id].points = ui->sp_insert_points_players->value();
         d_players[max_players_id].price = ui->sp_insert_price_players->value();
-        d_players[max_players_id].club_id = (ui->cb_club_insert_players->currentIndex())+1;
+        qint64 new_club_id;
+        for(auto i = d_clubs.begin(); i != d_clubs.end() ; i++)
+        {
+            if(ui->cb_club_insert_players->currentText() == i->second.name)
+                new_club_id = i->first;
+        }
+        d_players[max_players_id].club_id = new_club_id;
         QMessageBox::information(this,"success","done!");
         // refresh
         on_pb_read_players_clicked();
@@ -629,8 +678,6 @@ qint64 player_id;
 bool inMyTeam = false;
 void Home::on_player_profile_clicked()
 {
-
-
    ui->scrollArea->setGeometry(75,150,1000,750);
    ui->player_profile->show();
    ui->image->setStyleSheet(""); // to filter white background
@@ -701,9 +748,6 @@ void Home::on_sellButton_clicked()
         }
     }
 
-
-    // users user = d_users[current_user_id];
-
     for(auto player = d_teams_players.begin(); player != d_teams_players.end(); player++)
     {
         if (player->second.player_id == player_id && d_teams[player->second.team_id].user_id == current_user_id)
@@ -759,8 +803,8 @@ void Home::on_buyButton_clicked()
 
         d_teams_players[++max_teams_players_id].player_id = player_id;
         d_teams_players[max_teams_players_id].team_id = team_id;
+        d_teams_players[max_teams_players_id].position = 0;
         d_users[current_user_id].number_of_players++;
-
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
 
@@ -773,38 +817,163 @@ void Home::on_buyButton_clicked()
 
 /********************** Admin matches **********************/
 
-int club1 = 0;
-int club2 = 0;
+qint64 club1 = 0;
+qint64 club2 = 0;
+
+
+void Home::vs_club2(qint64 club_id)
+{
+    hold_currentIndexChanged = true;
+    ui->cb_choose_club2->clear();
+    ui->chosen_club2->clear();
+
+    for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
+        if(i->second.league_id == d_clubs[club_id].league_id && club_id != i->first)
+            ui->cb_choose_club2->addItem(i->second.name);
+
+    QString club = ui->cb_choose_club2->currentText();
+
+
+    club2 = clubs::find_id(club);
+
+
+    QPixmap pix = d_clubs[club2].club_image;
+    ui->chosen_club2->setPixmap(pix);
+
+    hold_currentIndexChanged = false;
+
+}
+void Home::on_cb_choose_club1_currentIndexChanged()
+{
+    if(hold_currentIndexChanged)return;
+    QString club = ui->cb_choose_club1->currentText();
+
+    club1 = clubs::find_id(club);
+
+    QPixmap pix = d_clubs[club1].club_image;
+    ui->chosen_club1->setPixmap(pix);
+    ui->tw_matches_club1->show();
+    vs_club2(club1);
+
+}
+void Home::on_cb_choose_club2_currentIndexChanged()
+{
+    if(hold_currentIndexChanged)return;
+    QString club = ui->cb_choose_club2->currentText();
+
+    club2 = clubs::find_id(club);
+
+    QPixmap pix = d_clubs[club2].club_image;
+    ui->chosen_club2->setPixmap(pix);
+    ui->tw_matches_club2->show();
+
+}
+
+void Home::on_pb_matches_add_player_club1_clicked()
+{
+    if(ui->tw_matches_club1->rowCount() == 15)
+    {
+        QMessageBox::critical(this,"Error","15 players already!");
+        return;
+    }
+    ui->tw_matches_club1->setRowCount(ui->tw_matches_club1->rowCount()+1);
+}
+void Home::on_pb_matches_add_player_club2_clicked()
+{
+    if(ui->tw_matches_club2->rowCount() == 15)
+    {
+        QMessageBox::critical(this,"Error","15 players already!");
+        return;
+    }
+    ui->tw_matches_club2->setRowCount(ui->tw_matches_club2->rowCount() + 1);
+}
+
+void Home::on_pb_matches_delete_player_club1_clicked()
+{
+    if(ui->tw_matches_club1->rowCount() > 0)
+        ui->tw_matches_club1->setRowCount(ui->tw_matches_club1->rowCount() - 1);
+}
+
+
+void Home::on_pb_matches_delete_player_club2_clicked()
+{
+    if(ui->tw_matches_club2->rowCount() > 0)
+        ui->tw_matches_club2->setRowCount(ui->tw_matches_club2->rowCount() - 1);
+}
+
+void Home::on_pb_declare_result_clicked()
+{
+
+}
 /************************* ADMIN CLUB *****************************/
-QString Home::on_pb_insert_logo_clubs_clicked()
+QString Chosen_new_club = "",Chosen_new_shirt = "";
+
+void Home::on_pb_update_clubs_clicked()
+{
+    if(!ui->gb_update_clubs->isVisible())
+        ui->gb_update_clubs->show();
+    else
+        ui->gb_update_clubs->hide();
+}
+void Home::on_pb_delete_clubs_clicked()
+{
+    if(!ui->gb_delete_clubs->isVisible())
+        ui->gb_delete_clubs->show();
+    else
+        ui->gb_delete_clubs->hide();
+}
+void Home::on_pb_insert_clubs_clicked()
+{
+    if(!ui->gb_insert_clubs->isVisible())
+        ui->gb_insert_clubs->show();
+    else
+        ui->gb_insert_clubs->hide();
+}
+
+void Home::on_pb_insert_logo_clubs_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,"Select Logo","C://","Image files (*.jpg *.gif *.png)");
-    return fileName;
+    Chosen_new_club = fileName;
 }
 
 
-QString Home::on_pb_shirt_insert_clubs_clicked()
+void Home::on_pb_shirt_insert_clubs_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,"Select T-shirt","C://","Image files (*.jpg *.gif *.png)");
-    return fileName;
+    Chosen_new_shirt = fileName;
 }
-
 
 void Home::on_pb_insert_confirm_clubs_clicked()
 {
-    QString shirt = on_pb_shirt_insert_clubs_clicked();
-    QString logo = on_pb_insert_logo_clubs_clicked();
     QString name = ui->le_name_insert_clubs->text();
-    if(logo.isEmpty() || shirt.isEmpty() || name.isEmpty()){
-        QMessageBox::information(this,"Error","select t-shirt and logo");
+    if(name.isEmpty())
+    {
+        QMessageBox::critical(this,"Error","invaled club name!");
         return;
     }
-    d_clubs[++max_clubs_id].shirt_image = shirt;
+    if(Chosen_new_club.isEmpty() || Chosen_new_shirt.isEmpty())
+    {
+        QMessageBox::StandardButton conform = QMessageBox::information(this,"ready?","are you sure you want the default settings for pictures ?",QMessageBox::Yes,QMessageBox::No);
+        if(conform == QMessageBox::Yes)
+        {
+            Chosen_new_shirt = ":/background/shirts/Default_shirt.png";
+            Chosen_new_club = ":/background/Clubs/Default_club.png";
+        }
+        else
+            return;
+    }
+    d_clubs[++max_clubs_id].shirt_image = Chosen_new_shirt;
     d_clubs[max_clubs_id].name = name;
-    d_clubs[max_clubs_id].club_image = logo;
+    d_clubs[max_clubs_id].club_image = Chosen_new_club;
     d_clubs[max_clubs_id].league_id = (ui->cb_league_insert_clubs->currentIndex())+1;
     QMessageBox::information(this,"success","inserted succesfuly");
+    clubs::size++;
     on_pb_read_clubs_clicked();
+    refresh_clubs_comboboxs();
+
+    Chosen_new_shirt = "";
+    Chosen_new_club = "";
+
 }
 void Home::on_pb_read_clubs_clicked()
 {
@@ -817,8 +986,14 @@ void Home::on_pb_read_clubs_clicked()
         ui->tw_clubs->setItem(rowNum,2,new QTableWidgetItem(QString::number(club->second.league_id)));
     }
 }
+
 void Home::on_pb_delete_confirm_clubs_clicked()
 {
+    if(clubs::size == 1)
+    {
+        QMessageBox::critical(this,"Error","there is only one club left !");
+        return;
+    }
     qint64 id = ui->le_delete_id_clubs->text().toInt();
     if(ui->le_delete_id_clubs->text().isEmpty())
     {
@@ -831,9 +1006,13 @@ void Home::on_pb_delete_confirm_clubs_clicked()
         // delete club
         clubs::remove(id);
         on_pb_read_clubs_clicked();
+        on_pb_read_players_clicked();
+        refresh_clubs_comboboxs();
+
         return;
     }
     QMessageBox::critical(this,"Error","there is no user with this id..!");
 }
+
 
 

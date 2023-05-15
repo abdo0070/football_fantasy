@@ -101,21 +101,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     while(qry.next())
     {
         int key = qry.value(0).toInt();
-        max_teams_players_id= max(max_teams_players_id,key);
+        max_teams_players_id = max(max_teams_players_id,key);
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
+        d_teams_players[key].position = qry.value(3).toInt();
     }  
 };
 
 MainWindow::~MainWindow()
 {
-
-//    cout << "id "<<"user_id\n";
-//    for(auto i = d_teams.begin() ; i != d_teams.end(); i++)
-//        cout << i->first << " " << i->second.user_id << '\n';
-//    cout << "id "<<" player_id "<< "team_id\n";
-//    for(auto i = d_teams_players.begin() ; i != d_teams_players.end(); i++)
-//        cout << i->first << " " << i->second.player_id << " " << i->second.team_id <<'\n';
 
     delete ui;
     QSqlQuery qry;
@@ -242,10 +236,11 @@ MainWindow::~MainWindow()
     }
     for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
     {
-        qry.prepare("insert into teams_players values(NULL,:player_id,:team_id);");
-        // qry.bindValue(":id",NULL);
+        qry.prepare("insert into teams_players values(:id,:player_id,:team_id,:position);");
+        qry.bindValue(":id",i->first);
         qry.bindValue(":player_id",i->second.player_id);
         qry.bindValue(":team_id",i->second.team_id);
+        qry.bindValue(":position",i->second.position);
         bool x = qry.exec();
         if(x)
             cout << "teams_players is in \n";

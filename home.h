@@ -16,6 +16,11 @@ public:
 
     void leader_board();
     void refresh_players();
+    void refresh_clubs_comboboxs();
+
+    //void vs_club1(qint64 club_id);
+    void vs_club2(qint64 club_id);
+
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 
@@ -69,15 +74,37 @@ private slots:
 
     //**************** Admin matches ******************//
 
-    QString on_pb_insert_logo_clubs_clicked();
 
-    QString on_pb_shirt_insert_clubs_clicked();
+    void on_pb_declare_result_clicked();
+
+    void on_pb_matches_add_player_club1_clicked();
+    void on_pb_matches_add_player_club2_clicked();
+
+    void on_cb_choose_club1_currentIndexChanged();
+    void on_cb_choose_club2_currentIndexChanged();
+
+    void on_pb_matches_delete_player_club1_clicked();
+
+    void on_pb_matches_delete_player_club2_clicked();
+
+
+    //**************** Admin clubs ******************//
+
+    void on_pb_insert_logo_clubs_clicked();
+
+    void on_pb_shirt_insert_clubs_clicked();
 
     void on_pb_insert_confirm_clubs_clicked();
 
     void on_pb_read_clubs_clicked();
 
     void on_pb_delete_confirm_clubs_clicked();
+
+    void on_pb_update_clubs_clicked();
+
+    void on_pb_delete_clubs_clicked();
+
+    void on_pb_insert_clubs_clicked();
 
 private:
     Ui::Home *ui;
