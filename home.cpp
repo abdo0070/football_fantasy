@@ -220,9 +220,7 @@ Home::Home(QWidget *parent) :
     ui(new Ui::Home)
 {
     ui->setupUi(this);
-    qDebug() << "Before refresh_squad";
     refresh_squad();
-    qDebug() << "After refresh_squad";
     profile();
     //matches();
     leader_board();
@@ -746,12 +744,11 @@ void Home::on_buyButton_clicked()
     if (user.budget >= player.price)
     {
         QMessageBox::information(this,"Success","You bought this player successfully");
-
         d_teams_players[++max_teams_players_id].player_id = player_id;
         d_teams_players[max_teams_players_id].team_id = team_id;
         d_teams_players[max_teams_players_id].position = 0;
         d_users[current_user_id].number_of_players++;
-
+        refresh_squad();
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
 
@@ -759,7 +756,7 @@ void Home::on_buyButton_clicked()
         refresh_players();
     }
 
-    refresh_squad();
+
 }
 
 
@@ -777,26 +774,11 @@ qint64 check_num_players_in_squad = 0;
 
 void Home::profile()
 {
-    refresh_players();
-    qDebug() << "Before refresh_squad";
-    refresh_squad();
-    qDebug() << "After refresh_squad";
+
     QPixmap club_icon(d_clubs[d_users[current_user_id].club_id].club_image);
     ui->profile_picture->setPixmap(club_icon);
-    qint64 user_team_id = 0;
-    players player;
     ui->username->setText(d_users[current_user_id].username + "'s team");
     ui->user_budget->setText(QString::number(d_users[current_user_id].budget) + "$");
-    for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
-    {
-        if (i->second.user_id == current_user_id)
-        {
-            user_team_id = i->first;
-            break;
-        }
-    }
-
-
 }
 
 void Home::refresh_squad()
@@ -811,9 +793,43 @@ void Home::refresh_squad()
             break;
         }
     }
-    qDebug() << "He is hereeeeeeeeeeeeeee";
     ui->listWidget->clear();
-    clear_squad(user_team_id);
+
+
+    QString default_shirt = "://background/shirts/none_player.png";
+
+    ui->GK1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK1_name->setText("");
+    ui->GK2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK2_name->setText("");
+    ui->LB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LB_name->setText("");
+    ui->CB1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB1_name->setText("");
+    ui->CB2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB2_name->setText("");
+    ui->CB3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB3_name->setText("");
+    ui->RB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RB_name->setText("");
+    ui->LM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LM_name->setText("");
+    ui->CM1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM1_name->setText("");
+    ui->CM2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM2_name->setText("");
+    ui->CM3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM3_name->setText("");
+    ui->RM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RM_name->setText("");
+    ui->LW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LW_name->setText("");
+    ui->ST_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->ST_name->setText("");
+    ui->RW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RW_name->setText("");
+
+
     // show d_players[i->second.player_id].name in the scrollbar for 0's position and the others in the squad
     for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
     {
@@ -935,6 +951,7 @@ void Home::clear_squad(qint64 user_team_id)
     ui->ST_name->setText("");
     ui->RW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
     ui->RW_name->setText("");
+    check_num_players_in_squad = 0;
 }
 
 void Home::on_clearButton_clicked()
