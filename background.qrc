@@ -38,5 +38,16 @@
         <file>Icons/1.png</file>
         <file>Icons/2.png</file>
         <file>Icons/3.png</file>
+        <file>background/shirts/none_player.png</file>
+        <file>background/shirts/Alahly1.png</file>
+        <file>background/shirts/AtleticoMadrid1.png</file>
+        <file>background/shirts/Barcelona1.png</file>
+        <file>background/shirts/Chelsea1.png</file>
+        <file>background/shirts/Liverpool1.png</file>
+        <file>background/shirts/ManchesterCity1.png</file>
+        <file>background/shirts/Pyramids1.png</file>
+        <file>background/shirts/RealMadrid1.png</file>
+        <file>background/shirts/Zamalek1.png</file>
+        <file>Icons/clear_button.png</file>
     </qresource>
 </RCC>

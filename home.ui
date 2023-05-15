@@ -57,7 +57,7 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>320</x>
+       <x>300</x>
        <y>0</y>
        <width>1281</width>
        <height>1051</height>
@@ -162,7 +162,7 @@
     <widget class="QLabel" name="user_budget">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>110</x>
        <y>390</y>
        <width>161</width>
        <height>41</height>
@@ -183,246 +183,6 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="GK1">
-     <property name="geometry">
-      <rect>
-       <x>450</x>
-       <y>350</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>GK1</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="GK2">
-     <property name="geometry">
-      <rect>
-       <x>450</x>
-       <y>530</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>GK2</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LB">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>60</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>LB</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CB1">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>260</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CB1</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CB2">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>440</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CB2</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CB3">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>610</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CB3</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="RB">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>800</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>RB</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LM">
-     <property name="geometry">
-      <rect>
-       <x>925</x>
-       <y>60</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>LM</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CM1">
-     <property name="geometry">
-      <rect>
-       <x>925</x>
-       <y>260</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CM1</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CM2">
-     <property name="geometry">
-      <rect>
-       <x>925</x>
-       <y>440</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CM2</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CM3">
-     <property name="geometry">
-      <rect>
-       <x>925</x>
-       <y>610</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>CM3</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="RM">
-     <property name="geometry">
-      <rect>
-       <x>925</x>
-       <y>800</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>RM</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LW">
-     <property name="geometry">
-      <rect>
-       <x>1271</x>
-       <y>120</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>LW</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="ST">
-     <property name="geometry">
-      <rect>
-       <x>1271</x>
-       <y>440</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>ST</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="RW">
-     <property name="geometry">
-      <rect>
-       <x>1271</x>
-       <y>700</y>
-       <width>70</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>RW</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="GK1_name">
      <property name="geometry">
       <rect>
@@ -436,6 +196,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -458,6 +221,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -478,6 +244,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -500,6 +269,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -520,6 +292,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -542,6 +317,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -562,6 +340,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -584,6 +365,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -604,6 +388,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -626,6 +413,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -646,6 +436,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -668,6 +461,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -688,6 +484,9 @@
       <font>
        <pointsize>15</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -710,6 +509,9 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -731,11 +533,400 @@
        <pointsize>15</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="players_label">
+     <property name="geometry">
+      <rect>
+       <x>1610</x>
+       <y>140</y>
+       <width>291</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>22</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Players on the bench</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget">
+     <property name="geometry">
+      <rect>
+       <x>1600</x>
+       <y>240</y>
+       <width>311</width>
+       <height>811</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>811</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>311</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DragDrop</enum>
+     </property>
+     <property name="defaultDropAction">
+      <enum>Qt::MoveAction</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearButton">
+     <property name="geometry">
+      <rect>
+       <x>1630</x>
+       <y>40</y>
+       <width>111</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/Icons/clear_button.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LW_button">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>120</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RW_button">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>700</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ST_button">
+     <property name="geometry">
+      <rect>
+       <x>1271</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB2_button">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB3_button">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>610</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LB_button">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>60</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RB_button">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>800</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="GK1_button">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>350</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="GK2_button">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>530</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RM_button">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>800</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LM_button">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>60</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM1_button">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>260</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM2_button">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>440</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM3_button">
+     <property name="geometry">
+      <rect>
+       <x>925</x>
+       <y>610</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB1_button">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>260</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
     <zorder>label_2</zorder>
@@ -745,21 +936,6 @@
     <zorder>username</zorder>
     <zorder>budget</zorder>
     <zorder>user_budget</zorder>
-    <zorder>GK1</zorder>
-    <zorder>GK2</zorder>
-    <zorder>LB</zorder>
-    <zorder>CB1</zorder>
-    <zorder>CB2</zorder>
-    <zorder>CB3</zorder>
-    <zorder>RB</zorder>
-    <zorder>LM</zorder>
-    <zorder>CM1</zorder>
-    <zorder>CM2</zorder>
-    <zorder>CM3</zorder>
-    <zorder>RM</zorder>
-    <zorder>LW</zorder>
-    <zorder>ST</zorder>
-    <zorder>RW</zorder>
     <zorder>GK1_name</zorder>
     <zorder>CB1_name</zorder>
     <zorder>CB2_name</zorder>
@@ -775,6 +951,24 @@
     <zorder>ST_name</zorder>
     <zorder>LW_name</zorder>
     <zorder>RM_name</zorder>
+    <zorder>players_label</zorder>
+    <zorder>listWidget</zorder>
+    <zorder>clearButton</zorder>
+    <zorder>LW_button</zorder>
+    <zorder>RW_button</zorder>
+    <zorder>ST_button</zorder>
+    <zorder>CB2_button</zorder>
+    <zorder>CB3_button</zorder>
+    <zorder>LB_button</zorder>
+    <zorder>RB_button</zorder>
+    <zorder>GK1_button</zorder>
+    <zorder>GK2_button</zorder>
+    <zorder>RM_button</zorder>
+    <zorder>LM_button</zorder>
+    <zorder>CM1_button</zorder>
+    <zorder>CM2_button</zorder>
+    <zorder>CM3_button</zorder>
+    <zorder>CB1_button</zorder>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">

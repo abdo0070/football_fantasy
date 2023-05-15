@@ -7,6 +7,10 @@
 #include<QtSql>
 #include<QtSql/QSqlDatabase>
 #include<QDebug>
+//#include<QDir>
+#include<QFileInfo>
+#include<QString>
+//#include<QCoreApplication>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

@@ -2,7 +2,7 @@
 #define HOME_H
 
 #include <QDialog>
-
+#include<QListWidgetItem>
 namespace Ui {
 class Home;
 }
@@ -13,8 +13,9 @@ class Home : public QDialog
 
 public:
 
-
+    void refresh_squad();
     void profile();
+    void clear_squad(qint64 user_team_id);
     void leader_board();
     void refresh_players();
     explicit Home(QWidget *parent = nullptr);
@@ -70,7 +71,44 @@ private slots:
 
     //**************** Admin matches ******************//
 
+    //**************** Profile ******************//
+    void on_clearButton_clicked();
 
+
+
+    void on_pushButton_2_clicked();
+
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
+    void on_LW_button_clicked();
+
+    void on_CB1_button_clicked();
+
+    void on_CB2_button_clicked();
+
+    void on_RB_button_clicked();
+
+    void on_CB3_button_clicked();
+
+    void on_CM2_button_clicked();
+
+    void on_CM1_button_clicked();
+
+    void on_CM3_button_clicked();
+
+    void on_GK1_button_clicked();
+
+    void on_GK2_button_clicked();
+
+    void on_LB_button_clicked();
+
+    void on_LM_button_clicked();
+
+    void on_RM_button_clicked();
+
+    void on_RW_button_clicked();
+
+    void on_ST_button_clicked();
 
 private:
     Ui::Home *ui;
