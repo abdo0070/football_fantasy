@@ -1,9 +1,8 @@
 #ifndef HOME_H
 #define HOME_H
 
-#include "qlistwidget.h"
 #include <QDialog>
-
+#include<QListWidgetItem>
 namespace Ui {
 class Home;
 }
@@ -13,8 +12,10 @@ class Home : public QDialog
     Q_OBJECT
 
 public:
-
-
+    void player_squad(QString pushed_player_name_out_squad,QPushButton  * button , QLabel * label , qint64 num_of_pos, QString pos1, QString pos2 = "", QString pos3 = "");
+    void refresh_squad();
+    void profile();
+    void clear_squad(qint64 user_team_id);
     void leader_board();
     void refresh_players();
     void refresh_clubs_comboboxs();
@@ -77,8 +78,6 @@ private slots:
     void on_buyButton_clicked();
 
     //**************** Admin matches ******************//
-
-
     void on_pb_declare_result_clicked();
 
 
@@ -90,8 +89,7 @@ private slots:
 
     void on_pb_matches_delete_player_club2_clicked();
 
-
-    //**************** Admin clubs ******************//
+ //**************** Admin clubs ******************//
 
     void on_pb_insert_logo_clubs_clicked();
 
@@ -117,7 +115,7 @@ private slots:
 
     void on_pb_update_refresh_clubs_clicked();
 
-    //**************** Profile ******************//
+//**************** Profile ******************//
 
     void on_clearButton_clicked();
 

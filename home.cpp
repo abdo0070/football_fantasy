@@ -14,7 +14,6 @@
 #include<QtExceptionHandling>
 #include<QItemDelegate>
 using namespace std;
-
 void Home::leader_board()
 {
     vector<pair<qint64, QString>> v;
@@ -352,12 +351,13 @@ Home::Home(QWidget *parent) :
     ui->tw_matches_club1->setItemDelegate(new Delegate);
     ui->tw_matches_club2->setItemDelegate(new Delegate);
 
-    //refresh
+    //matches();
     leader_board();
     refresh_players();
     refresh_clubs_comboboxs();
     refresh_matches();
     vs_club2(1);
+
 
     ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin); // first parameter is the index of the tab
     ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
@@ -861,7 +861,7 @@ void Home::on_player_profile_clicked()
 
 void Home::on_sellButton_clicked()
 {
-    qint64 playerid_in_teamsplayers;
+    qint64 playerid_in_teamsplayers = 0;
     auto user = d_users.begin() ;
     for(; user != d_users.end() ; user++)
     {
@@ -896,6 +896,7 @@ void Home::on_sellButton_clicked()
 
    refresh_players();
    //qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
+   refresh_squad();
 }
 
 void Home::on_buyButton_clicked()
@@ -905,17 +906,9 @@ void Home::on_buyButton_clicked()
         QMessageBox::critical(this,"Faild","your team is already full!");
         return;
     }
-    auto user = d_users.begin() ;
-    for(; user != d_users.end() ; user++)
-    {
-        if (user->first == current_user_id)
-        {
-            //qDebug() << "The current user name is: " << user->second.username << "and has: " << user->second.budget;
-            break;
-        }
-    }
+    users user = d_users[current_user_id];
 
-    qint64 team_id;
+    qint64 team_id = 0;
     players player = d_players[player_id];
     for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
     {
@@ -925,14 +918,14 @@ void Home::on_buyButton_clicked()
             break;
         }
     }
-    if (user->second.budget >= player.price)
+    if (user.budget >= player.price)
     {
         QMessageBox::information(this,"Success","You bought this player successfully");
-
         d_teams_players[++max_teams_players_id].player_id = player_id;
         d_teams_players[max_teams_players_id].team_id = team_id;
         d_teams_players[max_teams_players_id].position = 0;
         d_users[current_user_id].number_of_players++;
+
         ui->buyButton->setEnabled(false);
         ui->sellButton->setEnabled(true);
 
@@ -941,9 +934,10 @@ void Home::on_buyButton_clicked()
 
         refresh_players();
     }
-    // qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
-    // qDebug() << "*********Mission is completed*********";
+
+
 }
+
 
 /********************** Admin matches **********************/
 

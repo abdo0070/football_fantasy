@@ -13,6 +13,7 @@ SOURCES += \
     SUPPORT.cpp \
     clubs.cpp \
     dialog.cpp \
+    events.cpp \
     home.cpp \
     leagues.cpp \
     main.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     clubs.h \
     data.h \
     dialog.h \
+    events.h \
     home.h \
     leagues.h \
     mainwindow.h \
@@ -59,4 +61,5 @@ RESOURCES += \
     background.qrc
 
 DISTFILES += \
+    Icons/clear_button.png \
     background/FC_Barcelona_(crest).svg.png

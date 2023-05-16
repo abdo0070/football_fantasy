@@ -107,6 +107,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_teams_players[key].player_id = qry.value(1).toInt();
         d_teams_players[key].team_id = qry.value(2).toInt();
         d_teams_players[key].position = qry.value(3).toInt();
+        d_teams_players[key].position = qry.value(3).toInt();
     }  
 };
 
@@ -115,6 +116,7 @@ MainWindow::~MainWindow()
 
     delete ui;
     QSqlQuery qry;
+    qint64 ctr = 0;
     cout << "clubs deleted :" << qry.exec("delete from clubs;") << '\n';
     cout << "leagues deleted :" << qry.exec("delete from leagues;")<< '\n';
     cout << "matches deleted :"<< qry.exec("delete from matches;") << '\n';
@@ -135,10 +137,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":name",i->second.name);
         bool x = qry.exec();
         if(x)
-            cout << "leagues is in \n";
+            ctr++;
         else
             qDebug() << "in  ...... " <<  y << '\n' << qry.lastError() << '\n';
+
     }
+    cout << "leagues is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++,y++)
     {
         qry.prepare("insert into clubs values(:id,:name,:league_id,:shirt_image,:club_image);");
@@ -149,10 +154,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":club_image",i->second.club_image);
         bool x = qry.exec();
         if(x)
-            cout << "clubs is in \n";
+            ctr++;
         else
             qDebug() << "\n" << y << "\n" << qry.lastError() << '\n';
+
     }
+    cout << "clubs is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_rounds.begin() ; i != d_rounds.end() ; i++)
     {
         qry.prepare("insert into rounds values(:id,:weak);");
@@ -160,10 +168,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":weak",i->second.weak);
         bool x = qry.exec();
         if(x)
-            cout << "rounds is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "rounds is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_matches.begin() ; i != d_matches.end() ; i++)
     {
         qry.prepare("insert into matches values(:id,:club_1,:club_2,:round_id,:result_of_club1,:result_of_club2);");
@@ -175,10 +186,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":result_of_club2",i->second.result_of_club2);
         bool x = qry.exec();
         if(x)
-            cout << "matches is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "matches is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_players.begin() ; i != d_players.end() ; i++)
     {
         qry.prepare("insert into players values(:id,:age,:price,:position,:club_id,:name,:points);");
@@ -191,10 +205,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":points",i->second.points);
         bool x = qry.exec();
         if(x)
-            cout << "players is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "players is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_matches_players.begin() ; i != d_matches_players.end() ; i++)
     {
         qry.prepare("insert into matches_players values(:id,:points,:match_id,:player_id,:round_id);");
@@ -205,10 +222,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":round_id",i->second.round_id);
         bool x = qry.exec();
         if(x)
-            cout << "matches_players is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "matches_players is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_users.begin() ; i != d_users.end() ; i++)
     {
         qry.prepare("insert into users values(:id,:email,:name,:password,:price,:points,:is_admin,:club_id,:number_of_players);");
@@ -223,10 +243,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":number_of_players",i->second.number_of_players);
         bool x = qry.exec();
         if(x)
-            cout << "users is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "users is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
     {
         qry.prepare("insert into teams values(:id,:user_id);");
@@ -234,10 +257,13 @@ MainWindow::~MainWindow()
         qry.bindValue(":user_id",i->second.user_id);
         bool x = qry.exec();
         if(x)
-            cout << "teams is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "teams is in " << ctr << "times\n";
+    ctr = 0;
     for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
     {
         qry.prepare("insert into teams_players values(:id,:player_id,:team_id,:position);");
@@ -247,10 +273,12 @@ MainWindow::~MainWindow()
         qry.bindValue(":position",i->second.position);
         bool x = qry.exec();
         if(x)
-            cout << "teams_players is in \n";
+            ctr++;
         else
             qDebug() << qry.lastError() << '\n';
+
     }
+    cout << "teams_players is in " << ctr << "times\n";
 }
 void MainWindow::on_pushButton_clicked()
 {
@@ -272,7 +300,7 @@ void MainWindow::on_pushButton_clicked()
     {
         homeui = new Home;
 
-        QMessageBox::information(this,"log in","loged in successfully");
+        QMessageBox::information(this,"log in","logged in successfully");
         homeui->setWindowState(Qt::WindowFullScreen);
         homeui->show();
         ui->lineEdit->clear();

@@ -26,7 +26,7 @@ void SignUp::on_pushButton_clicked()
 
 
 
-void SignUp::on_pushButton_2_clicked()
+void SignUp::on_submitButton_clicked()
 {
     QString username = ui->lineEdit->text();
     QString email = ui->lineEdit_2->text();
