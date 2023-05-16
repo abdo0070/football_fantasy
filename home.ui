@@ -186,9 +186,9 @@
     <widget class="QLabel" name="GK1_name">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>395</x>
        <y>455</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -210,9 +210,9 @@
     <widget class="QLabel" name="CB1_name">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>575</x>
        <y>365</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -231,9 +231,9 @@
     <widget class="QLabel" name="CB2_name">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>575</x>
        <y>545</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -252,9 +252,9 @@
     <widget class="QLabel" name="CB3_name">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>575</x>
        <y>725</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -273,9 +273,9 @@
     <widget class="QLabel" name="RB_name">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>575</x>
        <y>905</y>
-       <width>150</width>
+       <width>200</width>
        <height>35</height>
       </rect>
      </property>
@@ -294,9 +294,9 @@
     <widget class="QLabel" name="LM_name">
      <property name="geometry">
       <rect>
-       <x>885</x>
+       <x>870</x>
        <y>170</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -315,9 +315,9 @@
     <widget class="QLabel" name="CM1_name">
      <property name="geometry">
       <rect>
-       <x>885</x>
+       <x>870</x>
        <y>365</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -336,9 +336,9 @@
     <widget class="QLabel" name="CM2_name">
      <property name="geometry">
       <rect>
-       <x>885</x>
+       <x>870</x>
        <y>545</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -357,9 +357,9 @@
     <widget class="QLabel" name="CM3_name">
      <property name="geometry">
       <rect>
-       <x>885</x>
+       <x>870</x>
        <y>725</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -378,9 +378,9 @@
     <widget class="QLabel" name="GK2_name">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>395</x>
        <y>645</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -399,9 +399,9 @@
     <widget class="QLabel" name="LB_name">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>575</x>
        <y>170</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -420,9 +420,9 @@
     <widget class="QLabel" name="RW_name">
      <property name="geometry">
       <rect>
-       <x>1231</x>
+       <x>1216</x>
        <y>810</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -441,9 +441,9 @@
     <widget class="QLabel" name="ST_name">
      <property name="geometry">
       <rect>
-       <x>1231</x>
+       <x>1216</x>
        <y>545</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -462,9 +462,9 @@
     <widget class="QLabel" name="LW_name">
      <property name="geometry">
       <rect>
-       <x>1231</x>
+       <x>1216</x>
        <y>225</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -483,9 +483,9 @@
     <widget class="QLabel" name="RM_name">
      <property name="geometry">
       <rect>
-       <x>885</x>
+       <x>870</x>
        <y>905</y>
-       <width>150</width>
+       <width>180</width>
        <height>35</height>
       </rect>
      </property>
@@ -887,6 +887,51 @@ background-repeat: none;</string>
       <string/>
      </property>
     </widget>
+    <widget class="QLabel" name="Points">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>510</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Points: </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="user_points">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>510</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
     <zorder>label_2</zorder>
     <zorder>pushButton</zorder>
     <zorder>label</zorder>
@@ -927,6 +972,8 @@ background-repeat: none;</string>
     <zorder>CM2_button</zorder>
     <zorder>CM3_button</zorder>
     <zorder>CB1_button</zorder>
+    <zorder>Points</zorder>
+    <zorder>user_points</zorder>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">

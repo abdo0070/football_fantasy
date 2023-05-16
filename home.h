@@ -1,6 +1,7 @@
 #ifndef HOME_H
 #define HOME_H
 
+#include "qlabel.h"
 #include <QDialog>
 #include<QListWidgetItem>
 namespace Ui {
@@ -12,7 +13,7 @@ class Home : public QDialog
     Q_OBJECT
 
 public:
-
+    void player_squad(QString pushed_player_name_out_squad,QPushButton  * button , QLabel * label , qint64 num_of_pos, QString pos1, QString pos2 = "", QString pos3 = "");
     void refresh_squad();
     void profile();
     void clear_squad(qint64 user_team_id);

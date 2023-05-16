@@ -779,6 +779,7 @@ void Home::profile()
     ui->profile_picture->setPixmap(club_icon);
     ui->username->setText(d_users[current_user_id].username + "'s team");
     ui->user_budget->setText(QString::number(d_users[current_user_id].budget) + "$");
+    ui->user_points->setText(QString::number(d_users[current_user_id].points));
 }
 
 void Home::refresh_squad()
@@ -846,7 +847,6 @@ void Home::refresh_squad()
             case 1: // GK1
                 ui->GK1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
                 ui->GK1_name->setText(player.name);
-                qDebug() << "ui->GK1_name->text(): " << ui->GK1_name->text();
                 break;
             case 2: // GK2
                 ui->GK2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
@@ -982,17 +982,11 @@ void Home::on_listWidget_itemClicked(QListWidgetItem *item)
 }
 
 
-void Home::on_GK1_button_clicked()
+void Home::player_squad(QString pushed_player_name_out_squad,QPushButton  * button , QLabel * label, qint64 num_of_pos,QString pos1,QString pos2, QString pos3)
 {
     players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
+    qint64 team_id = teams::team_id_user(current_user_id);
+
     for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
     {
         if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
@@ -1000,41 +994,36 @@ void Home::on_GK1_button_clicked()
             player = d_players[i->second.player_id];
         }
     }
+
     if (player_is_clicked)
     {
         // not in his position
-        if (player.position != "GoalKeeper")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a goal keeper");
+        if (player.position != pos1 && player.position != pos2 && player.position != pos3)
+            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a " + pos1);
         else
         {
             // iterate over the teams-players map to find the player with the matching name and team ID
             for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
             {
+                qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
                 if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
                 {
-                    // one goalKeeper in the squad
-                    if (ui->GK2_name->text()!= "")
-                    {
-                        QMessageBox::warning(this, "Only one goal Keeper","You cannot put two goal keepers in the same squad");
-                        break;
-                    }
+                    player = d_players[i->second.player_id];
+
                     // make the current player in the squad out if there is one
-                    if (ui->GK1_name->text() != "")
-                    {
+                    if (label->text() != pos1) {
                         for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++)
                         {
-                            if (d_players[j->second.player_id].name == ui->GK1_name->text())
-                            {
+                            if (d_players[j->second.player_id].name == label->text()) {
                                 j->second.position = 0;
                             }
                         }
                         // add the player right now if replacing with anther player in the squad
                         // assign the selected player to the squad
-                        i->second.position = 1;
+                        i->second.position = num_of_pos;
                         auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->GK1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->GK1_name->setText(pushed_player_name_out_squad);
-                        break;
+                        button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                        label->setText(pushed_player_name_out_squad);
                     }
                     else
                     {
@@ -1044,15 +1033,18 @@ void Home::on_GK1_button_clicked()
                         {
                             // add the player right now if inserting a new player in the squad and no. players in the squad < 11
                             // assign the selected player to the squad
-                            i->second.position = 1;
+                            i->second.position = num_of_pos;
                             auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->GK1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->GK1_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
+                            button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                            label->setText(pushed_player_name_out_squad);
+                            cout << "check_num_players_in_squad: " << check_num_players_in_squad;
                             check_num_players_in_squad++;
-                            break;
+
                         }
+
                     }
+
+                    break;
                 }
             }
             refresh_squad();
@@ -1060,1043 +1052,64 @@ void Home::on_GK1_button_clicked()
     }
     player_is_clicked = false;
 }
-
-
+void Home::on_GK1_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->GK1_button ,ui->GK1_name, 1,"GoalKeeper");
+}
 void Home::on_GK2_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "GoalKeeper")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a goal keeper");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    // one goalKeeper in the squad
-                    if (ui->GK1_name->text()!= "")
-                    {
-                        QMessageBox::warning(this, "Only one goal Keeper","You cannot put two goal keepers in the same squad");
-                        break;
-                    }
-                    // make the current player in the squad out if there is one
-                    if (ui->GK2_name->text() != "")
-                    {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->GK2_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 2;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->GK2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->GK2_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 2;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->GK2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->GK2_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->GK2_button ,ui->GK2_name, 2,"GoalKeeper");
 }
-
-
 void Home::on_LB_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Left-Back")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Left Back");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->LB_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->LB_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 3;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->LB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->LB_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 3;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->LB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->LB_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CB1_button ,ui->CB1_name, 3,"Left-Back");
 }
-
-
 void Home::on_CB1_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Centre-Back")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Centre Back");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->CB1_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CB1_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 4;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CB1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CB1_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 4;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CB1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CB1_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CB1_button ,ui->CB1_name, 4,"Centre-Back");
 }
-
-
 void Home::on_CB2_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Centre-Back")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Centre Back");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->CB2_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CB2_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 5;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CB2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CB2_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 5;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CB2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CB2_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CB2_button ,ui->CB2_name, 5,"Centre-Back");
 }
-
-
 void Home::on_CB3_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Centre-Back")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Centre Back");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->CB3_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CB3_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 6;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CB3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CB3_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 6;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CB3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CB3_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CB3_button ,ui->CB3_name, 6,"Centre-Back");
 }
-
-
 void Home::on_RB_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Right-Back")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Right Back");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->RB_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->RB_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 7;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->RB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->RB_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 7;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->RB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->RB_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->RB_button ,ui->RB_name, 7,"Right-Back");
 }
-
-
 void Home::on_LM_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Left-Back" && player.position != "Defensive Midfield" && player.position != "Central Midfield" && player.position != "Attacking Midfield" && player.position != "Left Winger")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Midfield or a Left Winger");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->LM_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->LM_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 8;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->LM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->LM_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 8;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->LM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->LM_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->LM_button ,ui->LM_name, 8,"Left Winger", "Central Midfield", "Attacking Midfield");
 }
-
-
 void Home::on_CM1_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Defensive Midfield" && player.position != "Central Midfield" && player.position != "Attacking Midfield")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Midfield");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->CM1_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CM1_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 9;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CM1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CM1_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 9;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CM1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CM1_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CM1_button ,ui->CM1_name, 9,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
 }
-
-
 void Home::on_CM2_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Defensive Midfield" && player.position != "Central Midfield" && player.position != "Attacking Midfield")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Midfield");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->CM2_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CM2_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 10;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CM2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CM2_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 10;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CM2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CM2_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->CM2_button ,ui->CM2_name, 10,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
 }
-
-
-
 void Home::on_CM3_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Defensive Midfield" && player.position != "Central Midfield" && player.position != "Attacking Midfield")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Midfield");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
+    player_squad(pushed_player_name_out_squad,ui->CM3_button ,ui->CM3_name, 11,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
 
-                    // make the current player in the squad out if there is one
-                    if (ui->CM3_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->CM3_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 11;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->CM3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->CM3_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 11;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->CM3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->CM3_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
 }
-
-
-
 void Home::on_RM_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Right-Back" && player.position != "Defensive Midfield" && player.position != "Central Midfield" && player.position != "Attacking Midfield" && player.position != "Right Winger")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Midfield or a Right Winger");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->RM_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->RM_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 12;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->RM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->RM_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 12;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->RM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->RM_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->RM_button ,ui->RM_name, 12,"Right Winger", "Central Midfield", "Attacking Midfield");
 }
-
 void Home::on_LW_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Left Winger")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Left Winger");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->LW_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->LW_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 13;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->LW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->LW_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 13;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->LW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->LW_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->LW_button ,ui->LW_name, 13,"Left Winger");
 }
-
-
 void Home::on_ST_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Centre-Forward" && player.position != "Second Striker")
-            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a Centre Forward or a Second Striker");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->ST_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->ST_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 14;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->ST_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->ST_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // assign the selected player to the squad
-                            i->second.position = 14;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->ST_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->ST_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->ST_button ,ui->ST_name, 14,"Second Striker", "Centre-Forward");
 }
-
-
 void Home::on_RW_button_clicked()
 {
-    players player;
-    qint64 team_id = 0;
-    for (auto i = d_teams.begin(); i != d_teams.end(); i++)
-    {
-        if (i->second.user_id == current_user_id) {
-            team_id = i->first;
-            break;
-        }
-    }
-    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
-    {
-        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-        {
-            player = d_players[i->second.player_id];
-        }
-    }
-    if (player_is_clicked)
-    {
-        // not in his position
-        if (player.position != "Right Winger")
-            QMessageBox::warning(this, player.name,player.name + " is not a Right Winger");
-        else
-        {
-            // iterate over the teams-players map to find the player with the matching name and team ID
-            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++) {
-                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
-                {
-                    player = d_players[i->second.player_id];
-
-                    // make the current player in the squad out if there is one
-                    if (ui->RW_name->text() != "") {
-                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++) {
-                            if (d_players[j->second.player_id].name == ui->RW_name->text()) {
-                                j->second.position = 0;
-                            }
-                        }
-                        // add the player right now if replacing with anther player in the squad
-                        // assign the selected player to the squad
-                        i->second.position = 15;
-                        auto player_shirt = d_clubs[player.club_id].shirt_image;
-                        ui->RW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                        ui->RW_name->setText(pushed_player_name_out_squad);
-                        break;
-                    }
-                    else
-                    {
-                        if (check_num_players_in_squad >= 11)
-                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
-                        else
-                        {
-                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
-                            // assign the selected player to the squad
-                            i->second.position = 15;
-                            auto player_shirt = d_clubs[player.club_id].shirt_image;
-                            ui->RW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
-                            ui->RW_name->setText(pushed_player_name_out_squad);
-                            qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
-                            check_num_players_in_squad++;
-                            break;
-                        }
-                    }
-
-
-                }
-            }
-            refresh_squad();
-        }
-    }
-    player_is_clicked = false;
+    player_squad(pushed_player_name_out_squad,ui->RW_button ,ui->RW_name, 15,"Right Winger");
 }
-
