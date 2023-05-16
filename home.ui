@@ -41,41 +41,6 @@
     <attribute name="title">
      <string>Profile</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>1790</x>
-       <y>10</y>
-       <width>121</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Log Out</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>70</y>
-       <width>1281</width>
-       <height>851</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/playground.jpg</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
@@ -95,10 +60,131 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>80</y>
+       <width>1281</width>
+       <height>1051</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/playground.jpg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="players_label">
+     <property name="geometry">
+      <rect>
+       <x>1610</x>
+       <y>130</y>
+       <width>291</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>22</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Players on the bench</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget">
+     <property name="geometry">
+      <rect>
+       <x>1600</x>
+       <y>230</y>
+       <width>311</width>
+       <height>811</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>811</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>311</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DragDrop</enum>
+     </property>
+     <property name="defaultDropAction">
+      <enum>Qt::MoveAction</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>1790</x>
+       <y>0</y>
+       <width>121</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Log Out</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearButton">
+     <property name="geometry">
+      <rect>
+       <x>1630</x>
+       <y>30</y>
+       <width>111</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/Icons/clear_button.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
     <widget class="QLabel" name="profile_picture">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>0</y>
        <width>231</width>
        <height>181</height>
@@ -111,10 +197,741 @@
       <bool>true</bool>
      </property>
     </widget>
-    <zorder>label_2</zorder>
-    <zorder>pushButton</zorder>
-    <zorder>label</zorder>
-    <zorder>profile_picture</zorder>
+    <widget class="QLabel" name="user_points">
+     <property name="geometry">
+      <rect>
+       <x>108</x>
+       <y>505</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="user_budget">
+     <property name="geometry">
+      <rect>
+       <x>108</x>
+       <y>385</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>user_bugdet</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="budget">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>385</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Budget:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="username">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>265</y>
+       <width>251</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>username's team</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Points">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>505</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Points: </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ST_button">
+     <property name="geometry">
+      <rect>
+       <x>1225</x>
+       <y>545</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RW_name">
+     <property name="geometry">
+      <rect>
+       <x>1170</x>
+       <y>915</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM3_name">
+     <property name="geometry">
+      <rect>
+       <x>824</x>
+       <y>830</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LW_name">
+     <property name="geometry">
+      <rect>
+       <x>1170</x>
+       <y>330</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB1_button">
+     <property name="geometry">
+      <rect>
+       <x>584</x>
+       <y>365</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RM_name">
+     <property name="geometry">
+      <rect>
+       <x>824</x>
+       <y>1010</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LM_button">
+     <property name="geometry">
+      <rect>
+       <x>879</x>
+       <y>165</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM1_button">
+     <property name="geometry">
+      <rect>
+       <x>879</x>
+       <y>365</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK1_name">
+     <property name="geometry">
+      <rect>
+       <x>349</x>
+       <y>560</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GK2_name">
+     <property name="geometry">
+      <rect>
+       <x>349</x>
+       <y>750</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="RB_name">
+     <property name="geometry">
+      <rect>
+       <x>529</x>
+       <y>1010</y>
+       <width>200</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB1_name">
+     <property name="geometry">
+      <rect>
+       <x>529</x>
+       <y>470</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LB_name">
+     <property name="geometry">
+      <rect>
+       <x>529</x>
+       <y>275</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB3_name">
+     <property name="geometry">
+      <rect>
+       <x>529</x>
+       <y>830</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RB_button">
+     <property name="geometry">
+      <rect>
+       <x>584</x>
+       <y>905</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM2_button">
+     <property name="geometry">
+      <rect>
+       <x>879</x>
+       <y>545</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RM_button">
+     <property name="geometry">
+      <rect>
+       <x>879</x>
+       <y>905</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB2_button">
+     <property name="geometry">
+      <rect>
+       <x>584</x>
+       <y>545</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM2_name">
+     <property name="geometry">
+      <rect>
+       <x>824</x>
+       <y>650</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CM1_name">
+     <property name="geometry">
+      <rect>
+       <x>824</x>
+       <y>470</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="GK2_button">
+     <property name="geometry">
+      <rect>
+       <x>404</x>
+       <y>635</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ST_name">
+     <property name="geometry">
+      <rect>
+       <x>1170</x>
+       <y>650</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CB2_name">
+     <property name="geometry">
+      <rect>
+       <x>529</x>
+       <y>650</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RW_button">
+     <property name="geometry">
+      <rect>
+       <x>1225</x>
+       <y>805</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="GK1_button">
+     <property name="geometry">
+      <rect>
+       <x>404</x>
+       <y>455</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LB_button">
+     <property name="geometry">
+      <rect>
+       <x>584</x>
+       <y>165</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CB3_button">
+     <property name="geometry">
+      <rect>
+       <x>584</x>
+       <y>715</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LW_button">
+     <property name="geometry">
+      <rect>
+       <x>1225</x>
+       <y>225</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CM3_button">
+     <property name="geometry">
+      <rect>
+       <x>879</x>
+       <y>715</y>
+       <width>70</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border-image: url(:/background/shirts/none_player.png);
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LM_name">
+     <property name="geometry">
+      <rect>
+       <x>824</x>
+       <y>275</y>
+       <width>180</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">
@@ -1563,7 +2380,7 @@ border-radius:20px 20px 20px 20px;
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="ctl_users">
       <attribute name="title">

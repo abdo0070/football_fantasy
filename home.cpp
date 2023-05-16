@@ -13,6 +13,7 @@
 #include<QException>
 #include<QtExceptionHandling>
 #include<QItemDelegate>
+#include<QLabel>
 using namespace std;
 void Home::leader_board()
 {
@@ -344,14 +345,16 @@ Home::Home(QWidget *parent) :
     ui(new Ui::Home)
 {
     ui->setupUi(this);
-    QPixmap profile(d_clubs[d_users[current_user_id].club_id].club_image);
+    QPixmap pic(d_clubs[d_users[current_user_id].club_id].club_image);
 
-    ui->profile_picture->setPixmap(profile);
+    ui->profile_picture->setPixmap(pic);
 
     ui->tw_matches_club1->setItemDelegate(new Delegate);
     ui->tw_matches_club2->setItemDelegate(new Delegate);
 
     //matches();
+    profile();
+    refresh_squad();
     leader_board();
     refresh_players();
     refresh_clubs_comboboxs();
@@ -359,7 +362,7 @@ Home::Home(QWidget *parent) :
     vs_club2(1);
 
 
-    ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin); // first parameter is the index of the tab
+    ui->tabWidget->setTabVisible(5,d_users[current_user_id].is_admin); // first parameter is the index of the tab
     ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
 
     ui->l_market_budget->setText("Your Budget : " + QString::number(d_users[current_user_id].budget)+'$');
@@ -895,6 +898,7 @@ void Home::on_sellButton_clicked()
 
 
    refresh_players();
+   profile();
    //qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
    refresh_squad();
 }
@@ -931,7 +935,8 @@ void Home::on_buyButton_clicked()
 
         d_users[current_user_id].budget -= player.price;
         ui->l_market_budget->setText("Your Budget : " + QString::number(d_users[current_user_id].budget)+'$');
-
+        profile();
+        refresh_squad();
         refresh_players();
     }
 

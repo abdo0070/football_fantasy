@@ -14,6 +14,7 @@ public:
 
 public:
     static void remove(qint64 id);
+
     users();
 };
 

@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include<QListWidgetItem>
+#include<QPushButton>
+#include<QLabel>
+
 namespace Ui {
 class Home;
 }
