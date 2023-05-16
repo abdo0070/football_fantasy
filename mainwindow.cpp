@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         d_matches[key].club_1 = qry.value(1).toInt();
         d_matches[key].club_2 = qry.value(2).toInt();
         d_matches[key].round_id = qry.value(3).toInt();
+        d_matches[key].result_of_club1 = qry.value(4).toInt();
+        d_matches[key].result_of_club2 = qry.value(5).toInt();
     }
     bool d4 = qry.exec("SELECT * FROM players;");
     players::size = qry.size();
@@ -164,11 +166,13 @@ MainWindow::~MainWindow()
     }
     for(auto i = d_matches.begin() ; i != d_matches.end() ; i++)
     {
-        qry.prepare("insert into matches values(:id,:club_1,:club_2,:round_id);");
+        qry.prepare("insert into matches values(:id,:club_1,:club_2,:round_id,:result_of_club1,:result_of_club2);");
         qry.bindValue(":id",i->first);
         qry.bindValue(":club_1",i->second.club_1);
         qry.bindValue(":club_2",i->second.club_2);
         qry.bindValue(":round_id",i->second.round_id);
+        qry.bindValue(":result_of_club1",i->second.result_of_club1);
+        qry.bindValue(":result_of_club2",i->second.result_of_club2);
         bool x = qry.exec();
         if(x)
             cout << "matches is in \n";

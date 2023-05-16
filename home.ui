@@ -29,7 +29,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="profile">
     <property name="maximumSize">
@@ -41,80 +41,6 @@
     <attribute name="title">
      <string>Profile</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>1790</x>
-       <y>10</y>
-       <width>121</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Log Out</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>70</y>
-       <width>1281</width>
-       <height>851</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/playground.jpg</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1920</width>
-       <height>1080</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="profile_picture">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>231</width>
-       <height>181</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <zorder>label_2</zorder>
-    <zorder>pushButton</zorder>
-    <zorder>label</zorder>
-    <zorder>profile_picture</zorder>
    </widget>
    <widget class="QWidget" name="players_tab">
     <attribute name="title">
@@ -878,6 +804,27 @@ background-color: rgb(47, 47, 47);</string>
       <string/>
      </property>
     </widget>
+    <widget class="QLabel" name="l_market_budget">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>30</y>
+       <width>881</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>30</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
     <zorder>Player_background</zorder>
     <zorder>search_bar</zorder>
     <zorder>search_button</zorder>
@@ -913,6 +860,7 @@ background-color: rgb(47, 47, 47);</string>
     <zorder>PLAYER_IMAGE_13</zorder>
     <zorder>PLAYER_IMAGE_14</zorder>
     <zorder>PLAYER_IMAGE_15</zorder>
+    <zorder>l_market_budget</zorder>
    </widget>
    <widget class="QWidget" name="tab_4">
     <property name="styleSheet">
@@ -1125,6 +1073,398 @@ border-radius:20px 20px 20px 20px;
     <zorder>label_7</zorder>
     <zorder>label_5</zorder>
    </widget>
+   <widget class="QWidget" name="tabw_Matches_Results">
+    <attribute name="title">
+     <string>Matches Results</string>
+    </attribute>
+    <widget class="QLabel" name="Matches_Results_Background">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1920</width>
+       <height>1080</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/bg.jpg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_matches_premier_league">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>110</y>
+       <width>301</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/Leagues/Premier_League_Logo.svg.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_matches_Laliga">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>120</y>
+       <width>201</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/Leagues/LaLiga_Santander_logo_(stacked).svg.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_matches_egyptian_league">
+     <property name="geometry">
+      <rect>
+       <x>1490</x>
+       <y>100</y>
+       <width>231</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="background.qrc">:/background/Leagues/EgyptianFA_Logo.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gb_matches_premier_league">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>260</y>
+       <width>491</width>
+       <height>811</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="club1_on_premier_league">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_premier_league_result_club1">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>40</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_premier_league_result_club2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>40</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tw_premier_league_results">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>260</y>
+        <width>341</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>169</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>player</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>points</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="club2_on_premier_league">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="gb_matches_LaLiga">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>260</y>
+       <width>491</width>
+       <height>811</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="club1_on_LaLiga">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_LaLiga_result_club1">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_LaLiga_result_club2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tw_LaLiga_results">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>260</y>
+        <width>341</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>169</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>player</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Points</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="club2_on_LaLiga">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="gb_egyptian_league">
+     <property name="geometry">
+      <rect>
+       <x>1360</x>
+       <y>260</y>
+       <width>491</width>
+       <height>811</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="club1_on_egyptian_league">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_egyptian_league_result_club1">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>40</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_egyptian_league_result_club2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>170</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>40</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tw_egyptian_league_results">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>260</y>
+        <width>341</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>169</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>player</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>points</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="club2_on_egyptian_league">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>10</y>
+        <width>161</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+   </widget>
    <widget class="QWidget" name="Admin">
     <property name="styleSheet">
      <string notr="true"/>
@@ -1149,7 +1489,7 @@ border-radius:20px 20px 20px 20px;
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="ctl_users">
       <attribute name="title">
@@ -1201,6 +1541,9 @@ background-color: rgb(255, 255, 255);</string>
          <width>1011</width>
          <height>521</height>
         </rect>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>130</number>
@@ -1784,6 +2127,9 @@ background-color: rgb(255, 255, 255);</string>
          <width>1011</width>
          <height>521</height>
         </rect>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>130</number>
@@ -2557,8 +2903,8 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QPushButton" name="pb_matches_delete_player_club2">
        <property name="geometry">
         <rect>
-         <x>597</x>
-         <y>420</y>
+         <x>600</x>
+         <y>360</y>
          <width>81</width>
          <height>51</height>
         </rect>
@@ -2578,19 +2924,6 @@ background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>Declare Result</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pb_matches_add_player_club2">
-       <property name="geometry">
-        <rect>
-         <x>607</x>
-         <y>360</y>
-         <width>71</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add Player</string>
        </property>
       </widget>
       <widget class="QSpinBox" name="club_1_result">
@@ -2613,19 +2946,6 @@ background-color: rgb(255, 255, 255);</string>
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="pb_matches_add_player_club1">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>360</y>
-         <width>71</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add Player</string>
-       </property>
-      </widget>
       <widget class="QComboBox" name="cb_choose_club1">
        <property name="geometry">
         <rect>
@@ -2639,11 +2959,14 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QTableWidget" name="tw_matches_club1">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>360</y>
-         <width>256</width>
+         <x>60</x>
+         <y>350</y>
+         <width>331</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>125</number>
@@ -2651,6 +2974,84 @@ background-color: rgb(255, 255, 255);</string>
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
        </attribute>
+       <attribute name="verticalHeaderStretchLastSection">
+        <bool>false</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>player1</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player2</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player3</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player4</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player5</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player6</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player7</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player8</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player9</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player10</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player11</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player12</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player13</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player14</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player15</string>
+        </property>
+       </row>
        <column>
         <property name="text">
          <string>Player_id</string>
@@ -2661,32 +3062,156 @@ background-color: rgb(255, 255, 255);</string>
          <string>Points</string>
         </property>
        </column>
-      </widget>
-      <widget class="QTableWidget" name="tw_matches_club2">
-       <property name="geometry">
-        <rect>
-         <x>690</x>
-         <y>360</y>
-         <width>256</width>
-         <height>361</height>
-        </rect>
-       </property>
-       <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>125</number>
-       </attribute>
-       <attribute name="horizontalHeaderStretchLastSection">
-        <bool>true</bool>
-       </attribute>
-       <column>
+       <item row="0" column="0">
         <property name="text">
-         <string>Player_id</string>
+         <string>0</string>
         </property>
-       </column>
-       <column>
+       </item>
+       <item row="0" column="1">
         <property name="text">
-         <string>Points</string>
+         <string>0</string>
         </property>
-       </column>
+       </item>
+       <item row="1" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="1" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="2" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="2" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="3" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="3" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="4" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="4" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="5" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="5" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="6" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="6" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="7" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="7" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="8" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="8" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="9" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="9" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="10" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="10" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="11" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="11" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="12" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="12" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="13" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="13" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="14" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="14" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
       </widget>
       <widget class="QComboBox" name="cb_choose_club2">
        <property name="geometry">
@@ -2714,8 +3239,8 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QPushButton" name="pb_matches_delete_player_club1">
        <property name="geometry">
         <rect>
-         <x>410</x>
-         <y>420</y>
+         <x>400</x>
+         <y>360</y>
          <width>81</width>
          <height>51</height>
         </rect>
@@ -2775,21 +3300,276 @@ background-color: rgb(255, 255, 255);</string>
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QTableWidget" name="tw_matches_club2">
+       <property name="geometry">
+        <rect>
+         <x>690</x>
+         <y>360</y>
+         <width>331</width>
+         <height>361</height>
+        </rect>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>125</number>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderStretchLastSection">
+        <bool>false</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>player1</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player2</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player3</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player4</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player5</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player6</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player7</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player8</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player9</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player10</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player11</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player12</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player13</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player14</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>player15</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>Player_id</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Points</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="1" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="1" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="2" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="2" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="3" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="3" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="4" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="4" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="5" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="5" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="6" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="6" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="7" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="7" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="8" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="8" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="9" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="9" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="10" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="10" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="11" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="11" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="12" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="12" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="13" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="13" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="14" column="0">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item row="14" column="1">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+      </widget>
       <zorder>label_6</zorder>
       <zorder>pb_matches_delete_player_club2</zorder>
       <zorder>pb_declare_result</zorder>
-      <zorder>pb_matches_add_player_club2</zorder>
       <zorder>club_1_result</zorder>
       <zorder>club_2_result</zorder>
-      <zorder>pb_matches_add_player_club1</zorder>
       <zorder>cb_choose_club1</zorder>
       <zorder>tw_matches_club1</zorder>
-      <zorder>tw_matches_club2</zorder>
       <zorder>cb_choose_club2</zorder>
       <zorder>le_weak</zorder>
       <zorder>pb_matches_delete_player_club1</zorder>
       <zorder>chosen_club1</zorder>
       <zorder>chosen_club2</zorder>
+      <zorder>tw_matches_club2</zorder>
      </widget>
      <widget class="QWidget" name="ctl_clubs">
       <attribute name="title">
@@ -2798,7 +3578,7 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QPushButton" name="pb_update_clubs">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>130</x>
          <y>90</y>
          <width>191</width>
          <height>81</height>
@@ -2822,6 +3602,9 @@ background-color: rgb(255, 255, 255);</string>
          <width>1011</width>
          <height>521</height>
         </rect>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>130</number>
@@ -2900,7 +3683,7 @@ background-color: rgb(255, 255, 255);</string>
          <rect>
           <x>10</x>
           <y>90</y>
-          <width>301</width>
+          <width>311</width>
           <height>31</height>
          </rect>
         </property>
@@ -2941,7 +3724,7 @@ background-color: rgb(255, 255, 255);</string>
          </property>
         </item>
        </widget>
-       <widget class="QLabel" name="l__clubs">
+       <widget class="QLabel" name="l_league_insert_clubs">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -3041,7 +3824,7 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>60</x>
          <y>180</y>
-         <width>341</width>
+         <width>451</width>
          <height>571</height>
         </rect>
        </property>
@@ -3052,8 +3835,8 @@ background-color: rgb(255, 255, 255);</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>90</y>
-          <width>301</width>
+          <y>60</y>
+          <width>311</width>
           <height>31</height>
          </rect>
         </property>
@@ -3069,7 +3852,7 @@ background-color: rgb(255, 255, 255);</string>
          <string>Name</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="cb_league_insert_clubs_2">
+       <widget class="QComboBox" name="cb_league_update_clubs">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -3094,7 +3877,7 @@ background-color: rgb(255, 255, 255);</string>
          </property>
         </item>
        </widget>
-       <widget class="QLabel" name="l__clubs_2">
+       <widget class="QLabel" name="l_league_update_clubs">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -3131,11 +3914,11 @@ background-color: rgb(255, 255, 255);</string>
          <string>CONFIRM</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pb_insert_logo_clubs_2">
+       <widget class="QPushButton" name="pb_update_logo_clubs">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>150</y>
+          <y>130</y>
           <width>311</width>
           <height>41</height>
          </rect>
@@ -3169,12 +3952,45 @@ background-color: rgb(255, 255, 255);</string>
          <string>T-shirt</string>
         </property>
        </widget>
+       <widget class="QLineEdit" name="le_target_id_clubs">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>311</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="placeholderText">
+         <string>target id</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pb_update_refresh_clubs">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>20</y>
+          <width>81</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Update</string>
+        </property>
+       </widget>
        <zorder>pb_update_confirm_clubs</zorder>
        <zorder>le_name_update_clubs</zorder>
-       <zorder>cb_league_insert_clubs_2</zorder>
-       <zorder>l__clubs_2</zorder>
-       <zorder>pb_insert_logo_clubs_2</zorder>
+       <zorder>cb_league_update_clubs</zorder>
+       <zorder>l_league_update_clubs</zorder>
+       <zorder>pb_update_logo_clubs</zorder>
        <zorder>pb_shirt_update_clubs</zorder>
+       <zorder>le_target_id_clubs</zorder>
+       <zorder>pb_update_refresh_clubs</zorder>
       </widget>
       <widget class="QLabel" name="admin_clubs_background">
        <property name="geometry">
@@ -3244,6 +4060,48 @@ background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </widget>
+      <widget class="QLabel" name="l_Chosen_update_logo">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>290</y>
+         <width>81</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="l_Chosen_update_shirt">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>380</y>
+         <width>81</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
       <zorder>admin_clubs_background</zorder>
       <zorder>pb_update_clubs</zorder>
       <zorder>tw_clubs</zorder>
@@ -3253,6 +4111,8 @@ background-color: rgb(255, 255, 255);</string>
       <zorder>pb_delete_clubs</zorder>
       <zorder>gb_update_clubs</zorder>
       <zorder>gb_delete_clubs</zorder>
+      <zorder>l_Chosen_update_logo</zorder>
+      <zorder>l_Chosen_update_shirt</zorder>
      </widget>
     </widget>
    </widget>

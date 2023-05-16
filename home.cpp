@@ -10,7 +10,9 @@
 #include <QFileDialog>
 #include <qdebug.h>
 #include<QTableWidgetItem>
-
+#include<QException>
+#include<QtExceptionHandling>
+#include<QItemDelegate>
 using namespace std;
 
 void Home::leader_board()
@@ -221,6 +223,123 @@ void Home::refresh_players()
     }
 }
 
+class Delegate : public QItemDelegate
+{
+public:
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem & option, const QModelIndex & index) const
+    {
+        QLineEdit *lineEdit = new QLineEdit(parent);
+        // Set validator
+        QIntValidator *validator = new QIntValidator(-10000000,10000000, lineEdit);
+        lineEdit->setValidator(validator);
+        return lineEdit;
+    }
+};
+
+void Home::refresh_matches()
+{
+    bool Premier = false;
+    bool Egyptian = false;
+    bool LaLiga = false;
+
+    for(auto i = d_matches.begin() ; i != d_matches.end() ; i++)
+    {
+        if(d_leagues[d_clubs[i->second.club_1].league_id].name == "Premier League")// Premier League
+        {
+            Premier = true;
+            ui->club1_on_premier_league->setPixmap(QPixmap(d_clubs[i->second.club_1].club_image));
+            ui->club2_on_premier_league->setPixmap(QPixmap(d_clubs[i->second.club_2].club_image));
+            ui->l_premier_league_result_club1->setText(QString::number(i->second.result_of_club1));
+            ui->l_premier_league_result_club2->setText(QString::number(i->second.result_of_club2));
+
+            // row count calculating
+            qint64 size = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+                if(j->second.match_id == i->first)
+                    size++;
+
+            ui->tw_premier_league_results->setRowCount(size);
+            qint64 rowNum = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+            {
+                if(j->second.match_id == i->first)
+                {
+                    ui->tw_premier_league_results->setItem(rowNum,0,new QTableWidgetItem(QString(d_players[j->second.player_id].name)));
+                    qint64 new_points = j->second.points;
+                    ui->tw_premier_league_results->setItem(rowNum,1,new QTableWidgetItem(QString::number(new_points)));
+                    rowNum++;
+                }
+            }
+        }
+        else if(d_leagues[d_clubs[i->second.club_1].league_id].name == "Egyption League")// Egyption League
+        {
+            Egyptian = true;
+            ui->club1_on_egyptian_league->setPixmap(QPixmap(d_clubs[i->second.club_1].club_image));
+            ui->club2_on_egyptian_league->setPixmap(QPixmap(d_clubs[i->second.club_2].club_image));
+            ui->l_egyptian_league_result_club1->setText(QString::number(i->second.result_of_club1));
+            ui->l_egyptian_league_result_club2->setText(QString::number(i->second.result_of_club2));
+
+            // row count calculating
+            qint64 size = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+                if(j->second.match_id == i->first)
+                    size++;
+
+            ui->tw_egyptian_league_results->setRowCount(size);
+            qint64 rowNum = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+            {
+                if(j->second.match_id == i->first)
+                {
+                    ui->tw_egyptian_league_results->setItem(rowNum,0,new QTableWidgetItem(QString(d_players[j->second.player_id].name)));
+                    qint64 new_points = j->second.points;
+                    ui->tw_egyptian_league_results->setItem(rowNum,1,new QTableWidgetItem(QString::number(new_points)));
+                    rowNum++;
+                }
+            }
+        }
+        else // Laliga
+        {
+            LaLiga = true;
+            ui->club1_on_LaLiga->setPixmap(QPixmap(d_clubs[i->second.club_1].club_image));
+            ui->club2_on_LaLiga->setPixmap(QPixmap(d_clubs[i->second.club_2].club_image));
+            ui->l_LaLiga_result_club1->setText(QString::number(i->second.result_of_club1));
+            ui->l_LaLiga_result_club2->setText(QString::number(i->second.result_of_club2));
+
+            // row count calculating
+            qint64 size = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+                if(j->second.match_id == i->first)
+                    size++;
+
+            ui->tw_LaLiga_results->setRowCount(size);
+            qint64 rowNum = 0;
+            for(auto j = d_matches_players.begin() ; j != d_matches_players.end() ; j++)
+            {
+                if(j->second.match_id == i->first)
+                {
+                    ui->tw_LaLiga_results->setItem(rowNum,0,new QTableWidgetItem(QString(d_players[j->second.player_id].name)));
+                    qint64 new_points = j->second.points;
+                    ui->tw_LaLiga_results->setItem(rowNum,1,new QTableWidgetItem(QString::number(new_points)));
+                    rowNum++;
+                }
+            }
+        }
+    }
+    if(Premier)
+        ui->gb_matches_premier_league->show();
+    else
+        ui->gb_matches_premier_league->hide();
+    if(Egyptian)
+        ui->gb_egyptian_league->show();
+    else
+        ui->gb_egyptian_league->hide();
+    if(LaLiga)
+        ui->gb_matches_LaLiga->show();
+    else
+        ui->gb_matches_LaLiga->hide();
+}
+
 Home::Home(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Home)
@@ -230,15 +349,20 @@ Home::Home(QWidget *parent) :
 
     ui->profile_picture->setPixmap(profile);
 
+    ui->tw_matches_club1->setItemDelegate(new Delegate);
+    ui->tw_matches_club2->setItemDelegate(new Delegate);
 
     //refresh
     leader_board();
     refresh_players();
     refresh_clubs_comboboxs();
-
+    refresh_matches();
+    vs_club2(1);
 
     ui->tabWidget->setTabVisible(4,d_users[current_user_id].is_admin); // first parameter is the index of the tab
     ui->tabWidget->setTabVisible(0,!d_users[current_user_id].is_admin);
+
+    ui->l_market_budget->setText("Your Budget : " + QString::number(d_users[current_user_id].budget)+'$');
 
     ui->gb_user_update->hide();
     // hide delete users
@@ -762,10 +886,14 @@ void Home::on_sellButton_clicked()
    d_users[current_user_id].number_of_players--;
    d_teams_players.erase(playerid_in_teamsplayers);
 
+
    ui->sellButton->setEnabled(false);
    ui->buyButton->setEnabled(true);
 
    user->second.budget += player.price;
+   ui->l_market_budget->setText("Your Budget : " + QString::number(d_users[current_user_id].budget)+'$');
+
+
    refresh_players();
    //qDebug() << "on_sellButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
 }
@@ -809,6 +937,8 @@ void Home::on_buyButton_clicked()
         ui->sellButton->setEnabled(true);
 
         d_users[current_user_id].budget -= player.price;
+        ui->l_market_budget->setText("Your Budget : " + QString::number(d_users[current_user_id].budget)+'$');
+
         refresh_players();
     }
     // qDebug() << "on_buyButton_clicked is good and the budget is: " << user->second.budget << "because player name is: " << player.name << "and his price is: " << player.price;
@@ -869,44 +999,190 @@ void Home::on_cb_choose_club2_currentIndexChanged()
 
 }
 
-void Home::on_pb_matches_add_player_club1_clicked()
-{
-    if(ui->tw_matches_club1->rowCount() == 15)
-    {
-        QMessageBox::critical(this,"Error","15 players already!");
-        return;
-    }
-    ui->tw_matches_club1->setRowCount(ui->tw_matches_club1->rowCount()+1);
-}
-void Home::on_pb_matches_add_player_club2_clicked()
-{
-    if(ui->tw_matches_club2->rowCount() == 15)
-    {
-        QMessageBox::critical(this,"Error","15 players already!");
-        return;
-    }
-    ui->tw_matches_club2->setRowCount(ui->tw_matches_club2->rowCount() + 1);
-}
-
 void Home::on_pb_matches_delete_player_club1_clicked()
 {
     if(ui->tw_matches_club1->rowCount() > 0)
         ui->tw_matches_club1->setRowCount(ui->tw_matches_club1->rowCount() - 1);
 }
-
-
 void Home::on_pb_matches_delete_player_club2_clicked()
 {
     if(ui->tw_matches_club2->rowCount() > 0)
         ui->tw_matches_club2->setRowCount(ui->tw_matches_club2->rowCount() - 1);
 }
 
+
 void Home::on_pb_declare_result_clicked()
 {
+    qint64 club1 = clubs::find_id(ui->cb_choose_club1->currentText());
+    qint64 club2 = clubs::find_id(ui->cb_choose_club2->currentText());
 
+    // this club has been declared
+    for(auto i = d_matches.begin() ; i != d_matches.end() ; i++)
+    {
+        if(club1 == i->second.club_1  || club1 == i->second.club_2)
+        {
+            QMessageBox::critical(this,"Error",d_clubs[club1].name + "'s result has been declared already...!");
+            return;
+        }
+        if(club2 == i->second.club_1  || club2 == i->second.club_2)
+        {
+            QMessageBox::critical(this,"Error",d_clubs[club2].name + "'s result has been declared already...!");
+            return;
+        }
+    }
+
+    // are these players exist in these clubs ?
+    for(auto i = 0 ; i < ui->tw_matches_club1->rowCount() ; i++)
+    {
+        qint64 player_id = ui->tw_matches_club1->item(i,0)->text().toInt();
+        qint64 calculated_points = ui->tw_matches_club1->item(i,1)->text().toInt();
+        if(!is_found(player_id,d_players) || d_clubs[d_players[player_id].club_id].name != ui->cb_choose_club1->currentText())
+        {
+            QMessageBox::critical(this,"Error","in club : " + ui->cb_choose_club1->currentText() + "\nthere is no player with this id at the row " + QString::number(i+1));
+            return;
+        }
+        if(calculated_points == 0)
+        {
+            QMessageBox::critical(this,"Error","in club : " + ui->cb_choose_club1->currentText() + "\nInvaled update of points or not affected at the row " + QString::number(i+1));
+            return;
+        }
+    }
+    // same for club 2
+    for(auto i = 0 ; i < ui->tw_matches_club2->rowCount() ; i++)
+    {
+        qint64 player_id = ui->tw_matches_club2->item(i,0)->text().toInt();
+        qint64 calculated_points = ui->tw_matches_club2->item(i,1)->text().toInt();
+        if(!is_found(player_id,d_players) || d_clubs[d_players[player_id].club_id].name != ui->cb_choose_club2->currentText())
+        {
+            QMessageBox::critical(this,"Error","in club : " + ui->cb_choose_club2->currentText() + "\nthere is no player with this id at the row " + QString::number(i+1));
+            return;
+        }
+        if(calculated_points == 0 || ui->tw_matches_club2->item(i,1)->text().isEmpty())
+        {
+            QMessageBox::critical(this,"Error","in club : " + ui->cb_choose_club2->currentText() + "\nInvaled update of points or not affected at the row " + QString::number(i+1));
+            return;
+        }
+    }
+
+
+    if(ui->le_weak->text().isEmpty())
+    {
+        QMessageBox::critical(this,"Error","You Forgot to define the weak..!");
+        return;
+    }
+
+    qint64 round_id = 0;
+    for(auto i = d_rounds.begin() ; i != d_rounds.end() ; i++)
+    {
+        if(i->second.weak == ui->le_weak->text())
+            round_id = i->first;
+    }
+    if(!round_id) // is this a new round or ..?
+    {
+        QMessageBox::StandardButton option = QMessageBox::information(this,"New Round ??","are you sure you want to declare a new rounds records ?",QMessageBox::Yes,QMessageBox::No);
+        if(option == QMessageBox::No)
+            return;
+        d_rounds.clear();
+        d_matches.clear();
+        d_matches_players.clear();
+
+        max_rounds_id  = max_matches_id = max_matches_players_id = 0;
+        rounds::size = matches::size = matches_players::size = 0;
+
+        d_rounds[++max_rounds_id].weak = ui->le_weak->text();
+
+    }
+
+    // reset data for matches (New Match)
+    d_matches[++max_matches_id].club_1 = club1;
+    d_matches[max_matches_id].club_2 = club2;
+    d_matches[max_matches_id].round_id = round_id;
+    d_matches[max_matches_id].result_of_club1 = ui->club_1_result->text().toInt();
+    d_matches[max_matches_id].result_of_club2 = ui->club_2_result->text().toInt();
+
+    matches::size++;
+
+    // calculating the rest of the data
+    for(auto i = 0 ; i < ui->tw_matches_club1->rowCount() ; i++)
+    {
+        qint64 player_id = ui->tw_matches_club2->item(i,0)->text().toInt();
+        qint64 calculated_points = ui->tw_matches_club2->item(i,1)->text().toInt();
+
+        d_players[player_id].points += calculated_points;
+        d_players[player_id].price += (calculated_points * 1000);
+
+        if(d_players[player_id].price < 0)// negative points or budgets @@!
+            d_players[player_id].price = 0;
+
+        if(d_players[player_id].points < 0)
+            d_players[player_id].points = 0;
+
+        d_matches_players[++max_matches_players_id].round_id = round_id;
+        d_matches_players[max_matches_players_id].match_id = max_matches_id;
+        d_matches_players[max_matches_players_id].player_id = player_id;
+        d_matches_players[max_matches_players_id].points = calculated_points;
+
+        // calculating the new points of users
+        for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+        {
+            if(i->second.player_id == player_id)
+            {
+                auto user = &d_users[d_teams[i->second.team_id].user_id];
+                user->points += calculated_points;
+                if(user->points < 0)
+                    user->points = 0;
+            }
+        }
+        matches_players::size++;
+        refresh_matches();
+
+    }
+    // the same with club2
+    for(auto i = 0 ; i < ui->tw_matches_club2->rowCount() ; i++)
+    {
+        qint64 player_id = ui->tw_matches_club2->item(i,0)->text().toInt();
+        qint64 calculated_points = ui->tw_matches_club2->item(i,1)->text().toInt();
+
+        d_players[player_id].points += calculated_points;
+        d_players[player_id].price += (calculated_points * 1000);
+
+        if(d_players[player_id].price < 0)// negative points or budgets @@!
+            d_players[player_id].price = 0;
+
+        if(d_players[player_id].points < 0)
+            d_players[player_id].points = 0;
+
+        d_matches_players[++max_matches_players_id].round_id = round_id;
+        d_matches_players[max_matches_players_id].match_id = max_matches_id;
+        d_matches_players[max_matches_players_id].player_id = player_id;
+        d_matches_players[max_matches_players_id].points = calculated_points;
+
+        // calculating the new points of users
+        for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+        {
+            if(i->second.player_id == player_id)
+            {
+                auto user = &d_users[d_teams[i->second.team_id].user_id];
+                user->points += calculated_points;
+                if(user->points < 0)
+                    user->points = 0;
+            }
+        }
+        matches_players::size++;
+    }
+
+    // refresh the G.U.I
+
+    refresh_players();
+    on_search_button_clicked();
+    // market updated
+    leader_board();
+    // profile refresh
+    // matches refresh
 }
 /************************* ADMIN CLUB *****************************/
 QString Chosen_new_club = "",Chosen_new_shirt = "";
+QString Chosen_update_club = "",Chosen_update_shirt = "";
 
 void Home::on_pb_update_clubs_clicked()
 {
@@ -915,6 +1191,7 @@ void Home::on_pb_update_clubs_clicked()
     else
         ui->gb_update_clubs->hide();
 }
+
 void Home::on_pb_delete_clubs_clicked()
 {
     if(!ui->gb_delete_clubs->isVisible())
@@ -930,17 +1207,41 @@ void Home::on_pb_insert_clubs_clicked()
         ui->gb_insert_clubs->hide();
 }
 
-void Home::on_pb_insert_logo_clubs_clicked()
+QString Home::shirt_image_file()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,"Select Logo","C://","Image files (*.jpg *.gif *.png)");
-    Chosen_new_club = fileName;
+    return QFileDialog::getOpenFileName(this,"Select Logo","C://","Image files (*.jpg *.gif *.png)");
+}
+QString Home::club_image_file()
+{
+    return QFileDialog::getOpenFileName(this,"Select T-shirt","C://","Image files (*.jpg *.gif *.png)");
 }
 
-
+void Home::on_pb_insert_logo_clubs_clicked()
+{
+    Chosen_new_club = club_image_file();
+}
 void Home::on_pb_shirt_insert_clubs_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,"Select T-shirt","C://","Image files (*.jpg *.gif *.png)");
-    Chosen_new_shirt = fileName;
+    Chosen_new_shirt = shirt_image_file();
+}
+
+void Home::on_pb_update_logo_clubs_clicked()
+{
+    QString file = club_image_file();
+    if(!file.isEmpty())
+    {
+        Chosen_update_club = file;
+        ui->l_Chosen_update_logo->setPixmap(QPixmap(Chosen_update_club));
+    }
+}
+void Home::on_pb_shirt_update_clubs_clicked()
+{
+    QString file = shirt_image_file();
+    if(!file.isEmpty())
+    {
+        Chosen_update_shirt = file;
+        ui->l_Chosen_update_shirt->setPixmap(QPixmap(Chosen_update_shirt));
+    }
 }
 
 void Home::on_pb_insert_confirm_clubs_clicked()
@@ -951,28 +1252,32 @@ void Home::on_pb_insert_confirm_clubs_clicked()
         QMessageBox::critical(this,"Error","invaled club name!");
         return;
     }
-    if(Chosen_new_club.isEmpty() || Chosen_new_shirt.isEmpty())
+    if(Chosen_new_club.isEmpty())
     {
-        QMessageBox::StandardButton conform = QMessageBox::information(this,"ready?","are you sure you want the default settings for pictures ?",QMessageBox::Yes,QMessageBox::No);
-        if(conform == QMessageBox::Yes)
-        {
-            Chosen_new_shirt = ":/background/shirts/Default_shirt.png";
-            Chosen_new_club = ":/background/Clubs/Default_club.png";
-        }
-        else
+        QMessageBox::StandardButton conform = QMessageBox::information(this,"ready?","are you sure you want the default settings for club Logo ?",QMessageBox::Yes,QMessageBox::No);
+        if(conform == QMessageBox::No)
             return;
+        Chosen_new_club = ":/background/Clubs/Default_club.png";
+    }
+    if(Chosen_new_shirt.isEmpty())
+    {
+        QMessageBox::StandardButton conform = QMessageBox::information(this,"ready?","are you sure you want the default settings for shirt image ?",QMessageBox::Yes,QMessageBox::No);
+        if(conform == QMessageBox::No)
+            return;
+        Chosen_new_shirt = ":/background/shirts/Default_shirt.png";
     }
     d_clubs[++max_clubs_id].shirt_image = Chosen_new_shirt;
     d_clubs[max_clubs_id].name = name;
     d_clubs[max_clubs_id].club_image = Chosen_new_club;
-    d_clubs[max_clubs_id].league_id = (ui->cb_league_insert_clubs->currentIndex())+1;
+    d_clubs[max_clubs_id].league_id = (ui->cb_league_insert_clubs->currentIndex()) + 1;
+
     QMessageBox::information(this,"success","inserted succesfuly");
     clubs::size++;
+
     on_pb_read_clubs_clicked();
     refresh_clubs_comboboxs();
 
-    Chosen_new_shirt = "";
-    Chosen_new_club = "";
+    Chosen_new_shirt = Chosen_new_club = "";
 
 }
 void Home::on_pb_read_clubs_clicked()
@@ -1003,16 +1308,405 @@ void Home::on_pb_delete_confirm_clubs_clicked()
     if(is_found(id,d_clubs))
     {
         QMessageBox::warning(this,"deleted",d_clubs[id].name+" has been deleted successfully!");
-        // delete club
         clubs::remove(id);
+        // refresh players
         on_pb_read_clubs_clicked();
         on_pb_read_players_clicked();
+        refresh_players();
         refresh_clubs_comboboxs();
+        on_search_button_clicked();
 
         return;
     }
     QMessageBox::critical(this,"Error","there is no user with this id..!");
 }
 
+void Home::on_pb_update_refresh_clubs_clicked()
+{
+    qint64 id = ui->le_target_id_clubs->text().toInt();
+    if(is_found(id,d_clubs))
+    {
+        ui->le_name_update_clubs->setText(d_clubs[id].name);
+        Chosen_update_club = d_clubs[id].club_image;
+        Chosen_update_shirt = d_clubs[id].shirt_image;
+        ui->l_Chosen_update_logo->setPixmap(QPixmap(Chosen_update_club));
+        ui->l_Chosen_update_shirt->setPixmap(QPixmap(Chosen_update_shirt));
+        ui->cb_league_update_clubs->setCurrentIndex(d_clubs[id].league_id - 1);
+    }
+    else
+        QMessageBox::warning(this,"Error","there is no club whit this id");
+}
 
+void Home::on_pb_update_confirm_clubs_clicked()
+{
+
+    qint64 id = ui->le_target_id_clubs->text().toInt();
+    if(!is_found(id,d_clubs))
+    {
+        QMessageBox::critical(this,"Error","there is no club with this id");
+        return;
+    }
+    if(ui->le_name_update_clubs->text().isEmpty())
+        QMessageBox::warning(this,"Error","empty club name!");
+
+    if(Chosen_update_club.isEmpty())
+        Chosen_update_club = d_clubs[id].club_image;
+
+    if(Chosen_update_shirt.isEmpty())
+        Chosen_update_shirt = d_clubs[id].shirt_image;
+
+    d_clubs[id].name = ui->le_name_update_clubs->text();
+    d_clubs[id].club_image = Chosen_update_club;
+    d_clubs[id].shirt_image = Chosen_update_shirt;
+
+    Chosen_update_club = Chosen_update_shirt = "";
+    ui->l_Chosen_update_logo->clear();
+    ui->l_Chosen_update_shirt->clear();
+}
+/********************** Profile **********************/
+
+QString pushed_player_name_out_squad;
+qint64 check_num_players_in_squad = 0;
+
+void Home::profile()
+{
+
+    QPixmap club_icon(d_clubs[d_users[current_user_id].club_id].club_image);
+    ui->profile_picture->setPixmap(club_icon);
+    ui->username->setText(d_users[current_user_id].username + "'s team");
+    ui->user_budget->setText(QString::number(d_users[current_user_id].budget) + "$");
+    ui->user_points->setText(QString::number(d_users[current_user_id].points));
+}
+
+void Home::refresh_squad()
+{
+    players player;
+    qint64 user_team_id = 0;
+    for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
+    {
+        if (i->second.user_id == current_user_id)
+        {
+            user_team_id = i->first;
+            break;
+        }
+    }
+    ui->listWidget->clear();
+
+
+    QString default_shirt = "://background/shirts/none_player.png";
+
+    ui->GK1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK1_name->setText("");
+    ui->GK2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK2_name->setText("");
+    ui->LB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LB_name->setText("");
+    ui->CB1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB1_name->setText("");
+    ui->CB2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB2_name->setText("");
+    ui->CB3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB3_name->setText("");
+    ui->RB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RB_name->setText("");
+    ui->LM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LM_name->setText("");
+    ui->CM1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM1_name->setText("");
+    ui->CM2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM2_name->setText("");
+    ui->CM3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM3_name->setText("");
+    ui->RM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RM_name->setText("");
+    ui->LW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LW_name->setText("");
+    ui->ST_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->ST_name->setText("");
+    ui->RW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RW_name->setText("");
+
+
+    // show d_players[i->second.player_id].name in the scrollbar for 0's position and the others in the squad
+    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
+    {
+        if (i->second.team_id == user_team_id)
+        {
+            player = d_players[i->second.player_id];
+            auto player_shirt = d_clubs[player.club_id].shirt_image;
+
+            switch (i->second.position)
+            {
+            case 0: // out
+                ui->listWidget->addItem(player.name);
+                break;
+            case 1: // GK1
+                ui->GK1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->GK1_name->setText(player.name);
+                break;
+            case 2: // GK2
+                ui->GK2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->GK2_name->setText(player.name);
+                break;
+            case 3: // LB
+                ui->LB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->LB_name->setText(player.name);
+                break;
+            case 4: // CB1
+                ui->CB1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CB1_name->setText(player.name);
+                break;
+            case 5: // CB2
+                ui->CB2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CB2_name->setText(player.name);
+                break;
+            case 6: // CB3
+                ui->CB3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CB3_name->setText(player.name);
+                break;
+            case 7: // RB
+                ui->RB_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->RB_name->setText(player.name);
+                break;
+            case 8: // LM
+                ui->LM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->LM_name->setText(player.name);
+                break;
+            case 9: // CM1
+                ui->CM1_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CM1_name->setText(player.name);
+                break;
+            case 10: // CM2
+                ui->CM2_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CM2_name->setText(player.name);
+                break;
+            case 11: // CM3
+                ui->CM3_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->CM3_name->setText(player.name);
+                break;
+            case 12: // RM
+                ui->RM_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->RM_name->setText(player.name);
+                break;
+            case 13: // LW
+                ui->LW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->LW_name->setText(player.name);
+                break;
+            case 14: // ST
+                ui->ST_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->ST_name->setText(player.name);
+                break;
+            case 15: // RW
+                ui->RW_button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                ui->RW_name->setText(player.name);
+                break;
+            }
+
+        }
+    }
+}
+void Home::clear_squad(qint64 user_team_id)
+{
+    //    default position in teams_players = 0
+    for(auto i = d_teams_players.begin() ; i != d_teams_players.end() ; i++)
+    {
+        if (i->second.team_id == user_team_id)
+        {
+            i->second.position = 0;
+        }
+    }
+    QString default_shirt = "://background/shirts/none_player.png";
+
+    ui->GK1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK1_name->setText("");
+    ui->GK2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->GK2_name->setText("");
+    ui->LB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LB_name->setText("");
+    ui->CB1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB1_name->setText("");
+    ui->CB2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB2_name->setText("");
+    ui->CB3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CB3_name->setText("");
+    ui->RB_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RB_name->setText("");
+    ui->LM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LM_name->setText("");
+    ui->CM1_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM1_name->setText("");
+    ui->CM2_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM2_name->setText("");
+    ui->CM3_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->CM3_name->setText("");
+    ui->RM_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RM_name->setText("");
+    ui->LW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->LW_name->setText("");
+    ui->ST_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->ST_name->setText("");
+    ui->RW_button->setStyleSheet("image: url("+ default_shirt + ");background: none;border: none;");
+    ui->RW_name->setText("");
+    check_num_players_in_squad = 0;
+}
+
+void Home::on_clearButton_clicked()
+{
+    qDebug() << "ui->listWidget->currentItem()->text()";
+    cout << "ui->listWidget->currentItem()->text()";
+    qint64 user_team_id = 0;
+    for(auto i = d_teams.begin() ; i != d_teams.end() ; i++)
+    {
+        if (i->second.user_id == current_user_id)
+        {
+            user_team_id = i->first;
+            break;
+        }
+    }
+    clear_squad(user_team_id);
+    refresh_squad();
+}
+
+
+
+bool player_is_clicked = false;
+void Home::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    player_is_clicked = true;
+    //    QMessageBox::information(this, item->text(),"You choosed " + item->text() + "\nSelect his position in the squad");
+    pushed_player_name_out_squad = item->text();
+}
+
+
+void Home::player_squad(QString pushed_player_name_out_squad,QPushButton  * button , QLabel * label, qint64 num_of_pos,QString pos1,QString pos2, QString pos3)
+{
+    players player;
+    qint64 team_id = teams::team_id_user(current_user_id);
+
+    for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
+    {
+        if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
+        {
+            player = d_players[i->second.player_id];
+        }
+    }
+
+    if (player_is_clicked)
+    {
+        // not in his position
+        if (player.position != pos1 && player.position != pos2 && player.position != pos3)
+            QMessageBox::warning(this, player.name,player.name + " is a " + player.position +",\nnot a " + pos1);
+        else
+        {
+            // iterate over the teams-players map to find the player with the matching name and team ID
+            for (auto i = d_teams_players.begin(); i != d_teams_players.end(); i++)
+            {
+                qDebug() << "check_num_players_in_squad: " << check_num_players_in_squad;
+                if (d_players[i->second.player_id].name == pushed_player_name_out_squad && i->second.team_id == team_id)
+                {
+                    player = d_players[i->second.player_id];
+
+                    // make the current player in the squad out if there is one
+                    if (label->text() != pos1) {
+                        for (auto j = d_teams_players.begin(); j != d_teams_players.end(); j++)
+                        {
+                            if (d_players[j->second.player_id].name == label->text()) {
+                                j->second.position = 0;
+                            }
+                        }
+                        // add the player right now if replacing with anther player in the squad
+                        // assign the selected player to the squad
+                        i->second.position = num_of_pos;
+                        auto player_shirt = d_clubs[player.club_id].shirt_image;
+                        button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                        label->setText(pushed_player_name_out_squad);
+                    }
+                    else
+                    {
+                        if (check_num_players_in_squad >= 11)
+                            QMessageBox::warning(this, "Maximum number of players","You cannot insert players in the squad more than 11 player");
+                        else
+                        {
+                            // add the player right now if inserting a new player in the squad and no. players in the squad < 11
+                            // assign the selected player to the squad
+                            i->second.position = num_of_pos;
+                            auto player_shirt = d_clubs[player.club_id].shirt_image;
+                            button->setStyleSheet("image: url("+ player_shirt + ");background: none;border: none;");
+                            label->setText(pushed_player_name_out_squad);
+                            cout << "check_num_players_in_squad: " << check_num_players_in_squad;
+                            check_num_players_in_squad++;
+
+                        }
+
+                    }
+
+                    break;
+                }
+            }
+            refresh_squad();
+        }
+    }
+    player_is_clicked = false;
+}
+void Home::on_GK1_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->GK1_button ,ui->GK1_name, 1,"GoalKeeper");
+}
+void Home::on_GK2_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->GK2_button ,ui->GK2_name, 2,"GoalKeeper");
+}
+void Home::on_LB_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CB1_button ,ui->CB1_name, 3,"Left-Back");
+}
+void Home::on_CB1_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CB1_button ,ui->CB1_name, 4,"Centre-Back");
+}
+void Home::on_CB2_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CB2_button ,ui->CB2_name, 5,"Centre-Back");
+}
+void Home::on_CB3_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CB3_button ,ui->CB3_name, 6,"Centre-Back");
+}
+void Home::on_RB_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->RB_button ,ui->RB_name, 7,"Right-Back");
+}
+void Home::on_LM_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->LM_button ,ui->LM_name, 8,"Left Winger", "Central Midfield", "Attacking Midfield");
+}
+void Home::on_CM1_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CM1_button ,ui->CM1_name, 9,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
+}
+void Home::on_CM2_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CM2_button ,ui->CM2_name, 10,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
+}
+void Home::on_CM3_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->CM3_button ,ui->CM3_name, 11,"Defensive Midfield", "Central Midfield", "Attacking Midfield");
+
+}
+void Home::on_RM_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->RM_button ,ui->RM_name, 12,"Right Winger", "Central Midfield", "Attacking Midfield");
+}
+void Home::on_LW_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->LW_button ,ui->LW_name, 13,"Left Winger");
+}
+void Home::on_ST_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->ST_button ,ui->ST_name, 14,"Second Striker", "Centre-Forward");
+}
+void Home::on_RW_button_clicked()
+{
+    player_squad(pushed_player_name_out_squad,ui->RW_button ,ui->RW_name, 15,"Right Winger");
+}
 

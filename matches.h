@@ -8,7 +8,7 @@
 class matches
 {
 public:
-    qint64 club_1,club_2,round_id;
+    qint64 club_1,club_2,round_id,result_of_club1,result_of_club2;
     static int size;
 public:
     matches();

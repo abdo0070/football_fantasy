@@ -37,4 +37,5 @@ qint64 clubs::find_id(QString club)
     for(auto i = d_clubs.begin() ; i != d_clubs.end() ; i++)
        if(club == i->second.name)
             return i->first;
+    return 1;
 }

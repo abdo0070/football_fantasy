@@ -1,6 +1,7 @@
 #ifndef HOME_H
 #define HOME_H
 
+#include "qlistwidget.h"
 #include <QDialog>
 
 namespace Ui {
@@ -17,6 +18,9 @@ public:
     void leader_board();
     void refresh_players();
     void refresh_clubs_comboboxs();
+    void refresh_matches();
+    QString shirt_image_file();
+    QString club_image_file();
 
     //void vs_club1(qint64 club_id);
     void vs_club2(qint64 club_id);
@@ -77,8 +81,7 @@ private slots:
 
     void on_pb_declare_result_clicked();
 
-    void on_pb_matches_add_player_club1_clicked();
-    void on_pb_matches_add_player_club2_clicked();
+
 
     void on_cb_choose_club1_currentIndexChanged();
     void on_cb_choose_club2_currentIndexChanged();
@@ -105,6 +108,50 @@ private slots:
     void on_pb_delete_clubs_clicked();
 
     void on_pb_insert_clubs_clicked();
+
+    void on_pb_update_confirm_clubs_clicked();
+
+    void on_pb_update_logo_clubs_clicked();
+
+    void on_pb_shirt_update_clubs_clicked();
+
+    void on_pb_update_refresh_clubs_clicked();
+
+    //**************** Profile ******************//
+
+    void on_clearButton_clicked();
+
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
+    void on_LW_button_clicked();
+
+    void on_CB1_button_clicked();
+
+    void on_CB2_button_clicked();
+
+    void on_RB_button_clicked();
+
+    void on_CB3_button_clicked();
+
+    void on_CM2_button_clicked();
+
+    void on_CM1_button_clicked();
+
+    void on_CM3_button_clicked();
+
+    void on_GK1_button_clicked();
+
+    void on_GK2_button_clicked();
+
+    void on_LB_button_clicked();
+
+    void on_LM_button_clicked();
+
+    void on_RM_button_clicked();
+
+    void on_RW_button_clicked();
+
+    void on_ST_button_clicked();
 
 private:
     Ui::Home *ui;

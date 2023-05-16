@@ -4,3 +4,7 @@ ADD COLUMN `club_image` VARCHAR(255) NULL AFTER `shirt_image`;
 
 ALTER TABLE `fantasy`.`teams_players` 
 ADD COLUMN `position` INT NULL AFTER `team_id`
+
+ALTER TABLE `fantasy`.`matches` 
+ADD COLUMN `result_of_club1` INT NULL AFTER `round_id`,
+ADD COLUMN `result_of_club2` INT NULL AFTER `result_of_club1`;
