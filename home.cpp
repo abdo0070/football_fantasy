@@ -1134,6 +1134,7 @@ void Home::on_pb_declare_result_clicked()
         }
         matches_players::size++;
         refresh_matches();
+        profile();
 
     }
     // the same with club2
@@ -1174,10 +1175,11 @@ void Home::on_pb_declare_result_clicked()
 
     refresh_players();
     on_search_button_clicked();
+
     // market updated
     leader_board();
-    // profile refresh
-    // matches refresh
+    profile();
+    refresh_matches();
 }
 /************************* ADMIN CLUB *****************************/
 QString Chosen_new_club = "",Chosen_new_shirt = "";
@@ -1275,7 +1277,8 @@ void Home::on_pb_insert_confirm_clubs_clicked()
 
     on_pb_read_clubs_clicked();
     refresh_clubs_comboboxs();
-
+    refresh_squad();
+    refresh_players();
     Chosen_new_shirt = Chosen_new_club = "";
 
 }

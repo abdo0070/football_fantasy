@@ -29,7 +29,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="profile">
     <property name="maximumSize">
@@ -2095,6 +2095,9 @@ border-radius:20px 20px 20px 20px;
         <pointsize>40</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -2112,6 +2115,9 @@ border-radius:20px 20px 20px 20px;
        <font>
         <pointsize>40</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -2194,6 +2200,9 @@ border-radius:20px 20px 20px 20px;
         <height>81</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -2206,6 +2215,9 @@ border-radius:20px 20px 20px 20px;
         <width>101</width>
         <height>81</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -2293,6 +2305,9 @@ border-radius:20px 20px 20px 20px;
         <pointsize>40</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -2310,6 +2325,9 @@ border-radius:20px 20px 20px 20px;
        <font>
         <pointsize>40</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string/>
